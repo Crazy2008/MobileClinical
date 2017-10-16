@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <title>检验</title>
+    <link rel="Stylesheet" href="content/site.css" />
+    <style type="text/css">
+        .nav-left { width: 17.5%; height: 100%; float: left; background-color: #EEEEEE; text-align: left; padding-right: 20px; overflow-y: auto; overflow-x: hidden; }
+        .nav-menu { height: 5.5em; line-height: 5.5em; FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#F9FCFB,endColorStr=#E6E6E7); /*IE 6 7 8*/ background: -ms-linear-gradient(top, #F9FCFB, #E6E6E7); /* IE 10 */ background: -moz-linear-gradient(top,#F9FCFB,#E6E6E7); /*火狐*/ background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#F9FCFB), to(#E6E6E7)); /*谷歌*/ background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F9FCFB), to(#E6E6E7)); /* Safari 4-5, Chrome 1-9*/ background: -webkit-linear-gradient(top, #F9FCFB, #E6E6E7); /*Safari5.1 Chrome 10+*/ background: -o-linear-gradient(top, #F9FCFB, #E6E6E7); /*Opera 11.10+*/ border-top: 1px #D3D3D3 solid; border-right: 1px #D3D3D3 solid; border-left: 1px #D3D3D3 solid; cursor: pointer; -webkit-box-shadow: 0 10px 15px #D6DEE6; -moz-box-shadow: 0 10px 15px #D6DEE6; box-shadow: 0 10px 15px #D6DEE6; }
+        .menu-last { border-bottom: 1px #D3D3D3 solid; }
+        .menu-active-before { border-bottom: 1px #D3D3D3 solid; }
+        .nav-menu span { width: 8.86%; background-color: inherit; float: left; height: 100%; }
+        .nav-menu div { width: 91.14%; background-color: inherit; height: 100%; color: #555555; font-size: 1.5em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nav-menu img { vertical-align: middle; }
+        /**/
+        .nav-menu-active { height: 5.5em; line-height: 5.5em; background-color: #EEEEEE; border-bottom: none; }
+        .nav-menu-active span { width: 8.86%; background-color: #1D46FF; float: left; height: 100%; }
+        .nav-menu-active div { width: 91.14%; background-color: inherit; height: 100%; color: #1D46FF; font-size: 1.75em; left: -8.86%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nav-menu-active img { vertical-align: middle; }
+        .content { width: 82.5%; height: 100%; float: right; background-color: #FFFFFF; }
+        .c-header { height: 6em; margin-top: 0.625em; position: relative; top: -100%; }
+        .nav-date { height: 4.375em; }
+        .nav-date .slide-left { width: 53px; background: url('content/images/slide-l.png') no-repeat center right; height: 100%; float: left; }
+        .nav-date .slide-right { width: 53px; background: url('content/images/slide-r.png') no-repeat center left; height: 100%; float: right; }
+        .nav-date .nav-list { height: 100%; position: relative; padding-right: 53px; margin-left: 53px; }
+        .nav-date .nav-list .nav-inner { width: 100%; overflow-y: hidden; overflow-x: auto; height: 100%; text-align: center; }
+        .nav-date-list { list-style-type: none; margin: 0px; padding: 0px; height: 100%; white-space: nowrap; }
+        .nav-date-list .item { width: 7.275em; padding: 0px; display: inline-block; }
+        .nav-date-list .item .m { color: #555555; font-size: 1.6875em; display: block; cursor: pointer; }
+        .nav-date-list .item .y { color: #B6B6B6; font-size: 1.4972em; display: block; cursor: pointer; }
+        .nav-date-list .item-on { width: 7.275em; padding: 0px; display: inline-block; }
+        .nav-date-list .item-on .m { color: #1D46FF; font-size: 1.9875em; display: block; cursor: pointer; }
+        .nav-date-list .item-on .y { color: #1D46FF; font-size: 1.6875em; display: block; cursor: pointer; }
+        .tpl-row { display: none !important; }
+        .data-row { }
+        .s_line { height: 1em; margin-top:10px;border-bottom: 1px solid #DFDFDF; margin-left: 53px; margin-right: 53px; }
+        .data-container { height: 100%; padding-top: 6em; }
+        .data-container .data-viewport { overflow-y: auto; height: 100%; margin-left: 53px; margin-right: 53px; }
+        .dtitle { font-size: 1.75em; color: #0063D1; }
+        .dlabel { font-size: 1.5em; color: #555555; }
+        .dfield { font-size: 1.5em; color: #999999; }
+        #thumbnail { width:50%; }
+        #thumbnail img{ margin:5px; width:150px;height:150px; background-position:center;background-repeat:no-repeat;background-size:contain;  }
+        #thumbnail img:hover{ border:1px #0063d1 solid;  }
+        .data-binding { display: none; }
+
+        #external-view { display:none;-webkit-overflow-scrolling:touch;overflow:auto;}
+    </style>
+</head>
+<body>
+    <div class="clinical-viewport">
+        <div style="width:100%;height:100%;position:relative">
+            <div class="nav-left">
+                <div style="height: 100%; background-color: #FFFFFF;" id="menu-container" class="data-source-binding" data-source="{binding Reports}" data-formater="formater">
+                    <div class="tpl-row nav-menu {$lastcls}" onclick="menuClick(this,'{$name}');">
+                        <span></span>
+                        <div>&nbsp;&nbsp;{$name}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="data-container">
+                    <div class="data-viewport" id="default-view">
+                        <p class="dtitle">检查部位</p>
+                        <p class="dlabel"><span class="data-binding">{$ReportDetail.name}</span>（<span class="data-binding">{$ReportDetail.part}</span>）</p>
+                        <p class="dtitle">检查所见</p>
+                        <p class="dlabel data-binding">{$ReportDetail.find}</p>
+                        <p class="dtitle">检查意见</p>
+                        <p class="dlabel data-binding">{$ReportDetail.result}</p>
+                        <div id="thumbnail" class="data-source-binding" data-source="{binding Thumbnails}">
+                            <img class="tpl-row" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" style="background-image:url('{$src}')" alt="" onclick="showViewer('{$link}');" />
+                        </div>
+
+                    </div>
+                    <div class="data-viewport" id="external-view">
+                        <iframe src="about:blank" frameborder="0" style="width:100%;height:100%;" id="external-frame"></iframe>
+                    </div>
+                </div>
+                <div class="c-header">
+                    <div class="nav-date">
+                        <div class="slide-left"></div>
+                        <div class="slide-right"></div>
+                        <div class="nav-list">
+                            <div class="nav-inner">
+                                <ul class="nav-date-list data-source-binding" id="list-report-date" data-source="{binding ListDate}" data-formater="formater">
+                                    <li class="item tpl-row" onclick="onDateClick(this,'{$catalog}', '{$keys}');">
+                                        <span class="m">{$month}</span>
+                                        <span class="y">{$year}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="s_line"></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="scripts/common.js" type="text/javascript"></script>
+    <!--<script src="content/demo/ris-demo.js"></script>-->
+    <script type="text/javascript">
+        var menuContainer = document.getElementById("menu-container");
+        var datelistCtrl = document.getElementById("list-report-date");
+
+        function menuClick(it, lb) {
+            var menu_actived = menuContainer["active-menu"];
+            if (it == menu_actived) return;
+            for (var i = 0; i < menuContainer.children.length; i++) {
+                var menu = menuContainer.children[i];
+
+                if (menu == menu_actived) {
+                    menu.className = menu.className.replace("nav-menu-active", "nav-menu");
+                    if (i > 0) $(menuContainer.children[i - 1]).removeClass("menu-active-before");
+                    if (i == menuContainer.children.length - 1) $(menu).addClass("menu-last");
+                }
+                else if (menu == it) {
+                    menuContainer["active-menu"] = it;
+                    it.className = it.className.replace("nav-menu", "nav-menu-active");
+                    if (i > 0) $(menuContainer.children[i - 1]).addClass("menu-active-before");
+                    if (i == menuContainer.children.length - 1) $(it).removeClass("menu-last");
+                }
+            }
+            loadReport(lb);
+        }
+
+        function onDateClick(it,catalog, keys) {
+            var focused = datelistCtrl["focused_item"];
+            if (focused == it) return;
+            if (focused) focused.className = focused.className.replace("item-on", "item");
+            it.className = it.className.replace("item", "item-on");
+            datelistCtrl["focused_item"] = it;
+            this.ReportDetail = getReportDetail(catalog ,keys);
+            $App.setData("PACS_IMAGES", JSON.stringify(getReportImage(catalog, keys, false)));
+			this.Thumbnails = getReportImage(catalog, keys, true);
+            bindingData("thumbnail");
+
+            if (this.ReportDetail.viewUrl) {
+                $("#default-view").hide();
+                $("#external-view").show();
+                $("#external-frame").attr("src", this.ReportDetail.viewUrl + "&nohandlerurl=1");
+                
+                //if (this.ReportDetail.viewUrl.indexOf("framezoom") > 0) {
+                //    alert(this.ReportDetail.viewUrl.substr(this.ReportDetail.viewUrl.indexOf("framezoom") + 10, 3));
+                //    $("#external-frame").css("zoom", this.ReportDetail.viewUrl.substr(this.ReportDetail.viewUrl.indexOf("framezoom") + 10, 3));
+                //}
+            }
+            else {
+                $("#default-view").show();
+                $("#external-view").hide();
+                $("#external-frame").attr("src", "about:blank");
+            }
+        }
+
+        function showViewer(url) {
+            if (!url) url = "http://mcs/pacs.html";
+            location.replace(url);
+        }
+    </script>
+    <script type="text/javascript">
+        var AllReports = [];
+        var $AllDetails = [];
+        var $AllImages = [];
+        var Reports = [];
+        var ListDate = [];
+        var ReportDetail = {};
+        var $syxh = 0;
+        var $yexh = 0;
+
+        var formater = {
+            lastcls: function (rec) {
+                if (rec == Reports[Reports.length - 1]) return "menu-last";
+                return "";
+            }
+        };
+
+
+        function loadData(syxh,yexh) {
+            var patient = $App.getData("CURRENT_PATIENT");
+            if (syxh > 0 && (!patient || patient.syxh != syxh)) {
+                $AllImages = [];
+                patient = $decode($App.setData("CURRENT_PATIENT", $App.findData("patient", "info", String.format("{\"syxh\":{0},\"yexh\":{1}}", syxh, yexh)).json));
+            }
+            this.$syxh = patient.syxh;
+            this.$yexh = patient.yexh;
+
+            $("#default-view").show();
+            $("#external-view").hide();
+            $("#external-frame").attr("src", "about:blank");
+
+            this.AllReports = $App.findData("ris", "rpt-list", String.format("{\"syxh\":{0},\"yexh\":{1}}", $syxh, $yexh));
+            this.$AllDetails = [];
+            this.$AllImages = [];
+            if (!$App.isOnline()) {
+                this.$AllDetails = $App.findData("ris", "patient-detail", String.format("{\"syxh\":{0},\"yexh\":{1}}", $syxh, $yexh));
+                this.$AllImages = $App.findData("ris", "patient-img", String.format("{\"syxh\":{0},\"yexh\":{1}}", $syxh, $yexh));
+            }
+            this.Reports = [];
+            this.ListDate = [];
+            this.ReportDetail = {};
+            var rpt = {};
+            for (var i = 0; i < this.AllReports.length; i++) {
+                var r = $decode(this.AllReports[i].json);
+                if (!rpt[$.trim(r.name)]) {
+                    this.Reports.push(r);
+                    rpt[$.trim(r.name)] = true;
+                }
+            }
+            bindingData("menu-container");
+            if (this.Reports.length > 0) menuClick(menuContainer.children[0], $.trim(this.Reports[0].name));
+        }
+
+        function loadReport(lb) {
+            this.ListDate.length = 0;
+            var name = $.trim(lb);
+            var dt = {};
+            var catalog = "";
+            for (var i = 0; i < this.AllReports.length; i++) {
+                var r = $decode(this.AllReports[i].json);
+                if ($.trim(r.name) != name) continue;
+                var datetime = r.submit_date || "";
+                var date = datetime.substring(0, 10);
+                if (dt[date]) dt[date].push(r.id);
+                else dt[date] = [r.id];
+                catalog = r.catalog;
+            }
+
+            for (var p in dt) this.ListDate.push({ keys: dt[p].join(","), year: p.substring(0, 4), month: p.substr(5), catalog: catalog });
+
+            this.bindingData("list-report-date");
+
+            if (this.ListDate.length > 0) onDateClick(datelistCtrl.children[this.ListDate.length - 1],catalog, this.ListDate[this.ListDate.length - 1].keys);
+        }
+        function getReportDetail(catalog,keys) {
+            for (var i = 0; i < $AllDetails.length; i++) {
+                var rec = $AllDetails[i];
+                var data = (rec.json && $decode(rec.json)) || rec;
+                data._mjson = data._mjson || rec.json;
+                $AllDetails[i] = data;
+                if (("," + keys + ",").indexOf("," + data.report_no + ",") > -1) return data;
+            }
+
+            if ($App.isOnline()) {
+                var rec = $App.findData("ris", "rpt-detail", String.format("{\"syxh\":{0},\"yexh\":{1},\"catalog\":\"{2}\",\"keys\":\"{3}\"}", $syxh, $yexh, catalog, keys))[0];
+                if (!rec) return {};
+                var data = (rec.json && $decode(rec.json)) || rec;
+                data._mjson = data._mjson || rec.json;
+                $AllDetails.push(data);
+                return data;
+            }
+
+            return {};
+        }
+
+        function getReportImage(catalog,keys,isthumnail) {
+            var arr = [];
+            var hasload = false;
+            for (var i = 0; i < $AllImages.length; i++) {
+                var rec = $AllImages[i];                
+                if (("," + keys + ",").indexOf("," + rec.key + ",") > -1) {
+                    hasload = true;
+                    if (isthumnail && rec.description.indexOf("<THUMNAIL>") == 0) arr.push(rec);
+                    else if (!isthumnail && rec.description.indexOf("<THUMNAIL>") < 0) arr.push(rec);
+                }
+            }
+
+            if (hasload) return arr;
+
+            if ($App.isOnline()) {
+                var images = $App.findData("ris", "rpt-img", String.format("{\"syxh\":{0},\"yexh\":{1},\"catalog\":\"{2}\",\"keys\":\"{3}\"}", $syxh, $yexh, catalog, keys));
+                $AllImages = $AllImages.concat(images);
+                return $(images).filter(function () {
+                    var rec = this;
+                    return (isthumnail && rec.description.indexOf("<THUMNAIL>") == 0) || (!isthumnail && rec.description.indexOf("<THUMNAIL>") < 0);
+                }).toArray();
+            }
+
+            return arr;
+        }
+        //$(document).ready(function () { setTimeout(loadData, 1) });
+    </script>
+</body>
+</html>

@@ -1,0 +1,790 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <title>医嘱</title>
+    <link rel="Stylesheet" href="content/site.css" />
+    <style type="text/css">
+        .nav-left { width: 17.5%; height: 100%; float: left; background-color: #EEEEEE; text-align: center; padding-right: 20px; }
+        .nav-menu { height: 5.5em; line-height: 5.5em; FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#F9FCFB,endColorStr=#E6E6E7); /*IE 6 7 8*/ background: -ms-linear-gradient(top, #F9FCFB, #E6E6E7); /* IE 10 */ background: -moz-linear-gradient(top,#F9FCFB,#E6E6E7); /*火狐*/ background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#F9FCFB), to(#E6E6E7)); /*谷歌*/ background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F9FCFB), to(#E6E6E7)); /* Safari 4-5, Chrome 1-9*/ background: -webkit-linear-gradient(top, #F9FCFB, #E6E6E7); /*Safari5.1 Chrome 10+*/ background: -o-linear-gradient(top, #F9FCFB, #E6E6E7); /*Opera 11.10+*/ border-top: 1px #D3D3D3 solid; border-right: 1px #D3D3D3 solid; border-left: 1px #D3D3D3 solid; cursor: pointer; -webkit-box-shadow: 0 10px 15px #D6DEE6; -moz-box-shadow: 0 10px 15px #D6DEE6; box-shadow: 0 10px 15px #D6DEE6; }
+        .menu-last { border-bottom: 1px #D3D3D3 solid; }
+        .menu-active-before { border-bottom: 1px #D3D3D3 solid; }
+        .nav-menu span { width: 8.86%; background-color: inherit; float: left; height: 100%; }
+        .nav-menu div { width: 91.14%; background-color: inherit; height: 100%; color: #555555; font-size: 1.5em; }
+        .nav-menu img { vertical-align: middle; }
+        /**/
+        .nav-menu-active { height: 5.5em; line-height: 5.5em; background-color: #EEEEEE; border-bottom: none; }
+        .nav-menu-active span { width: 8.86%; background-color: #1D46FF; float: left; height: 100%; }
+        .nav-menu-active div { width: 91.14%; background-color: inherit; height: 100%; color: #1D46FF; font-size: 1.75em; left: -8.86%; }
+        .nav-menu-active img { vertical-align: middle; }
+        .content { width: 82.5%; height: 100%; float: right; background-color: #FFFFFF; }
+        .button-edit-order{
+            position:absolute;
+            left:10%;
+            bottom:45px;
+            width:80%;
+            height:5.5em;
+            line-height:5.5em;
+            filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#0046F9,endColorStr=#0037C2); /*IE 6 7 8*/ 
+            background: -ms-linear-gradient(top, #0046F9, #0037C2); /* IE 10 */ 
+            background: -moz-linear-gradient(top,#0046F9,#0037C2); /*火狐*/ 
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#0046F9), to(#0037C2)); /*谷歌*/ 
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0046F9), to(#0037C2)); /* Safari 4-5, Chrome 1-9*/ 
+            background: -webkit-linear-gradient(top, #0046F9, #0037C2); /*Safari5.1 Chrome 10+*/ 
+            background: -o-linear-gradient(top, #0046F9, #0037C2); /*Opera 11.10+*/ 
+            cursor: pointer; 
+            box-shadow: 0 5px 15px #8FACE3;
+            border-radius:5px;
+            display:none; 
+        }
+        .button-edit-order span { font-size: 1.5em; color: #fff;}
+
+        /*table style*/
+        .order-list-head { width: 100%; position: relative; top: -100%; background: url('content/images/1pxwhite.gif') repeat; }
+        .order-list-head thead { font-size: 1.5em; color: #8A8A8A; }
+        .order-list-head td { text-align: center; }
+        .h_c1 { border-bottom: 1px #DFDFDF solid; vertical-align: middle; border-right: 1px #DFDFDF solid; }
+        .h_c2 { border-bottom: 1px #DFDFDF solid; vertical-align: middle; border-right: 1px #DFDFDF solid; }
+        .h_c3 { border-bottom: 1px #DFDFDF solid; vertical-align: middle; }
+        .h_c4 { border-bottom: 1px #DFDFDF solid; vertical-align: middle; border-right: 1px #DFDFDF solid; }
+        .h_c5 { border-bottom: 1px #DFDFDF solid; vertical-align: middle; border-right: 1px #DFDFDF solid; }
+        .h_c6 { vertical-align: middle; height: 1.82em; border-bottom: 1px #DFDFDF solid; }
+        .h_c6_1 { border-bottom: 1px #DFDFDF solid; vertical-align: middle; height: 1.82em; border-right: 1px #DFDFDF solid; }
+        .h_c6_2 { border-bottom: 1px #DFDFDF solid; vertical-align: middle; border-right: 1px #DFDFDF solid; }
+        .h_c6_3 { border-bottom: 1px #DFDFDF solid; vertical-align: middle; border-right: 1px #DFDFDF solid; }
+        .order-list-body { width: 100%; font-size: 1.5em; }
+        .order-list-body tr { height: 3.66em; }
+        .tpl-row { display: none; }
+        .b_c1 {  vertical-align: middle; text-align: center; border-bottom: 1px #DFDFDF solid; overflow: visible; }
+        .b_c2 { vertical-align: middle; text-align: center; border-bottom: 1px #DFDFDF solid; }
+        .b_c3 { vertical-align: middle; text-align: center; border-bottom: 1px #DFDFDF solid; }
+        .b_c4 { vertical-align: middle; text-align: left; border-bottom: 1px #DFDFDF solid; }
+        .b_c5 { vertical-align: middle; text-align: center; border-bottom: 1px #DFDFDF solid; overflow: visible; }
+        .b_c6 { vertical-align: middle; text-align: center; border-bottom: 1px #DFDFDF solid; }
+        .b_c7 { vertical-align: middle; text-align: center; border-bottom: 1px #DFDFDF solid; }
+        .b_c8 { vertical-align: middle; text-align: center; border-bottom: 1px #DFDFDF solid; }
+        .data-row { color: #525252; }
+        .stoped-order { color: #b0b0b0; }
+        .order-action { position: absolute;width:0;right:0;display:none;}
+        .order-action .panel {  height:100%;font-size: 1.5em;}
+        .order-action .panel .action { width: 50%; background-color: #FE0000; float: left; text-align: center; color: #F8F8F8;  height:100%; }
+        .order-action .panel .cancel { width: 50%; background-color: #0056CF; height:100%;  float: right; text-align: center; color: #FFFFFF;  }
+        .hidden-box { width: 1px; height: 1px; background-color: transparent; float: left; border: none; -webkit-appearance: none; }
+
+        /*order edit*/
+        .table-header { width:100%; }
+        .table-header td {  height: 4em; text-align:left;}
+        .table-header td span{color: #8A8A8A; font-size: 1.3em;}
+
+        #datalist{
+            width:100%;
+        }
+
+        .table-data { width:100%; }
+        .table-data tr {  height: 4em; }
+        .table-data td { color: #525252; font-size: 1.3em;border-bottom:1px #DFDFDF solid;  }
+        .col-1 { padding-left: 30px; }
+        .col-1,.col-2,.col-4,.col-5,.col-6,.col-7 { text-align: left; }
+        .col-3{ text-align: center; }
+        .col-5 { padding-left: 8px; }
+        .col-7 { padding-right: 8px; }
+
+        .f-label{font-size:1.3em;color:#525252;}
+        .form-group{ height:4em;border-bottom:1px #DFDFDF solid; }
+        .form-group .label{
+            float:left;line-height:4em;height:100%;width:28%;padding-left:10px;
+        }
+        .form-group .control{float:left;line-height:4em;height:100%;width:60%;}
+        .form-group .control .f-field { color: #525252; font-size: 1.3em; border: none; width: 100%; text-align: center; display: inline-block;}
+        .form-group .control .f-blank { color: #dfdfdf; font-style: italic; }
+        .form-group .control span.f-blank:after { color: #dfdfdf; font-style: italic; content: attr(title); }
+        
+        .form-group .button {float:left;line-height:4em;height:100%;width:12%;text-align:center;padding-right:10px;}
+        .form-group .button img{vertical-align:middle;cursor:pointer;}
+
+        .combo-caret {
+            display:inline-block;
+            width:34px;
+            height:24px;
+            vertical-align:middle;
+            background:url('content/images/expand.png') right no-repeat;
+        }
+        .combo-panel{
+            border: 1px solid rgba(0, 0, 0, .15);
+		    border-radius: 4px;
+		    box-shadow: 0px 6px 12px rgba(0,0,0,0.175);
+		    background-color: #fff;
+		    background-clip: padding-box;
+            padding:5px;
+            display:none;
+            position:absolute;
+            overflow-y:auto;
+        }
+
+        .combo-panel span{
+		    border: 1px solid rgba(0, 0, 0, .15);
+		    border-radius: 4px;
+		    display:inline-block;
+		    width:50px;
+		    height:50px;
+		    margin:2.5px;
+            line-height:50px;
+            font-size:1em;
+            color:#525252;
+            text-align:center;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            overflow:hidden;
+            FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#F9FCFB,endColorStr=#E6E6E7); /*IE 6 7 8*/
+             background: -ms-linear-gradient(top, #F9FCFB, #E6E6E7); /* IE 10 */ 
+             background: -moz-linear-gradient(top,#F9FCFB,#E6E6E7); /*火狐*/ 
+             background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#F9FCFB), to(#E6E6E7)); /*谷歌*/ 
+             background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F9FCFB), to(#E6E6E7)); /* Safari 4-5, Chrome 1-9*/ 
+             background: -webkit-linear-gradient(top, #F9FCFB, #E6E6E7); /*Safari5.1 Chrome 10+*/ 
+             background: -o-linear-gradient(top, #F9FCFB, #E6E6E7); /*Opera 11.10+*/ 
+             cursor: pointer; 
+             
+	    }
+        .combo-panel div.nodata{
+            height:50px;
+            line-height:50px;
+            text-align:center;
+        }
+        .goback { position: absolute; bottom: 10px; left: 30px;z-index:999999;opacity:0.5; }
+
+        /*item selector*/
+        .item-filter{
+            height:68.75%;
+            border:1px #c6c6c6 solid;
+            border-radius:1.375em;
+            width:5.5em;
+            display:inline-block;
+            text-align:center;
+            line-height:2.75em;
+            color:#6e6e6e;
+            font-size:1em;
+            float:right;
+            margin-right:5px;
+            position:relative;
+            top:15.625%;
+        }
+
+        .active-filter { background: #FF860B; border-color: #FF860B;color:white; }
+
+        .key-board { padding-bottom:20px;padding-left:30px;padding-right:30px; }
+        .key-board span{
+            background: #FFFFFF;
+            border: 1px solid #D1D1D1;
+            border-radius:10px;
+            box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.35);
+            font-family: .HelveticaNeueDeskInterface-Regular;
+            margin-right:5px;
+            font-size: 2em;
+            text-align:center;
+            color: black;
+            display:inline-block;
+            width:51.1px;
+            height:70px;
+            line-height:70px;
+        }
+
+        .key-board span.big{ width:112.2px; }
+    </style>
+</head>
+<body onselect="return false;">
+    <div class="clinical-viewport">
+        <div style="width:100%;height:100%;position:relative;overflow:hidden;">
+            <div style="width:100%;height:100%;" id="view-container">
+                <div class="nav-left">
+                    <div style="height: 100%; background-color: #FFFFFF;position:relative;" id="menu-container">
+                        <div class="nav-menu" onclick="menuClick(this,0);" id="m-0">
+                            <span></span>
+                            <div>
+                                <img src="content/images/lorder.png" alt="长期医嘱" />&nbsp;&nbsp;长期医嘱
+                            </div>
+                        </div>
+                        <div class="nav-menu" onclick="menuClick(this,1);" id="m-1">
+                            <span></span>
+                            <div>
+                                <img src="content/images/sorder.png" alt="临时医嘱" />&nbsp;&nbsp;临时医嘱
+                            </div>
+                        </div>
+                        <div class="nav-menu-active" onclick="menuClick(this,2);" id="m-2">
+                            <span></span>
+                            <div>
+                                <img src="content/images/vorder.png" alt="有效医嘱" />&nbsp;&nbsp;有效医嘱
+                            </div>
+                        </div>
+                        <div class="button-edit-order" onclick="onEditClick();"><span>录入医嘱</span></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div style="height: 100%; overflow-y: auto; overflow-x: hidden; padding-top: 5.53em;position:relative;" id="order-viewport">
+                        <table class="order-list-body data-source-binding" id="order-list-body" cellpadding="0" cellspacing="0" border="0" data-source="{binding Orders}" data-formater="formater" data-key-expression="this.group_id + '_' + this.id" data-default-rows="7">
+                            <colgroup>
+                                <col style="width: 10%" />
+                                <col style="width: 8%" />
+                                <col style="width: 2.33%" />
+                                <col style="width: 37.83%" />
+                                <col style="width: 9.17%" />
+                                <col style="width: 10%" />
+                                <col style="width: 8%" />
+                                <col style="width: 11.67%" />
+                            </colgroup>
+                            <tr class="tpl-row {$stoped}" id="d_r_{data-key}">
+                                <td class="b_c1">{$ksrq}</td>
+                                <td class="b_c2">{$kssj}</td>
+                                <td class="b_c3">{$czwz}</td>
+                                <td class="b_c4">{$content}</td>
+                                <td class="b_c5">{$creator}</td>
+                                <td class="b_c6">{$zxrq}</td>
+                                <td class="b_c7">{$zxsj}</td>
+                                <td class="b_c8">{$zxczymc}</td>
+                            </tr>
+                        </table>
+                        <div class="order-action" id="order-list-action">
+                            <div class="panel">
+                                <div class="action" onclick='doOrderAction($(this.parentElement.parentElement).data("order"));'></div>
+                                <div class="cancel" onclick="$(this.parentElement.parentElement).hide();"><input type='text' class='hidden-box' id='txtStopTime' onchange='    stopOrder(this.parentElement.parentElement.parentElement);' />取消</div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="order-list-head" border="0" cellpadding="0" cellspacing="0">
+                        <colgroup>
+                            <col style="width: 10%" />
+                            <col style="width: 8%" />
+                            <col style="width: 2.33%" />
+                            <col style="width: 37.83%" />
+                            <col style="width: 9.17%" />
+                            <col style="width: 10%" />
+                            <col style="width: 8%" />
+                            <col style="width: 11.67%" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <td rowspan="2" class="h_c1">日期</td>
+                                <td rowspan="2" class="h_c2">时间</td>
+                                <td rowspan="2" class="h_c3">&nbsp;</td>
+                                <td rowspan="2" class="h_c4">医嘱内容</td>
+                                <td rowspan="2" class="h_c5">医师签名</td>
+                                <td class="h_c6"></td>
+                                <td class="h_c6" id="order-table-label">停止</td>
+                                <td class="h_c6"></td>
+                            </tr>
+                            <tr>
+                                <td class="h_c6_1">日期</td>
+                                <td class="h_c6_2">时间</td>
+                                <td class="h_c6_3">签名</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div id="edit-container" style="width:100%;height:100%;display:none;position:absolute;left:100%;top:0px;background:#D8D8D8;">
+                <div style="float:left;width:70.5%;height:100%;padding-bottom:8em;background-color:#fff;position:relative;">
+                    <div style=" height:8em;border-bottom:1px #DFDFDF solid;">
+                        <div style="height:4em;border-bottom:1px #DFDFDF solid;line-height:4em;padding-left:30px;">
+                            <span style="font-size:1.75em;color:#333;">新开医嘱</span>
+                            <span style="font-size:1.75em;color:#1D46FF;float:right;padding-right:12px;" onclick="onCreateClick();">新建</span>
+                        </div>
+                        <table class="table-header" border="0" cellpadding="0" cellspacing="0">
+                            <colgroup>
+                                <col style="width: 11%" />
+                                <col style="width: 9%" />
+                                <col style="width: 5%" />
+                                <col style="width: 43%" />
+                                <col style="width: 18%" />
+                                <col style="width: 7%" />
+                                <col style="width: 7%" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <td style="padding-left:30px;text-align:left;"><span>日期</span></td>
+                                    <td><span>时间</span></td>
+                                    <td>&nbsp;</td>
+                                    <td><span>医嘱内容</span></td>
+                                    <td style="text-align:left;padding-left:8px;"><span>医生</span></td>
+                                    <td><span>类型</span></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div style="height:100%;overflow-y:auto;position:relative;">
+                        <table id="datalist" class="table-data data-source-binding" border="0" cellpadding="0" cellspacing="0" data-source="{binding EditOrders}" data-formater="formater" data-key-expression="this.id" data-default-rows="7">
+                            <colgroup>
+                                <col style="width: 11%" />
+                                <col style="width: 9%" />
+                                <col style="width: 5%" />
+                                <col style="width: 43%" />
+                                <col style="width: 18%" />
+                                <col style="width: 7%" />
+                                <col style="width: 7%" />
+                            </colgroup>
+                            <tbody>
+                                <tr id="d_r_{data-key}" class="tpl-row">
+                                    <td class="col-1">{$ksrq}</td>
+                                    <td class="col-2">{$kssj}</td>
+                                    <td class="col-3">{$czwz}</td>
+                                    <td class="col-4"><span>{$content}</span></td>
+                                    <td class="col-5">{$creator}</td>
+                                    <td class="col-6">{$typeDesc}</td>
+                                    <td class="col-7">{$categoryDesc}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div id="order-edit-action" class="order-action" style="position: absolute; width: 240px; height: 4em; right: -240px; display: none;">
+                            <div class="panel" style="position: relative; top: 0; left: 0; display: inherit;">
+                                <div class="action" onclick='delEditOrder();' style="height: 4em; line-height: 4em;"><span style="font-size:1.3em">删除</span></div>
+                                <div class="cancel" onclick="$(this.parentElement.parentElement).hide();" style="height: 4em; line-height: 4em;"><span style="font-size:1.3em">取消</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:right;width:29.5%;padding-left:20px;height:100%;">
+                    <div style="width:100%;position:relative;height:100%;background:#fff;">
+                        <div style="height:4em;line-height:4em;text-align:center;">
+                            <div style="width:50%;float:left;height:100%;border-bottom:1px #DFDFDF solid;">
+                                <span style="font-size:1.75em;color:#333;">录入医嘱</span>
+                            </div>
+                            <div style="width:50%;float:right;height:100%;background: #F9F9F9;border-bottom: 1px solid #E0E0E0;">
+                                <span style="font-size:1.75em;color:#A5A5A5;">常用</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="label">
+                                <span class="f-label" style="float:left">开始时间</span>
+                            </div>
+                            <div class="control">
+                                <input type="hidden" onchange="$('#start_time').text(this.value); " id="start_time_editor" />
+                                <span id="start_time" style="width:100%;text-align:center;" class="f-field" onclick="$App.datetimepicker('1', '0', '医嘱开始', Date.now().format('yyyyMMddHH:mm'), '', $(this).text().replace(/[\- ]/g,''),'', 'start_time_editor', null);">2016-07-28 12:30</span>
+                            </div>
+                            <div class="button"><span class="combo-caret"></span></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="label">
+                                <span class="f-label" style="float:left">项目</span>
+                            </div>
+                            <div class="control">
+                                <span id="item-field" class="f-field f-blank" title="<点击选择项目>" onclick="showItemSelector();"></span>
+                            </div>
+                            <div class="button"><span class="combo-caret"></span></div>
+                        </div>
+                        <div class="form-group" id="dosage-refer">
+                            <div class="label">
+                                <span class="f-label" style="float:left">剂量</span>
+                                <div style="height:100%;float:right;">
+                                    <img src="content/images/num-down.png" style="vertical-align:middle;" onclick="onUpDownClick('down');"/>
+                                </div>
+                            </div>
+                            <div class="control">
+                                <div style="float:left;height:100%;width:50%;text-align:right;padding-right:5px;">
+                                    <span id="dosage-field" style="text-align:right;" class="combo f-field" data-refer="#dosage-refer" data-caret="#dosage-caret" data-dropdown="#dosage-selector" data-source="no">500</span>
+                                </div>
+                                <div style="float:right;height:100%;width:50%;">
+                                    <a class="f-field" style="text-align:left;" id="dosage-caret">ml<span class="combo-caret"></span></a>
+                                </div>
+                            </div>
+                            <div class="button"><img src="content/images/num-up.png" onclick="onUpDownClick('up');" /></div>
+                        </div>
+                        <div class="form-group" id="usage-refer">
+                            <div class="label">
+                                <span class="f-label" style="float:left">用法</span>
+                            </div>
+                            <div class="control">
+                                <span id="usage" class="combo f-field  f-blank" title="<点击选择用法>" data-refer="#usage-refer" data-caret="#usage-caret" data-dropdown="#usage-list"></span>
+                            </div>
+                            <div class="button"><span id="usage-caret" class="combo-caret"></span></div>
+                        </div>
+                        <div class="form-group" id="freq-refer">
+                            <div class="label">
+                                <span class="f-label" style="float:left">频次</span>
+                            </div>
+                            <div class="control">
+                                <span id="frequency" class="combo f-field f-blank" title="<点击选择频次>" data-refer="#freq-refer" data-caret="#freq-caret" data-dropdown="#freq-list"></span>
+                            </div>
+                            <div class="button"><span id="freq-caret" class="combo-caret"></span></div>
+                        </div>
+                        <div class="form-group" style="height:10em;">
+                            <div class="label">
+                                <span class="f-label">嘱托</span>
+                            </div>
+                            <div class="control" style="width:72%;">
+                                <textarea id="description" style="height:89%;overflow:hidden;margin-top:0.8em;text-align:left;font-size:1.7em;" class="f-field f-blank" onchange='window.isEditting = !!$("#item-field").data("item");' onfocus="    if ($(this).val().indexOf('请输入...') >= 0) $(this).removeClass('f-blank').val('');" onblur="    if ($(this).val().trim().length == 0) $(this).addClass('f-blank').val('     <请输入...>');">     &lt;请输入...&gt;</textarea>
+                            </div>
+                        </div>
+                        <a id="save-button" style="position:absolute;font-size:2.125em;color:#1D46FF;bottom:10px;right:10px;" onclick="onSaveClick(this);">确定</a>
+                    </div>
+                </div>
+                <div id="usage-list" class="combo-panel" style="height:242.5px;"></div>
+                <div id="freq-list" class="combo-panel" style="height:185.5px;"></div>
+                <div id="dosage-selector" class="combo-panel" style="height:245px;position:absolute;">
+                    <div style="width:180px;height:100%;" class="dosage">
+                        <span>7</span><span>8</span><span>9</span>
+                        <span>4</span><span>5</span><span>6</span>
+                        <span>1</span><span>2</span><span>3</span>
+                        <span>0</span><span title="dot">.</span><span title="del"><img src="content/images/delete_24.png" style="vertical-align:middle;" /></span>
+                    </div>
+                    <div style="position:relative;top:-100%;float:right;" class="unit" id="unit-list">
+                        <div><span>mg</span></div>
+                        <div><span>片</span></div>
+                        <div><span>盒</span></div>
+                        <span style="position:absolute;display:block;right:0px;border-bottom:0px;" title="cancel">取消</span>
+                    </div>
+                </div>
+                <img id="goback" class="goback" src="content/images/gocatalog.png" onclick="$('#edit-container').animate({ left: '100%' }, 400, 'linear', function () { $(this).hide(); });" />
+            </div>
+            <div id="item-selector" style="width:100%;height:100%;display:none;position:absolute;left:100%;top:0px;background:#D8D8D8;">
+                <div style="float:left;width:70.5%;height:100%;padding-bottom:8em;background-color:#fff;position:relative;">
+                    <div style=" height:8em;border-bottom:1px #DFDFDF solid;">
+                        <div style="height:4em;border-bottom:1px #DFDFDF solid;line-height:4em;padding-left:30px;">
+                            <span style="font-size:1.75em;color:#333;">项目选择</span>
+                            <span class="item-filter" style="margin-right:12px;">其他</span>
+                            <span class="item-filter">检验</span>
+                            <span class="item-filter">检查</span>
+                            <span class="item-filter">手术</span>
+                            <span class="item-filter">膳食</span>
+                            <span class="item-filter">护理</span>
+                            <span class="item-filter">文字</span>
+                            <span class="item-filter">治疗</span>
+                            <span class="item-filter">药品</span>
+                            <span class="item-filter active-filter">全部</span>
+                        </div>
+                        <table class="table-header" border="0" cellpadding="0" cellspacing="0">
+                            <colgroup>
+                                <col style="width: 10%" />
+                                <col style="width: 30%" />
+                                <col style="width: 15%" />
+                                <col style="width: 5%" />
+                                <col style="width: 5%" />
+                                <col style="width: 25%" />
+                                <col style="width: 10%" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <td style="padding-left:30px;text-align:left;"><span>代码</span></td>
+                                    <td style="text-align:left;"><span>名称</span></td>
+                                    <td style="text-align:left;"><span>规格</span></td>
+                                    <td><span>单价</span></td>
+                                    <td><span>报销</span></td>
+                                    <td style="text-align:left;"><span>产地</span></td>
+                                    <td style="text-align:left;"><span>药房<br />执行科室</span></td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div style="height:100%;overflow-y:auto;">
+                        <table id="itemlist" class="table-data data-source-binding" border="0" cellpadding="0" cellspacing="0" data-source="{binding Items}" data-formater="itemformater" data-key-expression="this.id" data-default-rows="9">
+                            <colgroup>
+                                <col style="width: 10%" />
+                                <col style="width: 30%" />
+                                <col style="width: 15%" />
+                                <col style="width: 5%" />
+                                <col style="width: 5%" />
+                                <col style="width: 25%" />
+                                <col style="width: 10%" />
+                            </colgroup>
+                            <tbody>
+                                <tr id="d_r_{data-key}" class="tpl-row">
+                                    <td class="col-1">{$code}</td>
+                                    <td class="col-2" onclick="selectRow(this);">{$name}</td>
+                                    <td class="col-3">{$spec}</td>
+                                    <td class="col-4">{$price}</td>
+                                    <td class="col-5">{$pay_percent}</td>
+                                    <td class="col-6">{$produce}</td>
+                                    <td class="col-7"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="float:right;width:29.5%;padding-left:20px;height:100%;">
+                    <div style="width:100%;height:100%;background:#fff;" >
+                        <div style="height:4em;line-height:4em;text-align:center;border-bottom:1px #DFDFDF solid;">
+                            <span id="filter-keyword" class="f-field" style="font-size:2em;color:black;"></span>
+                        </div>
+                        <div class ="key-board" style="padding-top:40px;">
+                            <span>a</span>
+                            <span>b</span>
+                            <span>c</span>
+                            <span>d</span>
+                            <span>e</span>
+                            <span>f</span>
+                            <span>g</span>
+                        </div>
+                        <div class="key-board">
+                            <span>h</span>
+                            <span>i</span>
+                            <span>j</span>
+                            <span>k</span>
+                            <span>l</span>
+                            <span>m</span>
+                            <span>n</span>
+                        </div>
+                        <div class="key-board">
+                            <span>o</span>
+                            <span>p</span>
+                            <span>q</span>
+                            <span>r</span>
+                            <span>s</span>
+                            <span>t</span>
+                            <span>u</span>
+                        </div>
+                        <div class="key-board">
+                            <span>v</span>
+                            <span>w</span>
+                            <span>x</span>
+                            <span>y</span>
+                            <span>z</span>
+                            <span class="big">%</span>
+                        </div>
+                        <div class="key-board" style="padding-top:50px;">
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                            <span>6</span>
+                        </div>
+                        <div class="key-board">
+                            <span>7</span>
+                            <span>8</span>
+                            <span>9</span>
+                            <span class="big" id="key-del">Del</span>
+                            <span class="big" id="key-close" style="margin-right:auto;" onclick="$('#item-selector').animate({ left: '100%' }, 400, 'linear', function () { $(this).hide(); $('#goback').show(); });">Close</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <!--<script src="content/demo/demo.js"></script>-->
+    <script src="scripts/common.js" type="text/javascript"></script>
+    <!--<script src="content/iscroll/iscroll.js" type="text/javascript"></script>-->
+    <script src="scripts/toucher.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        document.onselectstart = function () { return false; }
+        var OrderTable = document.getElementById("order-list-body");
+        var menuContainer = document.getElementById("menu-container");
+        var menus = $(menuContainer.children).filter(".nav-menu,.nav-menu-active").toArray();
+        menuContainer["active-menu"] = menus[2];
+        menuContainer["actvice-index"] = 2;
+
+
+        function menuClick(it, lsbz) {
+            var menu_actived = menuContainer["active-menu"];
+            var menu_actived_index = menuContainer["actvice-index"];
+            if (it == menu_actived) return;
+            if (menu_actived) {
+                menu_actived.className = menu_actived.className.replace("nav-menu-active", "nav-menu");
+                if (menu_actived_index > 0) $(menus[menu_actived_index - 1]).removeClass("menu-active-before");
+                if (menu_actived_index == menus.length - 1) $(menu_actived).addClass("menu-last");
+            }
+            for (var i = 0; i < menus.length; i++) {
+                if (menus[i] == it) {
+                    menuContainer["active-menu"] = it;
+                    menuContainer["actvice-index"] = i;
+                    it.className = it.className.replace("nav-menu", "nav-menu-active");
+                    if (i > 0) $(menus[i - 1]).addClass("menu-active-before");
+                    if (i == menus.length - 1) $(it).removeClass("menu-last");
+                    break;
+                }
+            }
+            $lsbz = lsbz;
+            document.getElementById("order-table-label").innerText = $labels[lsbz];
+            loadData();
+        }
+        //event
+        function onOrderListRowSwipeStart() {
+            var el = event.target || event.srcElement;
+            var row = findParent(el, function () { return this.className && this.className.indexOf("data-row") > -1; });
+            var key = row.id.substr(4);
+            var order = OrderTable["meta-data"][key];
+            if (!order || (order.type == 0 && order.state == 4) || (order.type == 1 && order.state == 3)) return (this.swipeEl = undefined) || true;
+            this.swipeEl = row;
+            $("#order-list-action").data("order", order).find(".action").text(order.type == 1 ? "DC" : "停止");
+            
+        }
+        function onOrderListRowSwipe(e) {
+            var distanceX = e.startX - e.pageX;
+            var distanceY = e.startY - e.pageY;
+            if (Math.abs(distanceX) > Math.abs(distanceY)) event.preventDefault();
+            if (!this.swipeEl) return true;
+            if (distanceX < 20) return true;
+            var top = (this.swipeEl.rowIndex + 1) * $(this.swipeEl).outerHeight();
+            var el = $("#order-list-action").show().css("top", top).css("height", $(this.swipeEl).outerHeight() + "px").css("line-height", $(this.swipeEl).outerHeight() + "px");
+            var w = $(OrderTable).outerWidth() * 0.2967;
+            el.css("width", (distanceX > 2 * w ? w : Math.round(distanceX / 2)) + "px");
+        }
+
+        function onOrderListRowSwipeEnd(e) {
+            if(!this.swipeEl) return true;
+            var distance = e.startX - e.pageX;
+            if (distance < 0) return true;
+            var el = $("#order-list-action");
+            var w = $(OrderTable).outerWidth() * 0.2967;
+            if (distance >= 2 * w);
+            else if (distance >= w && distance < 2 * w) el.animate({ width: w + "px" }, 300, "linear");
+            else el.animate({ width: "0px" }, 300, "linear", function () { $(this).hide(); });
+        }
+
+
+        function doOrderAction(order) {
+            var action = order.type == 1 ? "DC" : "STOP";
+            var lsbz = order.type;
+            var syxh = $syxh, yexh = $yexh;
+            var fzxh = order.group_id, xh = order.id;
+
+            if (action == "DC") dcOrder(syxh, yexh, lsbz, fzxh, xh);
+            else doStopOrder(syxh, yexh, fzxh, xh);
+        }
+
+        function onEditClick() {
+            setTimeout(loadEditOrders, 1);
+            $("#edit-container").css("left", "100%").show().animate({ left: 0 }, 400, "linear");
+        }
+    </script>
+    <script type="text/javascript">
+        var allOrders = [];
+        var Orders = [];
+        var $lsbz = 2;
+        var $labels = ["停止", "执行", "停止"]
+        var $syxh = 0, $yexh = 0;
+        var loads = [];
+        //var view_scroller = new IScroll(document.getElementById('order-viewport'));
+
+        var formater = {
+            ksrq: function (rec) {
+                var text = Date.from(rec.start_time).format("yyyy.MM.dd").substr(2) || "";
+                if (rec.type == 1 && rec.state == 3) {
+                    var width = $(this).width();
+                    return "<div style=\"position: relative; \">" + text + "<div style=\"width: " + width + "px; position: absolute; top: 50%;border-bottom:1px red solid; \"></div></div>";
+                }
+                return text;
+            },
+            kssj: function (rec) {
+                return Date.from(rec.start_time).format("HH:mm") || "";
+            },
+            czwz: function(rec){
+                var pos = ["","┏","┃","┗"];
+                return pos[rec.group_pos || 0];
+            },
+            zxrq: function (rec) {
+                if (rec.type == 1 && rec.state == 3) return "&nbsp;";
+                else if (rec.type == 1) return Date.from(rec.exec_time).format("yyyy.MM.dd").substr(2) || "&nbsp;";
+                else if (rec.state == 4) return Date.from(rec.end_time).format("yyyy.MM.dd").substr(2) || "&nbsp;";
+                else return "&nbsp;";
+            },
+            zxsj: function (rec) {
+                if (rec.type == 1 && rec.state == 3) return "&nbsp;";
+                else if (rec.type == 1) return Date.from(rec.exec_time).format("HH:mm") || "&nbsp;";
+                else if (rec.state == 4) return Date.from(rec.end_time).format("HH:mm") || "&nbsp;";
+                else return "&nbsp;";
+            },
+            zxczymc: function (rec) {
+                if (rec.type == 1 && rec.state == 3) return "&nbsp;";
+                else if (rec.type == 1) return rec.executor || "&nbsp;";
+                else return rec.stop_doctor || "&nbsp;";
+            },
+            stoped: function (rec) {
+                if (rec.type == 0 && rec.state == 4) return "stoped-order";
+                return "";
+            },
+            typeDesc: function (rec) {
+                return rec.type == 1 ? "临时" : "长期";
+            },
+            categoryDesc: function (rec) {
+                var c = ["药品", "治疗", "手术", "膳食", "输血", "护理", "检查", "化验", "输液", "停止", "转科", "出院", "出院", "转床", "术后", "产后"];
+                return c.length >= rec.category ? c[rec.category] : "其他";
+            }
+        };
+
+        function loadData(syxh, yexh) {
+            var patient = $App.getData("CURRENT_PATIENT");
+            if (syxh > 0 && (!patient || patient.syxh != syxh)) {
+                this.loads = [];
+                this.allOrders = [];
+                patient = $decode($App.setData("CURRENT_PATIENT", $App.findData("patient", "info", String.format("{\"syxh\":{0},\"yexh\":{1}}", syxh, yexh)).json));
+            }
+            if ($App.isOnline() && this.loads[$lsbz] !== true) {
+                if ($lsbz == 2) this.allOrders = this.allOrders.concat($App.findData("order", "get-order", String.format("{\"syxh\":{0},\"yexh\":{1},\"lsbz\":{2}}", patient.syxh, patient.yexh, 0)));
+                else this.allOrders = this.allOrders.concat($App.findData("order", "get-order", String.format("{\"syxh\":{0},\"yexh\":{1},\"lsbz\":{2}}", patient.syxh, patient.yexh,$lsbz)));
+                if ($lsbz == 2) this.loads[2] = (this.loads[0] = true);
+                else this.loads[$lsbz] = true;
+            } else if (!$App.isOnline() && ($syxh != patient.syxh || $yexh != patient.yexh || this.loads.length == 0)) {
+                this.allOrders = $App.findData("order", "patient-order", String.format("{\"syxh\":{0},\"yexh\":{1}}", patient.syxh, patient.yexh));
+                this.loads = [true, true, true];
+            }
+            this.$syxh = patient.syxh;
+            this.$yexh = patient.yexh;
+
+            this.Orders = [];
+            for (var i = 0; i < this.allOrders.length; i++) {
+                var order = $decode(this.allOrders[i].json);
+                if (order.rec_state == RecordState.Normal || order.rec_state == RecordState.Empty) continue;
+                order._mjson = this.allOrders[i].json;
+                if (($lsbz != 2 && order.type == $lsbz) || ($lsbz == 2 && order.type == 0 && order.state != 4)) this.Orders.push(order);
+            };
+            bindingData();
+            $("#order-list-action").hide();
+            if (!OrderTable.touchUtil) {
+                //view_scroller.on("beforeScrollStart", onOrderListRowSwipeStart);
+                //view_scroller.on("scrollStart", onOrderListRowSwipe);
+                //view_scroller.on("scrollEnd", onOrderListRowSwipeEnd);
+
+                OrderTable.touchUtil = util.toucher(OrderTable);
+                OrderTable.touchUtil.on("swipeStart", onOrderListRowSwipeStart);
+                OrderTable.touchUtil.on("swipe", onOrderListRowSwipe);
+                OrderTable.touchUtil.on("swipeEnd", onOrderListRowSwipeEnd);
+            }
+        }
+
+        function dcOrder(syxh, yexh, lsbz, fzxh, xh) {
+            var doc = $App.getDoctor();
+            var result = $App.postData("order", "dc", String.format("{\"ysdm\":\"{0}\",\"lsbz\":{1},\"syxh\":{2},\"yexh\":{3},\"fzxh\":{4},\"xh\":{5}}", doc.id, lsbz, syxh, yexh, fzxh, xh));
+            if (result) {
+                $("tr[id^='d_r_" + fzxh + "_'").each(function () {
+                    var key = this.id.substr(4);
+                    var rec = OrderTable["meta-data"][key];
+                    var text = Date.from(rec.start_time).format("yyyy.MM.dd").substr(2) || "";
+                    var width = $(OrderTable).width();
+                    $(this).find("td.b_c1").html("<div style=\"position: relative; \">" + text + "<div style=\"width: " + width + "px; position: absolute; top: 50%;border-bottom:1px red solid; \"></div></div>");
+                    $("#order-list-action").hide();
+                });
+            }
+        }
+
+        function doStopOrder(syxh, yexh, fzxh, xh) {
+            if ($App.datetimepicker) $App.datetimepicker("1", "0", "停止", Date.now().format("yyyyMMddHH:mm"), "", "", "", "txtStopTime");
+            else $("#txtStopTime").click();
+        }
+
+        function stopOrder(editor) {
+            if (!editor || !$(editor).data("order")) return;
+            var order = $(editor).data("order");
+            var parts = [];
+            $("#txtStopTime").val().replace(/[0-9]+/g, function (v) { parts.push(parseInt(v)); });
+            var date = new Date(parts[0], parts[1] - 1, parts[2], parts[3], parts[4]);
+            var tzsj = date.format("yyyy MM dd HH:mm").replace(/\s+/g, "") + ":00";
+            var doc = $App.getDoctor();
+
+            var result = $App.postData("order", "stop", String.format("{\"ysdm\":\"{0}\",\"syxh\":{1},\"yexh\":{2},\"xh\":{3},\"tzsj\":\"{4}\"}", doc.id, $syxh, $yexh, order.id, tzsj));
+            if (result) {
+                $("tr[id^='d_r_" + order.group_id + "_'").each(function () {
+                    $(this).addClass("stoped-order");
+                    $(this).find("td.b_c6").text(date.format("yyyy.MM.dd").substr(2));
+                    $(this).find("td.b_c7").text(date.format("HH:mm"));
+                    $(this).find("td.b_c8").text(doc.name);
+                });
+                $(editor).hide();
+            }
+            $(editor).data("order", null);
+        }
+    </script>
+    <script src="order.edit.js" type="text/javascript"></script>
+</body>
+</html>

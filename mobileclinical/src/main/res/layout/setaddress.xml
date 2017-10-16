@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/setAdress">
+	<LinearLayout 
+	    android:orientation="vertical"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"   
+	    android:layout_gravity="center_horizontal" 
+	    >
+	   <TextView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="webservice地址:"
+		    android:textSize="24sp"
+		    android:textColor="#0041FF"
+		    android:layout_marginTop="10dp"/>
+		<EditText
+		    android:layout_width = "420dp" 
+			android:layout_height="wrap_content"
+			android:drawableBottom="@drawable/line"
+			android:background="@null"
+			android:id="@+id/log_setwebservice"
+			android:singleLine="true"
+			android:inputType="text"
+			android:textSize="24sp"
+			android:layout_marginTop="10dp"/>
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:orientation="horizontal"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:layout_gravity="center_horizontal"  
+	    android:paddingBottom="20dp"
+	    android:layout_marginTop="20dp">
+		<Button
+		    android:layout_width = "120dp" 
+			android:layout_height="wrap_content"
+			android:id="@+id/log_confirm"
+			android:padding="10dp"
+			
+            android:textColor="#ffffff"
+            android:background="@drawable/btn_select"
+			android:text="确认"
+			android:textSize="26sp"/>
+		<!-- <Button
+			android:layout_width = "180dp" 
+			android:layout_height="wrap_content"
+			android:id="@+id/setIP_test"
+			android:padding="10dp"
+			android:layout_marginLeft="10dp"
+			android:textColor="#ffffff"
+            android:background="@drawable/btn_select"
+			android:text="测试连接"
+			android:textSize="26sp"/> -->
+		<Button
+			android:layout_width = "120dp" 
+			android:layout_height="wrap_content"
+			android:padding="10dp"
+			android:layout_marginLeft="10dp"
+			android:textColor="#ffffff"
+            android:background="@drawable/btn_select"
+			android:id="@+id/log_cancel"
+			android:text="取消"
+			android:textSize="26sp"/>
+	</LinearLayout>
+</LinearLayout>

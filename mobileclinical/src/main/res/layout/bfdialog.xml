@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#50000000" >
+
+   <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fpd_topheight"
+        android:gravity="right" >
+        <Button
+            android:id="@+id/bfdialog_back"
+            android:layout_width="@dimen/bfd_backwidth"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/btn_select_back"
+            android:layout_centerVertical="true" />
+
+        <Button
+            android:id="@+id/bfdialog_close"
+            android:layout_width="@dimen/bfd_closewidth"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/bfdialog_back"
+            android:background="@drawable/btn_select_close"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bfd_height"
+        android:gravity="top"
+        android:orientation="horizontal" >
+
+        <ScrollView
+            android:id="@+id/pi_ll_secondmenuscroll"
+            android:layout_width="@dimen/bfd_bfwidth"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/bf_ll_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="0dp" >
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout
+	        android:layout_width="@dimen/fbg_name_top"
+	        android:layout_height="match_parent"
+	        android:orientation="horizontal" >
+	    </LinearLayout>
+        <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="@dimen/bfd_height"
+	        android:background="#FFFFFF" >
+
+	        <GridView
+	           android:id="@+id/bf_gridview"
+	           android:layout_width="wrap_content"
+			   android:layout_height="wrap_content"            
+	           android:columnWidth="@dimen/bf_grid_width"
+	           android:horizontalSpacing="-20dp"
+	           android:verticalSpacing="-20dp"
+	           android:numColumns="3" >
+	        </GridView>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

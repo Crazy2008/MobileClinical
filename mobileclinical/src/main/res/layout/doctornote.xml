@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:background="#E6E6E7" >
+
+    <LinearLayout
+        android:id="@+id/pb_ll_gridview"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/rep_bg"
+        android:orientation="vertical" >
+
+        <!-- 左侧显示 -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="查房便签"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/dn_notetext" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#002487" />
+
+        <ImageButton
+            android:id="@+id/bwl_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="110dp"
+            android:background="@drawable/notewrite"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="编辑今日便签"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/dn_notetext" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="15dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#E6E6E7" >
+    </LinearLayout>
+    
+    <View android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:id="@+id/image_point"/>
+    
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="3"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+        
+        <LinearLayout 
+            android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	        
+            <ImageView 
+		        android:id="@+id/dn_btn_left"
+                android:layout_width="wrap_content"  
+                android:layout_height="wrap_content"  
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:src="@drawable/leftswitch"  
+                android:layout_marginLeft="30dp" />
+	        
+	        <com.winning.mobileclinical.layout.HorizontalListView2 
+		        android:id="@+id/date_listview"
+		        android:layout_width="0dp"
+		        android:layout_weight="3"
+		        android:layout_height="60dp"
+		        android:layout_marginLeft="30dp"
+		        android:layout_marginRight="30dp" >
+	        </com.winning.mobileclinical.layout.HorizontalListView2>
+	        
+	        <ImageView 
+		        android:id="@+id/dn_btn_right"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"  
+                android:src="@drawable/rightswitch"  
+                android:layout_marginRight="30dp" />
+	        
+        </LinearLayout>
+        
+        
+        <TextView
+            android:layout_width="fill_parent"
+            android:id="@+id/bwl_title"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/titlebackground"
+            android:text="      查房便签"
+            android:textColor="#1D46FF"
+            android:textSize="@dimen/dn_notetitle" />
+        
+         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="文本"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:textColor="#434343"
+            android:textSize="@dimen/dn_notetitle" />
+         <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/bwl_content"
+            android:layout_height="50dp"
+            android:text=""
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:textColor="#555555"
+            android:textSize="@dimen/dn_notetitle"
+            android:maxLines = "2"
+            android:scrollbars="none" />
+        
+         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="照片"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:textColor="#434343"
+            android:textSize="@dimen/dn_notetitle" />
+         
+         
+         <LinearLayout 
+            android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+        
+	        <com.winning.mobileclinical.layout.HorizontalListView2 
+		        android:id="@+id/date_picturelistview"
+		        android:layout_width="0dp"
+		        android:layout_weight="3"
+		        android:layout_height="110dp"
+		        android:layout_marginLeft="30dp"
+		        android:layout_marginRight="30dp" >
+	        </com.winning.mobileclinical.layout.HorizontalListView2>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="录音"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:textColor="#434343"
+            android:textSize="@dimen/dn_notetitle" />
+         
+         
+        <LinearLayout 
+            android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	        
+            <ImageView 
+		        android:id="@+id/dn_record_left"
+                android:layout_width="wrap_content"  
+                android:layout_height="wrap_content"  
+                android:gravity="left"
+                android:layout_gravity="center"
+                android:src="@drawable/leftswitch"  
+                android:layout_marginLeft="30dp"/>
+
+	        <com.winning.mobileclinical.layout.HorizontalListView2 
+		        android:id="@+id/date_recordlistview"
+		        android:layout_width="0dp"
+		        android:layout_gravity="center_horizontal"
+		        android:layout_weight="3"
+		        android:layout_height="100dp"
+		        android:layout_marginLeft="30dp"
+		        android:layout_marginRight="30dp" >
+	        </com.winning.mobileclinical.layout.HorizontalListView2>
+	        
+	        <ImageView 
+		        android:id="@+id/dn_record_right"
+                android:layout_width="wrap_content"  
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"  
+                android:src="@drawable/rightswitch"
+                android:layout_marginRight="30dp"/>
+	        
+        </LinearLayout>
+         
+        
+        
+    </LinearLayout>
+
+</LinearLayout>

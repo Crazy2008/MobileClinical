@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">移动查房</string>
+	<string name="loginid">用户名</string>
+	<string name="ok">确 定</string>
+    <string name="cancel">取 消</string>
+
+</resources>
+<!-- 华为平板兼容模式 -->

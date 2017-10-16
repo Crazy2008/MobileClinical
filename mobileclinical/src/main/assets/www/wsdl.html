@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <title></title>
+</head>
+<body>
+    <div><span style="display:inline-block;width:120px;">name:</span> <input id="name" style="width:200px;"/></div>
+    <div><span style="display:inline-block;width:120px;">key: </span><input id="key" style="width:200px;" /></div>
+    <div><span style="display:inline-block;width:120px;">jsonargs: </span><input id="jsonargs" style="width:500px;" /><button onclick="test();">测试</button></div>
+    <div id="ticks"></div>
+    <hr />
+    <textarea cols="100" rows="20" id="result"></textarea>
+    <script src="scripts/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+        var test = function () {
+            var n = $("#name").val();
+            var k = $("#key").val();
+            var a = $("#jsonargs").val();
+
+            $("#result").val(request(n, k, a));
+        }
+
+        var request = function (n, k, a) {
+            var request_result = {};
+            var begin = new Date();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                url: '/test/data.asmx/get',
+                data: "{'name':'" + n + "','key':'" + k + "','jsonargs':'" + a + "'}",
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                    request_result = result;
+                }
+            });
+            var during = (new Date()).getTime() - begin.getTime();
+            $("#ticks").text("耗时:" + during);
+            return request_result.d || "";
+        }
+    </script>
+</body>
+</html>

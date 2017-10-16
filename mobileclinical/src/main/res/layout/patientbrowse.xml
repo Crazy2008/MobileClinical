@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pb_topheight"
+        android:gravity="center_vertical"
+        android:background="@drawable/top_headbg"
+         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:drawableLeft="@drawable/logo1"
+            android:drawablePadding="15dp"
+            android:text="移动医生站"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/pb_toptitle" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="432dp"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/edit_search"
+                android:hint="查找病人"
+                android:inputType="text"
+                android:padding="3dp"
+                android:textSize="@dimen/pb_topdoctor" />
+            
+            <Button
+	            android:id="@+id/saoma"
+	            android:layout_marginLeft="30dp"
+	            android:layout_width="40dp"
+	            android:layout_height="40dp"
+	            android:background="@drawable/btn_saoma"
+	            />
+            
+
+            <TextView
+                android:id="@+id/pb_tv_bqks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:text=""
+                android:textColor="#ffffff"
+                android:textSize="@dimen/pb_topdoctor" />
+            
+            <Button
+	            android:id="@+id/pb_tv_bqksselect"
+	            android:layout_marginLeft="30dp"
+	            android:layout_width="40dp"
+	            android:layout_height="40dp"
+	            android:background="@drawable/xiala"
+	            />
+            
+        </LinearLayout>
+    </LinearLayout>
+    <!-- 中间 -->
+
+   <!--  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:baselineAligned="false"
+        android:orientation="vertical" >
+
+        <GridView
+            android:id="@+id/pgridview"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:cacheColorHint="#00000000"
+            android:columnWidth="@dimen/pb_gv_width"
+            android:horizontalSpacing="5px"
+            android:numColumns="4"
+            android:padding="1dip"
+            android:verticalSpacing="5px" >
+        </GridView>
+    </LinearLayout> -->
+    
+    <LinearLayout
+        android:id="@+id/pi_ll_content"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+        <FrameLayout
+            android:id="@+id/pi_fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/pb_menu_top" >
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/pi_fl_contentImport"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pb_menu_top" >
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/pi_fl_contentTX"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pb_menu_top" >
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/pi_fl_contentWD"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pb_menu_top" >
+        </FrameLayout>
+        
+        
+        
+        
+    </LinearLayout>
+    
+    <com.winning.mobileclinical.layout.DragTipsLayout
+	    xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+	    android:orientation="horizontal" >
+	    <LinearLayout
+	    	android:id="@+id/pi_ll_menu"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:background="@drawable/bottom_headbg"
+	        android:orientation="horizontal"
+	        android:layout_alignParentBottom="true"
+	        android:gravity="center" >
+	    </LinearLayout>
+   </com.winning.mobileclinical.layout.DragTipsLayout>
+    
+   <!--  <RelativeLayout
+        android:id="@+id/order_contextshow"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/pb_topheight"
+        android:gravity="center_vertical"
+        android:layout_below="@id/pi_ll_content"
+        android:orientation="horizontal" >
+            <LinearLayout
+    	    android:layout_width="match_parent"
+    	    android:layout_height="@dimen/pb_topheight"
+    	    android:orientation="horizontal"
+    	    android:id="@+id/pi_ll_menu"> 
+    	</LinearLayout>
+        </RelativeLayout> -->
+    
+
+    <!-- 下方 -->
+    
+    
+<!--     <LinearLayout
+    	    android:layout_width="match_parent"
+    	    android:layout_height="@dimen/pb_topheight"
+    	    android:layout_marginLeft="15dp"
+    	    android:orientation="horizontal"
+    	    android:id="@+id/pi_ll_menu"> 
+    	</LinearLayout> -->
+
+    <!-- <RelativeLayout
+        android:id="@+id/order_contextshow"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/pb_topheight"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/pb_topheight"
+            android:background="#3A3D53"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/pi_ll_menu"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/pb_topheight"
+                android:layout_marginBottom="@dimen/pb_menu_top"
+                android:background="#0041FF"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout> -->
+
+</RelativeLayout>

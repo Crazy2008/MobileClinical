@@ -1,0 +1,79 @@
+﻿body { font-family: 'Microsoft YaHei'; margin:0px; padding:0px; }
+* { box-sizing: border-box; }
+/*病人列表界面宽高设置*/
+/*IPAD 2*/
+@media (min-width: 768px) {
+    .app-viewport,.clinical-viewport,.other-viewport { width:1280px; }
+}
+/*Samsung SM-T810*/
+@media (min-width: 1024px){
+    .app-viewport,.clinical-viewport,.other-viewport { width: 1300px;}
+}
+/*IPAD MINI 2*/
+@media (min-width: 1024px) and (-webkit-min-device-pixel-ratio: 2){
+    .app-viewport,.clinical-viewport,.other-viewport { width: 1280px;}
+}
+/*HUAWEI M2-A01W*/
+@media (min-width: 1280px){
+    .app-viewport,.clinical-viewport,.other-viewport { width: 1700px;}
+}
+
+/*病人列表 Samsung SM-T810 （竖屏）*/
+@media (min-width: 768px) and (orientation : portrait) {
+    .clinical-viewport,.other-viewport { width: 1300px;}
+}
+/*病人列表 HUAWEI M2-A01W （竖屏）*/
+@media (min-width: 800px) and (orientation : portrait) {
+    .clinical-viewport,.other-viewport { width: 1300px;}
+}
+/*病人列表 IPAD2（竖屏）*/
+@media (min-width: 1024px) and (orientation : portrait) {
+    .clinical-viewport,.other-viewport { width: 1280px;}
+}
+
+/*病人列表 HUAWEI M2-A01W*/
+@media (min-height: 608px){
+    .app-viewport,.other-viewport { height: 808px; }
+}
+
+/*病人列表  Samsung SM-T810*/
+@media (min-height: 624px){
+    .app-viewport,.other-viewport { height: 790px; }
+}
+
+/*病人列表  IPAD MINI 2*/
+@media (min-height: 655px){
+    .app-viewport,.other-viewport { height: 819px; }
+}
+
+/*病人列表  IPAD 2*/
+@media (min-height:1024px){
+    .app-viewport,.other-viewport { height: 819px; }
+}
+
+/*病人数据 HUAWEI M2-A01W*/
+@media (min-height: 530px){
+    .clinical-viewport { height: 704px; }
+}
+
+/*病人数据 Samsung SM-T810*/
+@media (min-height: 546px){
+    .clinical-viewport { height: 692px; }
+}
+
+/*病人数据 IPAD MINI 2*/
+@media (min-height: 575px){
+    .clinical-viewport { height: 719px; }
+}
+
+/*病人数据 HUAWEI M2-A01W（竖屏）*/
+@media (min-height: 608px) and (orientation : portrait){
+    .clinical-viewport { height: 1640px; }
+}
+
+/*病人数据 Samsung SM-T810  （竖屏）*/
+@media (min-height: 802px) and (orientation : portrait){
+    .clinical-viewport { height: 1358px; }
+}
+
+.clear{ clear:both; }

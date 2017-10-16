@@ -1,0 +1,28 @@
+﻿var risdata = { "success": true, "data": [{ "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "json": "{\"syxh\":313964,\"yexh\":0,\"id\":\"713909\",\"name\":\"胃镜\",\"type\":\"RIS\",\"catalog\":\"WJ\",\"catalog_name\":\"胃镜\",\"jcbw\":\"\",\"release_date\":\"2016-03-07 09:41:46\",\"submit_date\":\"2016-03-07 09:05:01\",\"ksdm\":\"3122\",\"bqdm\":\"8215\"}" }, { "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "json": "{\"syxh\":313964,\"yexh\":0,\"id\":\"714249\",\"name\":\"心脏超声\",\"type\":\"RIS\",\"catalog\":\"XC\",\"catalog_name\":\"心脏超声\",\"jcbw\":\"\",\"release_date\":\"2016-03-07 14:59:07\",\"submit_date\":\"2016-03-07 14:53:29\",\"ksdm\":\"3122\",\"bqdm\":\"8215\"}" }, { "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "json": "{\"syxh\":313964,\"yexh\":0,\"id\":\"714858\",\"name\":\"超声内镜\",\"type\":\"RIS\",\"catalog\":\"CSNJ\",\"catalog_name\":\"超声内镜\",\"jcbw\":\"\",\"release_date\":\"2016-03-08 14:58:27\",\"submit_date\":\"2016-03-08 14:09:59\",\"ksdm\":\"3122\",\"bqdm\":\"8215\"}" }, { "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "json": "{\"syxh\":313964,\"yexh\":0,\"id\":\"714859\",\"name\":\"MR\",\"type\":\"RIS\",\"catalog\":\"MR\",\"catalog_name\":\"核磁共振\",\"jcbw\":\"\",\"release_date\":\"2016-03-08 14:58:27\",\"submit_date\":\"2016-03-08 14:09:59\",\"ksdm\":\"3122\",\"bqdm\":\"8215\"}" }], "action": "rpt-list", "message": "" };
+var risdetail = {
+    "713909": { "success": true, "data": [{ "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "json": "{\"syxh\":313964,\"yexh\":0,\"ksdm\":\"3122\",\"bqdm\":\"8215\",\"report_no\":\"713909\",\"type\":\"WJ\",\"name\":\"胃镜\",\"part\":\"模板\",\"find\":\"食道：进镜22cm见一0.4cm粘膜隆起，食管黏膜光滑柔软，血管纹理清晰，扩张度好，齿状线清晰。\\n贲门：粘膜前下壁粘膜隆起糜烂\\n胃底：未见异常\\n胃体：粘膜光滑，色泽潮红，未见溃疡及出血。\\n胃角：弧度存在粘膜光滑柔软，蠕动可。\\n胃窦：粘膜光滑，红白相间，以红为主，未见出血及溃疡，蠕动尚可，色泽淡红。\\n幽门：呈圆形，开闭尚可，粘膜皱襞光滑，色泽淡红，未见出血及溃疡。\\n十二指肠：未见异常\",\"result\":\"食管平滑肌瘤？ 贲门病变性质待定\\n浅表性胃炎\",\"img_src\":null}" }], "action": "rpt-detail", "message": "" },
+    "714249": { "success": true, "data": [{ "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "json": "{\"syxh\":313964,\"yexh\":0,\"ksdm\":\"3122\",\"bqdm\":\"8215\",\"report_no\":\"714249\",\"type\":\"XC\",\"name\":\"心脏超声\",\"part\":\"心脏\",\"find\":\"心脏结构测量 多普勒测量 心功能测量\\n\\n主动脉径 26 mm 二尖瓣： Vmax： cm/s, PG mmHg 左室射血分数 65 %\\n左房径 30 mm 反流： cm^2 短轴缩短率 35 %\\n右室径 18 mm 三尖瓣： Vmax： cm/s, PG mmHg 心输出量 5.5 l/m\\n左室径 45 mm 反流： cm^2 心每搏量 60 ml\\n室间隔厚度 7 mm 主动脉瓣：Vmax： cm/s, PG mmHg 二尖瓣Ev 76 cm/s\\n左室壁厚度 7 mm 反流： cm 二尖瓣Av 92 cm/s\\n主肺动脉径 19 mm 肺动脉瓣：Vmax： cm/s, PG mmHg 心 率 92 次/分\\n二尖瓣面积 cm^2 反流： cm\\n\\n\\n 1.各房室内径正常大小，室间隔及左室壁厚度及运动幅度正常，收缩活动协调，\\n\\n 房室间隔完整。心包脏壁层无分离。\\n\\n 2.主动脉内径正常，运动幅度正常，主肺动脉内径正常。\\n\\n 3.各瓣膜无增厚，开放关闭正常。\\n\\n 4.左室射血分数及心输出量正常。\\n\\n 5.CDFI：未见异常血流。二尖瓣血流频谱EV/AV<1。\",\"result\":\"提示左室舒张松弛功能下降。\",\"img_src\":null}" }], "action": "rpt-detail", "message": "" },
+    "714858": { "success": true, "data": [{ "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "json": "{\"syxh\":313964,\"yexh\":0,\"ksdm\":\"3122\",\"bqdm\":\"8215\",\"report_no\":\"714858\",\"type\":\"CSNJ\",\"name\":\"超声内镜\",\"part\":\"模板\",\"find\":\"胃镜所见：食管距门齿22cm左侧壁近前壁见一约0.5cm粘膜隆起，表面光滑，蠕动可。胃窦后壁可见一浅溃疡，底覆白苔，周围粘膜充血水肿，活检2快，质软。贲门粘膜充血水肿，片状糜烂。\\n超声胃镜所见：食管距门齿22cm左侧壁近前壁见一粘膜下低回声肿块，断面大小约2.5mm×1.4mm，边界清楚，内部回声均匀，起源于粘膜肌层。\",\"result\":\"食管粘膜下肿瘤（考虑平滑肌瘤可能性大）\\n胃窦浅溃疡 贲门炎\",\"img_src\":null}" }], "action": "rpt-detail", "message": "" },
+    "714859": { "success": true, "data": [{ "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "json": "{\"syxh\":313964,\"yexh\":0,\"ksdm\":\"3122\",\"bqdm\":\"8215\",\"report_no\":\"714859\",\"type\":\"MR\",\"name\":\"MR\",\"part\":\"右膝\",\"find\":\"影像学表现：右膝关节诸骨骨质信号未见异常；右膝关节髌上囊及关节腔内见少量长T1，长T2信号，STIR上呈高信号；右膝关节后角肿胀，信号增高，显示欠清，外侧半月板形态信号未见异常；右膝关节前后交叉韧带及内外侧副韧带信号未见异常；周围软组织未见异常。\",\"result\":\"右膝关节髌上囊及关节腔内少量积液，内侧半月板后侧肿胀，变性可能。\",\"img_src\":null}" }], "action": "rpt-detail", "message": "" }
+}
+
+var rispaces = {
+    "713909": { "success": true, "data": [{ "key": "713909", "description": "<THUMNAIL>", "src": "content/images/clicktoviewpacks.png" }, { "description": "", "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "key": "713909", "res_id": "af5f3140-f24c-4c7c-ae0c-bf9c7b848e83", "src": "content/demo/wj.png" }], "action": "rpt-img", "message": "" },
+    "714249": { "success": true, "data": [{ "key": "714249", "description": "<THUMNAIL>", "src": "content/images/clicktoviewpacks.png" }, { "description": "", "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "key": "714249", "res_id": "af5f3140-f24c-4c7c-ae0c-bf9c7b848e83", "src": "content/demo/xzcs.png" }], "action": "rpt-img", "message": "" },
+    "714858": { "success": true, "data": [{ "key": "714858", "description": "<THUMNAIL>", "src": "content/images/clicktoviewpacks.png" }, { "description": "", "syxh": 313964, "yexh": 0, "ksdm": "3122", "bqdm": "8215", "key": "714858", "res_id": "af5f3140-f24c-4c7c-ae0c-bf9c7b848e83", "src": "content/demo/csnj.png" }], "action": "rpt-img", "message": "" },
+    "714859": { "success": true, "data": [{ "key": "714859", "description": "<THUMNAIL>", "link": "http://222.185.125.182:801/TCloud/padimageviewer.html?studyUID=1.3.46.670589.11.42459.5.0.4740.2014061120081626681&source=miis", "src": "content/images/clicktoviewpacks.png" }], "action": "rpt-img", "message": "" }
+};
+
+var finder = $.proxy($App.findData, $App);
+
+$App = $.extend($App, {
+    findData: function (n, s, a) {
+        if (s == "rpt-list") return risdata.data;
+        else if (s == "rpt-img") return rispaces[eval("(" + a + ")").keys].data;
+        else if (s == "rpt-detail") return risdetail[eval("(" + a + ")").keys].data;
+        else return finder(n, s, a);
+    },
+    isOnline: function () {
+        return 1;
+    }
+});

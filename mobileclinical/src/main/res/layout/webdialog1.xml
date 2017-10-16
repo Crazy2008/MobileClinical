@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    
+     <Button android:id="@+id/button" android:layout_width="100dp"  
+        android:layout_height="60dp" android:text="test" /> 
+    
+    <WebView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:visibility="gone"
+	    android:layerType="software"
+	    android:id="@+id/webView"
+	    />
+    
+     <WebView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layerType="software"
+	    android:visibility="gone"
+	    android:id="@+id/webViewris"
+	    />
+     
+      <WebView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layerType="software"
+	    android:visibility="gone"
+	    android:id="@+id/webViewlis"
+	    />
+      
+       <WebView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layerType="software"
+	    android:visibility="gone"
+	    android:id="@+id/webViewemr"
+	    />
+       
+        <WebView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layerType="software"
+	    android:visibility="gone"
+	    android:id="@+id/webViewtemp"
+	    />
+    
+
+</LinearLayout>

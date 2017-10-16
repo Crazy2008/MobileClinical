@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    android:background="#6c000000">
+    <LinearLayout 
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent">
+        
+    </LinearLayout>
+    <!-- 右边层 -->
+    <LinearLayout 
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:layout_marginTop="@dimen/pb_topheight">
+        <!-- 层头 -->
+		<RelativeLayout 
+		    android:layout_width="fill_parent"
+		    android:layout_height="@dimen/pb_downleft_title"
+		    android:background="#4194a4"
+		    android:id="@+id/pop_rl_back">
+		    <!-- 关闭按钮 -->
+		    <Button 
+		        android:layout_width="@dimen/pb_downleft_title"
+		        android:layout_height="@dimen/pb_downleft_title"
+		        android:background="@drawable/patient"
+		        android:id="@+id/btn_close"/>
+		    <LinearLayout 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:orientation="horizontal"
+		        android:layout_marginLeft="75dp"
+		        android:layout_centerVertical="true">   
+		        <TextView 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="手术安排"
+		            android:textColor="#ffffff"
+		            android:textSize="22sp"
+		            android:id="@+id/pop_tv_title"/>
+		        <ImageView 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:src="@drawable/patient"
+		            android:id="@+id/pop_iv_titleimage"/>
+	 	   </LinearLayout>
+		   <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginRight="25dp"
+	            android:gravity="center"
+	            android:layout_centerVertical="true"
+	            android:layout_alignParentRight="true"
+	            android:id="@+id/pop_ll_right"
+	            android:orientation="horizontal">
+		        <TextView 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text=""
+		            android:textColor="#ffffff"
+		            android:textSize="22sp"
+		            android:id="@+id/pop_tv_num"/>
+		        <TextView 
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="人"
+		            android:id="@+id/pop_wjz_name"
+		            android:textColor="#ffffff"
+		            android:textSize="22sp"/>
+		     </LinearLayout>
+		</RelativeLayout>
+		<!-- 下面显示内容 -->
+	    <GridView
+            android:id="@+id/pop_gv_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnWidth="@dimen/pb_downright"
+            android:gravity="center"
+            android:horizontalSpacing="0dp"
+            android:numColumns="auto_fit"
+            android:padding="0dip"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="0dp" >
+        </GridView>
+    </LinearLayout><!-- 显示层的结束 -->
+
+</LinearLayout>

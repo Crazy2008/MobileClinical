@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MediaProjectionDemo-master/MediaProjectionDemo-master.iml" filepath="$PROJECT_DIR$/MediaProjectionDemo-master/MediaProjectionDemo-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Work2.iml" filepath="$PROJECT_DIR$/Work2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cfbqdemo/cfbqdemo.iml" filepath="$PROJECT_DIR$/cfbqdemo/cfbqdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cfjl/cfjl.iml" filepath="$PROJECT_DIR$/cfjl/cfjl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mobileclinical/mobileclinical.iml" filepath="$PROJECT_DIR$/mobileclinical/mobileclinical.iml" />
+    </modules>
+  </component>
+</project>

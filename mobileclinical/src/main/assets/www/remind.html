@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <title>提醒</title>
+    <link rel="Stylesheet" href="content/site.css" />
+    <style type="text/css">
+        .data-view { overflow-y: auto; height: 100%; }
+        .data-list { box-shadow: 0 10px 15px #F5F5F5; margin-bottom: 15px; clear: both; }
+        .list-collapse { height: 7.5em; overflow: hidden; }
+        .list-expand { height: auto; }
+        .data-list .header { border: 1px #F5F5F5 solid; height: 7.5em; line-height: 7.5em; padding-left: 40px; padding-right: 40px; }
+        .data-list .header .title { width: 30%; float: left; font-size: 2.125em; position: relative; top: -5px; }
+        .data-list .header .title .icon { vertical-align: middle; position: relative; top: -3px; }
+        .data-list .header .nav { width: 70%; float: right; }
+        .data-list .header .nav .toolbar { float: right; font-size: 1.3em; color: #8B8B8B; }
+        .data-list .header .nav .toolbar span { border: 1px #b7b7b7 solid; height: 40px; border-radius: 20px; display: inline-block; line-height: 40px; padding-left: 20px; padding-right: 20px; cursor: pointer; user-select: none; }
+        .data-list .header .nav .tip { float: right; font-size: 1.5em; color: #7A7A7A; }
+        .data-list .header .nav .btn-down { float: right; width: 24px; height: 7.5em; cursor: pointer; }
+        .list-collapse .header .nav .toolbar { display: none; }
+        .list-collapse .header .nav .btn-down { background-image: none; background-repeat: no-repeat; background-position: center; }
+        .list-collapse .header .nav .tip span:first-child { display: initial; }
+        .list-expand .header .nav .toolbar { display: initial; }
+        .list-expand .header .nav .btn-down { background-image: none; background-repeat: no-repeat; background-position: center; }
+        .data-list .header .nav .expandable { background-image: url("content/images/expand.png") !important; }
+        .list-expand .header .nav .tip span:first-child { display: none; }
+        .data-list .list { clear: both; }
+        .data-list .list .item { border-bottom: 1px #F5F5F5 solid; border-right: 1px #F5F5F5 solid; height: 7.5em; padding-left: 50px; padding-right: 50px; }
+        .col-name { float: left; width: 18%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-hzxm { background-repeat: no-repeat; background-size: 45px 45px; background-position: 0 55%; padding-left: 60px; display: table; overflow: hidden; }
+        .col-name .wrap { display: table-cell; vertical-align: middle; }
+        .col-name .wrap .inner { font-size: 1.75em; color: #193CDA; }
+        .col-type { height: 100%; float: left; width: 18%; }
+        .col-type div { position: relative; top: 50%; }
+        .col-type div .task-type { height: 30px; text-align: center; width: 200px; display: inline-block; border-radius: 18px; color: white; position: relative; top: -14px; font-size: 1.3em; vertical-align: middle; }
+        .col-content { float: right; width: 82%; height: 100%; }
+        .col-content .info { height: 50%; position: relative; }
+        .info-inner { position: absolute; bottom: 5px; width: 100%; }
+        .col-content .record { height: 50%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .col-sex { float: left; width: 16.4%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-age { float: left; width: 16.4%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-dept { float: left; width: 16.4%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-ward { float: left; width: 16.4%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-bed { float: left; width: 16.4%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .data-list .list .item .record { clear: both; }
+        .f-label { color: #8B8B8B; font-size: 1.3em; }
+        .f-field { color: #464646; font-size: 1.3em; }
+        #modal-back { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background-color: black; -moz-opacity: 0.5; opacity: .50; filter: alpha(opacity=50); }
+        #modal-dialog { position: absolute; top: 5%; left: 17.1875%; width: 65.625%; height: 90%; background-color: white; overflow: auto; border-radius: 40px; padding: 24px 70px; }
+        #modal-title { text-align: center; font-size: 2.25em; color: #204ED2; }
+        .name-icon { height: 3.75em; }
+        .name-icon .icon { float: left; height: 100%; background-repeat: no-repeat; background-position: left center; width: 66px; position: relative; top: 10%; }
+        .name-icon .name { float: left; height: 100%; font-size: 3em; color: #193CDA; vertical-align: middle; }
+        .dialog-patient { padding-top: 15px; }
+        .dialog-patient .f-label { font-size: 1.5em; }
+        .dialog-patient .f-field { font-size: 1.5em; }
+        .content-label { font-size: 1.7em; color: #3E3E3E; padding: 30px 0px 5px 10px; border-bottom: 1px #979797 solid; }
+        .content-container { height: 8em; font-size: 1.5em; line-height: 1.7em; padding: 10px 0px 10px 10px; }
+        .tab-nav { height: 2em; }
+        .input-message { padding-top: 20px 0px 10px 10px; height: 10em; }
+        .input-message textarea { width: 100%; height: 100%; border: 1px #B9B9B9 solid; background-color: #EFEFEF; overflow: hidden; font-size: 1.5em; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); transition: border linear 0.2s, box-shadow linear 0.2s; }
+        .input-message textarea:focus { width: 100%; height: 100%; border: 1px #B9B9B9 solid; background-color: #ffffff; border-color: rgba(0, 130, 153, 0.8); outline: 0; outline: thin dotted \9; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 130, 153, 0.6); }
+        .dialog-button { margin-top: 20px; height: 4.3125em; line-height: 4.3125em; user-select: none; }
+        .dialog-button span { border-radius: 4px; text-align: center; float: right; color: #F7F7F7; font-size: 1.5em; height: 100%; user-select: none; }
+        .dialog-button .checker { width: 48px; background-repeat: no-repeat; background-position: center; float: left !important; }
+        .dialog-button .checker-label { color: #464646; font-size: 1.6em; float: left !important;text-align:left;width:4em; }
+        .dialog-button .cancel { background-color: #FE0000; width: 8em; cursor: pointer; }
+        .dialog-button .commit { background-color: #2454CF; width: 8em; cursor: pointer; }
+        dialog-button span:active { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 35px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 75px #fff; }
+        .data-binding { display: none; }
+        .tpl-row { display: none; }
+        .kss-flag { background-color: #9013FE; color: white; }
+        .undo-flag { background-color: #FF860B; color: white; }
+        .all-flag { background-color: #32A626; color: white; }
+        .hidden { display: none; }
+        #checker-kss-label{width:auto;}
+        select,input { width: 3em; height: 2em; padding: 6px 12px; font-size: 1.2em; text-align:center; color: #555; border: 1px solid #ccc; border-radius: 20px; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075); box-shadow: inset 0 1px 1px rgba(0,0,0,.075); -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
+        input:focus { border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); }
+    </style>
+</head>
+<body>
+    <div class="app-viewport">
+        <div style="width:100%;height:100%;position:relative;padding-bottom:15px;">
+            <div style="height:15px;background-color:#FAFAFA;"></div>
+            <div class="data-view">
+                <!--危急值-->
+                <div class="data-list list-collapse" id="criticalvalue-list">
+                    <div class="header">
+                        <div class="title" style="color: #FF1D1D;">
+                            <img src="content/images/cv.png" class="icon" />&nbsp;&nbsp;&nbsp;危急值
+                        </div>
+                        <div class="nav">
+                            <div class="btn-down" onclick="setExpand(this);"></div>
+                            <div class="tip">
+                                <span class="data-binding">{$View.CriticalValueNum}</span>
+                                <span style="width:90px;display:inline-block;"></span>
+                            </div>
+                            <div class="toolbar"></div>
+                        </div>
+                    </div>
+                    <div class="list data-source-binding" data-source="{binding $CriticalValues}" data-formater="cvformater" data-key-expression="this.syxh + '_' + this.yexh">
+                        <div class="tpl-row item" id="cv_r_{data-key}">
+                            <div class="col-name col-hzxm" style="height:100%;background-image:url(content/images/{$sex_icon}.png);">
+                                <div class="wrap"><div class="inner">{$hzxm}</div></div>
+                            </div>
+                            <div class="col-content">
+                                <div class="info">
+                                    <div class="info-inner">
+                                        <div class="col-sex" style="width:20%;"><span class="f-label">性别：</span><span class="f-field">{$sex}</span></div>
+                                        <div class="col-age" style="width:20%;"><span class="f-label">年龄：</span><span class="f-field">{$age}</span></div>
+                                        <div class="col-bed" style="width:20%;"><span class="f-label">床位：</span><span class="f-field">{$cwdm}</span></div>
+                                        <div class="col-dept" style="width:20%;"><span class="f-label">科室：</span><span class="f-field">{$ksmc}</span></div>
+                                        <div class="col-ward" style="width:20%;"><span class="f-label">病区：</span><span class="f-field">{$bqmc}</span></div>
+                                    </div>
+                                </div>
+                                <div class="record">
+                                    <span class="f-label">危急内容：</span>
+                                    <span class="f-field">{$wjnr}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--待审批任务-->
+                <div class="data-list list-collapse" id="task-list">
+                    <div class="header">
+                        <div class="title" style="color: #32A626;">
+                            <img src="content/images/task.png" class="icon" />&nbsp;&nbsp;&nbsp;有审核需要处理
+                        </div>
+                        <div class="nav">
+                            <div class="btn-down" onclick="setExpand(this);"></div>
+                            <div class="tip">
+                                <span class="data-binding">{$View.TaskCount}</span>
+                                <span style="width:90px;display:inline-block;"></span>
+                            </div>
+                            <div class="toolbar">
+                                <span onclick="onFilterClick(this,'all')" onselectstart="return false;" id="filter-all" data-type="all">&nbsp;&nbsp;&nbsp;&nbsp;全&nbsp;&nbsp;部&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;
+                                <span onclick="onFilterClick(this,'kss')" onselectstart="return false;" id="filter-kss" data-type="kss">抗生素申请</span>
+                                <span onclick="onFilterClick(this,'undo')" onselectstart="return false;" id="filter-undo" data-type="undo">病历撤销归档</span>&nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list data-source-binding" id="task-item-list" data-source="{binding $Tasks}" data-formater="taskformater" data-key-expression="this.type + '_' + this.data.xh">
+                        <div class="tpl-row item" id="{$type}_r_{data-key}">
+                            <div class="col-type">
+                                <div><span class="task-type {$taskcls}">{$name}</span></div>
+                            </div>
+                            <div class="col-content">
+                                <div class="info">
+                                    <div class="info-inner">
+                                        <div class="col-name"><span class="f-label">姓名：</span><span class="f-field">{$hzxm}</span></div>
+                                        <div class="col-sex"><span class="f-label">性别：</span><span class="f-field">{$sex}</span></div>
+                                        <div class="col-age"><span class="f-label">年龄：</span><span class="f-field">{$age}</span></div>
+                                        <div class="col-bed"><span class="f-label">床位：</span><span class="f-field">{$cwdm}</span></div>
+                                        <div class="col-dept"><span class="f-label">科室：</span><span class="f-field">{$ksmc}</span></div>
+                                        <div class="col-ward"><span class="f-label">病区：</span><span class="f-field">{$bqmc}</span></div>
+                                    </div>
+                                </div>
+                                <div class="record">
+                                    <span class="f-label">说明：</span>
+                                    <span class="f-field">{$taskcontent}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--审核对话框背景-->
+            <div id="modal-back" class="hidden"></div>
+            <!--审核对话框-->
+            <div id="modal-dialog" class="hidden">
+                <div id="modal-title" class="data-binding">{$Current.dialogTitle}</div>
+                <div class="name-icon">
+                    <div class="icon" style="background-image:url('content/images/man.png')" id="sex-icon"></div>
+                    <span class="name data-binding">{$Current.hzxm}</span>
+                </div>
+                <div class="dialog-patient">
+                    <div class="col-sex" style="width:20%;"><span class="f-label" style="padding-left:10px;">性别：</span><span class="f-field data-binding">{$Current.sex}</span></div>
+                    <div class="col-age" style="width:20%;"><span class="f-label">年龄：</span><span class="f-field data-binding">{$Current.age}</span></div>
+                    <div class="col-dept" style="width:20%;"><span class="f-label">科室：</span><span class="f-field data-binding">{$Current.ksmc}</span></div>
+                    <div class="col-ward" style="width:20%;"><span class="f-label">病区：</span><span class="f-field data-binding">{$Current.bqmc}</span></div>
+                    <div class="col-bed" style="width:20%;"><span class="f-label">床位：</span><span class="f-field data-binding">{$Current.cwdm}</span></div>
+                </div>
+                <div class="content-label data-binding">{$Current.contentLabel}：</div>
+                <div class="content-container data-binding" style="color:#FE0000;">{$Current.content}</div>
+                <div class="tab-nav"></div>
+                <div class="input-message">
+                    <textarea id="txtShyj" data-help-row="7" placeholder="输入处理意见。"></textarea>
+                </div>
+                <div class="dialog-button">
+                    <span class="checker" id="dialog-checker" style="background-image:url('content/images/checker-1.png');" onclick='$(this).css("background-image", "url(\"content/images/checker-" + (this.checked === 0 ? 1 : 0) + ".png\")"); $("#checker-label").text(["通过", "拒绝"][this.checked === 0 ? 0 : 1]); this.checked = (this.checked === 0 ? 1 : 0);'></span>
+                    <span class="checker-label" id="checker-label">通过</span>
+                    <span class="checker" id="checker-kss-fh" style="background-image:url('content/images/checker-0.png');display:none;" onclick='$(this).css("background-image", "url(\"content/images/checker-" + (this.checked === 1 ? 0 : 1) + ".png\")"); this.checked = (this.checked === 1? 0 : 1);'></span>
+                    <span class="checker-label" id="checker-kss-label" style="display:none;">需要人工复核</span>
+                    <span class="checker-label" id="rearchive-time-label" style="width:auto;display:none;">重新归档时间：&nbsp;&nbsp;</span>
+                    <span style="float:left;display:none;" id="rearchive-time-editor"><input type="number" id="txtTime"/><select id="txtUnit"><option value="d">天&nbsp;&nbsp;</option><option value="h">小时</option><option value="m">分钟</option></select></span>
+                    <span class="commit" onclick="onProcessCommit();">确定</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span class="cancel" onclick="$('#modal-back,#modal-dialog').addClass('hidden');">取消</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <!--<script src="content/demo/demo.js"></script>-->
+    <script src="scripts/common.js" type="text/javascript"></script>
+    <script src="scripts/toucher.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        document.onselectstart = function () { return false; };
+        function findContainer(el) {
+            if (el.tagName.toLowerCase() == "div" && el.className && el.className.indexOf("data-list") > -1) return el;
+            else if (el.parentElement) return findContainer(el.parentElement);
+            else return false;
+        }
+        function setExpand(sender) {
+            var container = findContainer(sender);
+            if (!container) return;
+            var parent = $(container.parentElement);
+            var current = $(container);
+            var focused = parent.data("focused") || [];
+            var state = current.data("expanded") || 0;
+            var statecls = ["list-expand", "list-collapse"];
+            current.removeClass(statecls[1 - state]).addClass(statecls[state]);
+            if (!state) {
+                $(focused).removeClass(statecls[0]).addClass(statecls[1]).data("expanded", 0);
+                parent.data("focused", container);
+            } else {
+                parent.data("focused", false);
+            }
+            current.data("expanded", 1 - state);
+        }
+
+        function onFilterClick(sender, type) {
+            var element = $(sender);
+            var parent = $(sender.parentElement);
+            if (element.data("checked") === true) return;
+            var focused = $(parent.data("focused") || []);
+            focused.removeClass(focused.data("type") + "-flag").data("checked", false);
+            element.addClass(type + "-flag");
+            $("#task-item-list").children(".data-row").each(function () {
+                if (type == "all") $(this).css("display", "");
+                else if (this.id.toLowerCase().indexOf(type) != 0) $(this).css("display", "none");
+                else $(this).css("display", "");
+            });
+            element.data("checked", true);
+            parent.data("focused", sender);
+        }
+
+        function onRowLongTap() {
+            var checker = document.getElementById("dialog-checker");
+            var ksschecker = document.getElementById("checker-kss-fh");
+            var checkerLabel = document.getElementById("checker-label");
+            var ksscheckerLabel = document.getElementById("checker-kss-label");
+            var timelabel = document.getElementById("rearchive-time-label");
+            var timeeditor = document.getElementById("rearchive-time-editor");
+
+            if (this.id.indexOf("cv_r_") == 0) {
+                window.Current = getCurrent('cv', this.parentElement['meta-data'][this.id.substr(5)]);
+                $([checker, checkerLabel, ksschecker, ksscheckerLabel, timelabel, timeeditor]).css("display", "none");
+            }
+            else {
+                window.Current = getCurrent(this.id.substr(0, this.id.indexOf("_")), this.parentElement['meta-data'][this.id.substr(this.id.indexOf("_r_") + 3)]);
+                $([checker, checkerLabel]).css("display", "");
+                if (this.id.indexOf("KSS") == 0) $([ksschecker, ksscheckerLabel]).css("display", "");
+                else $([ksschecker, ksscheckerLabel]).css("display", "none");
+
+                if (this.id.indexOf("UNDO") == 0 && $Config["AutoArchiveTimeSetting/FirstVerifyRule/CanWithDrawWhenVerifyPass"] == "true") $([timelabel, timeeditor]).css("display", "");
+                else $([timelabel, timeeditor]).css("display", "none");
+            }
+            window.Current.element = this.id;
+            $('#modal-back,#modal-dialog').removeClass("hidden");
+            checker.checked = 1;
+            ksschecker.checked = 0;
+            $(checker).css("background-image", "url('content/images/checker-1.png')");
+            $(ksschecker).css("background-image", "url('content/images/checker-0.png')");
+            $("#txtTime").val($Config["AutoArchiveTimeSetting/FirstArchiveTime"] || "0");
+            $("#txtUnit").val("d");
+            $("#sex-icon").css("background-image", "url('content/images/" + taskformater.sex_icon({ data: Current }) + ".png')")
+            bindingData("nothing");
+
+        };
+
+        function onProcessCommit() {
+            var doctor = $App.getDoctor();
+            var memo = $("#txtShyj").val();
+            if (!memo || !$.trim(memo)) return $App.alert("请填写处理意见!");
+            var checked = $("#checker-label").text() == "通过" ? 1 : 0;
+            var ksschecked = document.getElementById("checker-kss-fh").style.backgroundImage.indexOf("checked-1") > 0 ? 1 : 0;
+            var type = Current.data_type.toUpperCase(), others = [], jargs = "{\"type\":\"{0}\",\"syxh\":{1},\"yexh\":{2},\"key\":\"{3}\",\"memo\":\"{4}\",\"ysdm\":\"{5}\",\"other\":\"{6}\"}";
+            
+            if (Current.data_type == "KSS") others = ["shzt=", checked, ",czbz=", Current.czbz, ",rgfh=", ksschecked];
+            else if (Current.data_type == "UNDO") others = ["shzt=", checked, ",zdgdsj=", $("#txtTime").val(), ",sjdw=", $("#txtUnit").val(), ",gdczsj=", Current.gdczsj || "", ",gdbz=", Current.gdbz || ""];
+            var result = $App.postData("doctor", "process-remind", String.format(jargs, type, Current.syxh, Current.yexh, Current.xh, memo, doctor.id, others.join("")));
+            if (result !== false) {
+                $('#modal-back,#modal-dialog').addClass('hidden');
+                $("#" + Current.element).remove();
+                if (Current.data_type == "cv") {
+                    View.CriticalValueNum = (parseInt(View.CriticalValueNum.substr(0, View.CriticalValueNum.length - 1)) - 1);
+                    if (View.CriticalValueNum == 0) View.CriticalValueNum = "&lt;无&gt;";
+                    else View.CriticalValueNum = View.CriticalValueNum + "条";
+                    $(window["data-binding-fields"]["{$View.CriticalValueNum}"]).html(View.CriticalValueNum);
+                } else {
+                    View.TaskCount = (parseInt(View.TaskCount.substr(0, View.TaskCount.length - 1)) - 1);
+                    if (View.TaskCount == 0) View.TaskCount = "&lt;无&gt;";
+                    else View.TaskCount = View.TaskCount + "条";
+                    $(window["data-binding-fields"]["{$View.TaskCount}"]).html(View.TaskCount);
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var $CriticalValues = [];
+        var $Tasks = [];
+        var $Config = [];
+        var View = {};
+        var Current = {};
+
+        function loadData() {
+            var doctor = $App.getDoctor();
+            var dept = $App.getDept();
+            var data = $App.findData("doctor", "remind-list", String.format("{\"id\":\"{0}\",\"ksdm\":\"{1}\",\"bqdm\":\"{2}\"}", $.trim(doctor.id), $.trim(dept.ksdm), $.trim(dept.bqdm)));
+            this.$Config = ($App.findData("config", "all", String.format("{\"full\":false,\"keys\":\"AutoArchiveTimeSetting/FirstVerifyRule/CanWithDrawWhenVerifyPass,AutoArchiveTimeSetting/FirstArchiveTime\"}")) || []).toConfigObject("id", "config");
+            this.$CriticalValues = data && data.criticalcalue || [];
+            this.$Tasks = data && data.task || [];
+            
+            if (this.$CriticalValues.length == 0) {
+                View.CriticalValueNum = "&lt;无&gt;"
+                $("#criticalvalue-list").find(".btn-down").removeClass("expandable");
+            }
+            else {
+                View.CriticalValueNum = this.$CriticalValues.length + "条";
+                $("#criticalvalue-list").find(".btn-down").addClass("expandable");
+            }
+
+            if (this.$Tasks.length == 0) {
+                View.TaskCount = "&lt;无&gt;";
+                $("#task-list").find(".btn-down").removeClass("expandable");
+            }
+            else {
+                View.TaskCount = this.$Tasks.length + "条";
+                $("#task-list").find(".btn-down").addClass("expandable");
+            }
+
+            bindingData();
+
+            $(".data-row").each(function () {
+                if (!this.touchUtil) {
+                    this.touchUtil = util.toucher(this);
+                    this.touchUtil.on("longTap", onRowLongTap);
+                }
+            });
+        };
+
+        var cvformater = {
+            sex_icon: function (rec) {
+                return taskformater.sex_icon(rec);
+            }
+        };
+
+        var taskformater = {
+            hzxm: function (rec) {
+                return rec.data.hzxm;
+            },
+            sex: function (rec) {
+                return rec.data.sex;
+            },
+            sex_icon: function (rec) {
+                var sex = (rec.data || rec).sex;
+                var sex_codes = ["man", "women", "boy", "girl", "mbaby", "fbaby"];
+                var re = /^.*岁/;
+                var match = (rec.data || rec).age.match(re);
+                var age = match ? parseInt($.trim(match[0].replace("岁", ""))) : 0;
+                if (sex == "男") {
+                    if (age >= 18) return "man";
+                    else if (age >= 14) return "boy";
+                    else return "mbaby";
+                }
+                else {
+                    if (age >= 18) return "women";
+                    else if (age >= 14) return "girl";
+                    else return "fbaby";
+                }
+            },
+            age: function (rec) {
+                return rec.data.age;
+            },
+            ksmc: function (rec) {
+                return rec.data.ksmc;
+            },
+            bqmc: function (rec) {
+                return rec.data.bqmc;
+            },
+            cwdm: function (rec) {
+                return rec.data.cwdm;
+            },
+            taskcls: function (rec) {
+                return rec.type.toLowerCase() + "-flag";
+            },
+            taskcontent: function (rec) {
+                var data = rec.data;
+                if (rec.type == "KSS") {
+                    var newline = this.tagName == "DIV" ? "&nbsp;" : "<br/>";
+                    var sqlxmc = ["药品用量控制", "联合用药控制", "三级管控", "围手术期控制", "处方规则控制", "特殊用药", "术后24小时使用抗菌药物"];
+                    var html = ["【", sqlxmc[data.sqlx], "】", newline];
+                    html.push("抗生素：");
+                    html.push($.trim(data.ypmc) || "");
+                    html.push("&nbsp;");
+                    html.push($.trim(data.ypgg) || "");
+                    html.push("&nbsp;");
+                    html.push($.trim(data.ypjl) || "");
+                    html.push($.trim(data.jldw) || "");
+                    html.push("&nbsp;");
+                    html.push($.trim(data.ypyfmc) || "");
+                    html.push("&nbsp;");
+                    html.push($.trim(data.pcmc) || "");
+                    html.push(newline);
+
+                    var arr = (data.sqyy || "").split("&");
+                    for (var i = 0; i < arr.length; i++) {
+                        if (!$.trim(arr[i]) || (arr[i].substr(arr[i].indexOf(":")) == ":")) continue;
+                        html.push(arr[i]);
+                        if (i < arr[i].length - 1) html.push("&nbsp;&nbsp;");
+                    }
+                    return html.join("");
+                }
+                else if (rec.type == "UNDO") {
+                    return rec.data["cxgdyy"];
+                }
+            }
+        };
+
+        function getCurrent(type, rec) {
+            var titles = { "cv": "危急值处理", "KSS": "抗生素申请审核", "UNDO": "病历撤销归档审核" };
+            var labels = { "cv": "危急内容", "KSS": "申请内容", "UNDO": "撤销原因" };
+            if (type == "cv") return $.extend(rec, {data_type:type, dialogTitle: titles[type], contentLabel: labels[type],content:rec.wjnr,results:[] });
+            else return $.extend({ data_type:type,results: rec.results, content: taskformater.taskcontent(rec), dialogTitle: titles[type], contentLabel: labels[type] }, rec.data);
+        }
+
+        $(document).ready(function () {
+            $("#txtShyj").helpinput();
+            //setTimeout(loadData,1);
+        });
+    </script>
+</body>
+</html>

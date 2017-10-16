@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#e6e6e6">
+       <!-- 层头 -->
+	<RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="60dp"
+	    android:background="#e6e6e6">
+	    <!-- 关闭按钮 -->
+	    <Button 
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:background="@drawable/imgpop_close2"
+	        android:id="@+id/imgpop_close"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="便签图像"
+            android:textColor="#53b9d0"
+            android:textSize="22sp"
+            android:layout_centerInParent="true"/>
+	</RelativeLayout>
+	<!-- 下面显示内容 -->
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="horizontal">
+        <ScrollView 
+            android:layout_width="0dip"
+	        android:layout_weight="9"
+	        android:layout_height="match_parent">
+		    <LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:id="@+id/imgpop_image"
+		        android:orientation="horizontal"
+		        />
+        </ScrollView>
+
+	    <LinearLayout
+	        android:layout_width="0dip"
+	        android:layout_weight="1"
+	        android:layout_height="match_parent"
+	        android:orientation="vertical" >
+	        <Button 
+		        android:layout_width="60dp"
+		        android:layout_height="60dp"
+		        android:background="@drawable/imgpop_zoomin"
+		        android:id="@+id/imgpop_zoomin"/>
+	        <Button 
+		        android:layout_width="60dp"
+		        android:layout_height="60dp"
+		        android:background="@drawable/imgpop_zoomout"
+		        android:id="@+id/imgpop_zoomout"/>
+	      <!--    <Button 
+		        android:layout_width="60dp"
+		        android:layout_height="60dp"
+		        android:background="@drawable/imgpop_previous"
+		        android:id="@+id/imgpop_previous"/>
+	        <Button 
+		        android:layout_width="60dp"
+		        android:layout_height="60dp"
+		        android:background="@drawable/imgpop_next"
+		        android:id="@+id/imgpop_next"/>-->
+	    </LinearLayout>
+	</LinearLayout>
+
+</LinearLayout>

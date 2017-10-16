@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="600dp"
+    android:layout_height="600dp"
+    android:clickable="true"
+    android:gravity="center"
+    android:orientation="horizontal" >
+
+    <TextView 
+      android:id="@+id/hl_add_pic"
+      android:layout_width="600dp"
+      android:layout_height="600dp"
+      android:background="#F3F3F3"
+      android:drawablePadding="@drawable/add_camera"/>
+
+
+</LinearLayout>

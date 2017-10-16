@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="textblue">#0041FF</color>
+    
+
+    <color name="greenbg">#5DCB9B</color>
+    <color name="alpha_00">#00000000</color>
+    <color name="text_gray">#969696</color>
+    <color name="text_selected">#05a9f5</color>
+    <color name="hour_current">#BCBCBC</color>
+    <color name="yz_current">#DADADA</color>
+    <color name="yz_text">#4D4D4D</color>
+    <color name="yz_detailtext">#0E94AD</color>
+    <color name="bq">#ECC486</color>
+    <color name="gray">#767676</color>
+    <color name="wzyz">#FF8040</color>
+    <color name="tabbg">#DADADA</color>
+    <color name="yzgreen">#91C56A</color>
+    <color name="yzblue">#0398C8</color>
+    <color name="yzred">#ed072d</color>
+    <color name="lblue">#d4e8ee</color>
+    <color name="grouptitle">#64B6ED</color>
+    <color name="refresh">#f2f2f2</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_percent">#10000000</color>
+    <color name="bisque">#ffe4c4</color>
+    <!-- 桔黄色 -->
+    <color name="mediumslateblue">#7b68ee</color>
+    <!-- 中暗蓝色 -->
+    <color name="white">#ffffff</color>
+
+    <!-- 白偏灰 -->
+    <color name="white_gray">#f8f8f8</color>
+
+    <!-- 白色 -->
+    <color name="color_dark_grey">#808080</color>
+    <!-- 橘红色 -->
+    <color name="color_grey">#e36736</color>
+    <color name="black">#000000</color>
+    <color name="blue">#53b9d0</color>
+
+    <!-- 黑色 -->
+    <color name="red">#ff0000</color>
+    <!-- 红色 -->
+    <color name="ivory">#FFFFF0</color>
+    <color name="lavender">#E6E6FA</color>
+    <color name="pressed">#fff22f</color>
+    <color name="selected">#fff33f</color>
+    <color name="focused">#ffff44</color>
+    <color name="back">#ff9900</color>
+    <color name="lightblue">#5CABD4</color>
+    <color name="steelblue">#4682B4</color>
+    <color name="skyblue">#3F9AE0</color>
+    <color name="chssblue">#CBE2FF</color>
+    <color name="textbgcolor">#f2f2f2</color>
+    <color name="textcolor">#000000</color>
+    
+
+    <drawable name="silver">#00ffffff</drawable>
+
+    <color name="gold">#FFD700</color> <!-- 金色 -->
+    
+    
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color> 
+
+</resources>

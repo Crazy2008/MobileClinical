@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_item_background"
+    android:clickable="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="4dip"
+    android:paddingLeft="8dip"
+    android:paddingRight="8dip"
+    android:paddingTop="4dip" >
+
+   <ImageView
+        android:id="@+id/list_audio_record"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center" />
+        
+    <TextView
+        android:id="@+id/list_time_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textColor="#555555" />
+
+</LinearLayout>

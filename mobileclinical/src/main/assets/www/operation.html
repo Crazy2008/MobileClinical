@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <title>手术查询</title>
+    <link rel="Stylesheet" href="content/site.css" />
+    <style type="text/css">
+        #dtbegin, #dtend { padding: 6px 12px; width: 200px; font-size: 1.2em; text-align: center; color: #555; border: 1px solid #ccc; border-radius: 20px; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075); box-shadow: inset 0 1px 1px rgba(0,0,0,.075); -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
+        #dtbegin, #dtend:focus { border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); }
+        #tswk, #tsmon { padding: 0px; border: none; }
+        .data-view { height: 100%; }
+        .data-list { box-shadow: 0 10px 15px #F5F5F5; margin-bottom: 15px; clear: both; padding-bottom: 7.5em; height: 100%; }
+
+        .list-header { border: 1px #F5F5F5 solid; height: 7.5em;  padding-left: 40px; padding-right: 40px; }
+
+        .state-selector { float: right; width:260px;}
+        .state-selector button,a { font-size: 1.2em; color: #8B8B8B; }
+        .dropdown-toggle { color: #333 !important; background-color: #e6e6e6; border-color: #8c8c8c; text-decoration: none; border: 1px solid transparent; border-radius: 4px; vertical-align:middle;}
+        .dropdown-toggle .caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-top: 4px solid\9; border-right: 4px solid transparent; border-left: 4px solid transparent; }
+        .dropdown-menu { display:none; position: absolute; min-width: 160px; padding: 5px 0; margin: 2px 0 0; text-align: left; list-style: none; background-color: #fff; background-clip: padding-box; border: 1px solid #ccc; border: 1px solid rgba(0, 0, 0, .15); border-radius: 4px; box-shadow: 0 6px 12px rgba(0, 0, 0, .175); }
+        .dropdown-menu > li > a { display: block; padding: 8px 20px; clear: both; font-weight: normal; line-height: 1.42857143; color: #333 !important; white-space: nowrap;text-decoration: none; }
+        .dropdown-menu > li > a:hover,
+        .dropdown-menu > li > a:focus { color: #262626;  background-color: #f5f5f5; }
+        .dropdown-menu > .active > a,
+        .dropdown-menu > .active > a:hover,
+        .dropdown-menu > .active > a:focus { color: #fff;  background-color: #337ab7; outline: 0; }
+
+
+        .date-selector { float: left; padding-right: 20px; line-height: 7.5em;}
+        .date-selector .btn { vertical-align: middle; cursor: pointer; }
+        .date-selector input { height: 44px; }
+        .list-view { clear: both; height: 100%; overflow-y: auto; }
+        .list-view .list-item { border-bottom: 1px #F5F5F5 solid; border-right: 1px #F5F5F5 solid; height: 7.5em; padding-left: 50px; }
+        .list-view .list-item .rec-detail { float: right; width: 68.4%; }
+
+        .col-name { float: left; width: 14%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-hzxm { background-repeat: no-repeat; background-size: 45px 45px; background-position: 0 55%; padding-left: 60px; display: table; overflow: hidden; }
+        .col-name .wrap { display: table-cell; vertical-align: middle; }
+        .col-name .wrap .inner { font-size: 1.75em; color: #193CDA; }
+
+        .col-content { float: right; width: 77%; height: 100%; }
+        .col-content .info { height: 50%; position: relative; }
+        .info-inner { position: absolute; bottom: 5px; width: 100%; }
+        .col-content .record { height: 50%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .col-sex { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-age { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-dept { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-ward { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-bed { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-status { float: right; width: 7%; height: 7.5em; line-height: 7.5em; color: #8B8B8B; }
+        .data-list .list .item .record { clear: both; }
+        .f-label { color: #8B8B8B; font-size: 1.3em; }
+        .f-field { color: #464646; font-size: 1.3em; }
+
+        .data-binding { display: none; }
+        .tpl-row { display: none; }
+        .hidden { display: none; }
+        .data-row { clear: both; }
+
+        #modal-back { position: absolute; top: 0px; left: 0px;width: 100%; height: 100%; background-color: black; -moz-opacity: 0.5; opacity: .50; filter: alpha(opacity=50); }
+        #modal-dialog { position: absolute; top: 1%; left: 17.1875%; width: 70%;height:98%;  background-color: white; overflow: auto; border-radius: 40px; padding: 24px 70px; }
+        #modal-title { text-align: center; font-size: 2.25em; color: #204ED2; }
+        .name-icon { height: 3.75em; }
+        .name-icon .icon { float: left; height: 100%; background-repeat: no-repeat; background-position: left center; width: 66px; position: relative; top: 10%; }
+        .name-icon .name { float: left; height: 100%; font-size: 3em; color: #193CDA; vertical-align: middle; }
+        .dialog-patient { padding-top: 15px; }
+        .dialog-patient .f-label { font-size: 1.5em; }
+        .dialog-patient .f-field { font-size: 1.5em; }
+        .diagnoses { padding-left: 10px; clear: both; }
+        .operators { padding-left: 10px; clear: both; }
+        .label-item { margin-left: 5px; padding-left: 15px; padding-right: 15px; background-color: #F9F9F9; display: inline-block; font-size: 1.3em; height: 40px; line-height: 40px; border-radius: 20px; border: 1px #F0F0F0 solid; }
+
+        .dialog-button { margin-top: 20px; height: 4.3125em; line-height: 4.3125em; user-select: none; }
+        .dialog-button span { border-radius: 4px; text-align: center; float: right; color: #F7F7F7; font-size: 1.5em; height: 100%; user-select: none; }
+        .dialog-button .cancel { background-color: #FE0000; width: 8em; cursor: pointer; }
+        dialog-button span:active { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 35px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 75px #fff; }
+    </style>
+</head>
+<body onselect="return false;">
+    <div class="other-viewport" style="position:relative;">
+        <div style="width:100%;height:100%;padding-bottom:15px;position:relative;">
+            <div style="height:15px;background-color:#FAFAFA;"></div>
+            <div class="data-view">
+                <div class="data-list" id="task-list">
+                    <div class="list-header">
+                        <div class="date-selector">
+                            &nbsp;<img src="content/images/tswk-active.png" alt="本周" onclick="dateRangeChanged(this,'tswk');" class="btn" id="tswk" />
+                            &nbsp;<img src="content/images/tsmon.png" alt="本月" onclick="dateRangeChanged(this, 'tsmon');" class="btn" id="tsmon" />
+                            &nbsp;<input type="text" required="required" id="dtbegin" data-type="0" data-title="申请" data-max="[Date.now().format('yyyyMMddHH:mm')]" data-group="reg-date" onchange="dateRangeChanged(null, 'custom');" class="date-picker btn" />
+                            &nbsp;-&nbsp;<input type="text" required="required" id="dtend" data-group="reg-date" class="date-picker btn" />
+                            &nbsp;&nbsp;
+                        </div>
+                        <div class="state-selector" id="state-selector">
+                            <div style="float:left;height:100%;line-height: 7.5em;">
+                                <a onclick="window.location.reload();">手术状态</a>&nbsp;
+                            </div>
+                            <div style="line-height: 7.5em;">
+                                <button id="state-dropdown-btn" style="display:inline-block;height:48px;width:160px;line-height:48px;text-align:center;" class="dropdown-toggle" data-menu="#state-dropdown" onclick="showDropdown(this); event.stopPropagation();">
+                                    全&nbsp;&nbsp;&nbsp;部<i class="caret"></i>
+                                </button>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="list-view data-source-binding" data-source="{binding $Operations}" data-formater="formater" data-key-expression="this.xh + ''">
+                        <div class="tpl-row list-item" id="d_r_{$xh}">
+                            <div class="col-name col-hzxm" style="height:100%;background-image:url('content/images/{$sex_icon}.png');">
+                                <div class="wrap"><div class="inner">{$hzxm}</div></div>
+                            </div>
+                            <div class="col-content">
+                                <div class="info">
+                                    <div class="info-inner">
+                                        <div class="col-sex"><span class="f-label">性别：</span><span class="f-field">{$sex}</span></div>
+                                        <div class="col-age"><span class="f-label">年龄：</span><span class="f-field">{$age}</span></div>
+                                        <div class="col-bed"><span class="f-label">床位：</span><span class="f-field">{$cwdm}</span></div>
+                                        <div class="col-dept"><span class="f-label">科室：</span><span class="f-field">{$ksmc}</span></div>
+                                        <div class="col-ward"><span class="f-label">病区：</span><span class="f-field">{$bqmc}</span></div>
+                                    </div>
+                                </div>
+                                <div class="record">
+                                    <div style="width:31.6%;float:left;">
+                                        <span class="f-label">申请日期：</span>
+                                        <span class="f-field">{$sqrq}</span>
+                                    </div>
+                                    <div class="rec-detail">
+                                        <span class="f-label">手术：</span>
+                                        <span class="f-field">{$detail}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-status"><span class="f-field">{$status}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="dropdown-menu" id="state-dropdown">
+            <li onclick="onFilterClick(this,'-1')"><a href="#">全&nbsp;&nbsp;&nbsp;部</a></li>
+            <li onclick="onFilterClick(this, '0')"><a href="#">未安排</a></li>
+            <li onclick="onFilterClick(this, '1')"><a href="#">已安排</a></li>
+            <li onclick="onFilterClick(this, '2')"><a href="#">已完成</a></li>
+            <li onclick="onFilterClick(this, '3,4')"><a href="#">已取消</a></li>
+        </ul>
+        <!--审核对话框背景-->
+        <div id="modal-back" class="hidden"></div>
+        <!--审核对话框-->
+        <div id="modal-dialog" class="hidden" onselect="return false;">
+            <div id="modal-title" class="data-binding">手术申请单</div>
+            <div class="name-icon">
+                <div class="icon" style="background-image:url('content/images/man.png')" id="sex-icon"></div>
+                <span class="name data-binding">{$Current.hzxm}</span>
+            </div>
+            <div class="dialog-patient">
+                <div class="col-sex" style="width:20%;"><span class="f-label" style="padding-left:10px;">性别：</span><span class="f-field data-binding">{$Current.sex}</span></div>
+                <div class="col-age" style="width:20%;"><span class="f-label">年龄：</span><span class="f-field data-binding">{$Current.age}</span></div>
+                <div class="col-dept" style="width:20%;"><span class="f-label">科室：</span><span class="f-field data-binding">{$Current.ksmc}</span></div>
+                <div class="col-ward" style="width:20%;"><span class="f-label">病区：</span><span class="f-field data-binding">{$Current.bqmc}</span></div>
+                <div class="col-bed" style="width:20%;"><span class="f-label">床位：</span><span class="f-field data-binding">{$Current.cwdm}</span></div>
+            </div>
+            <div class="dialog-patient">
+                <div style="width:100%;white-space: nowrap; text-overflow: ellipsis; overflow: hidden;padding-left:10px;">
+                    <span class="f-label">手术内容：</span>
+                    <span class="f-field data-binding">{$Current.ssnr}</span>
+                </div>
+            </div>
+            <div class="dialog-patient diagnoses">
+                <fieldset>
+                    <legend class="f-label">术前诊断</legend>
+                    <div style="min-height:60px;" id="diagnose-list">
+
+                    </div>
+                </fieldset>
+            </div>
+            <div class="dialog-patient">
+                <div style="width:20%;float:left;padding-left:10px;"><span class="f-label">体位：</span><span class="f-field data-binding">{$Current.ssbwmc}</span></div>
+                <div style="width:20%;float:left;"><span class="f-label">切口：</span><span class="f-field data-binding">{$Current.qkdjmc}</span></div>
+                <div style="width:20%;float:left;"><span class="f-label">手术室：</span><span class="f-field data-binding">{$Current.chamber}</span></div>
+                <div style="width:20%;float:left;"><span class="f-label">手术间：</span><span class="f-field data-binding">{$Current.room}</span></div>
+                <div style="width:20%;float:left;"><span class="f-label">台次：</span><span class="f-field data-binding">{$Current.desktop}</span></div>
+            </div>
+            <div class="dialog-patient operators">
+                <fieldset>
+                    <legend class="f-label">手术人员</legend>
+                    <div style="min-height:60px;" id="operator-list">
+                    </div>
+                </fieldset>
+            </div>
+            <div class="dialog-patient">
+                <div style="width:66%;float:left;padding-left:10px;"><span class="f-label">申请时间：</span><span class="f-field data-binding">{$Current.sqrq}</span></div>
+                <div style="width:34%;float:left;"><span class="f-label">状态：</span><span class="f-field data-binding">{$Current.jlzt}</span></div>
+            </div>
+            <div class="dialog-patient">
+                <div style="width:33%;float:left;padding-left:10px;"><span class="f-label">安排时间：</span><span class="f-field data-binding">{$Current.aprq}</span></div>
+                <div style="width:33%;float:left;"><span class="f-label">开始时间：</span><span class="f-field data-binding">{$Current.kssj}</span></div>
+                <div style="width:34%;float:left;"><span class="f-label">结束时间：</span><span class="f-field data-binding">{$Current.jssj}</span></div>
+            </div>
+            <div class="dialog-patient">
+                <div style="padding-left:10px;float:left;width:100%;"><span class="f-label">特殊感染：</span><span class="f-field data-binding">{$Current.tsgr}</span></div>
+            </div>
+            <div class="dialog-patient">
+                <div style="padding-left:10px;float:left;width:100%;"><span class="f-label">特殊器械：</span><span class="f-field data-binding">{$Current.tsqx}</span></div>
+            </div>
+            <div class="clear">
+                <br />
+            </div>
+            <div class="dialog-button">
+                <span class="cancel" onclick="$('#modal-back,#modal-dialog').addClass('hidden');">关闭</span>
+            </div>
+            <div style="height:10px;"></div>
+        </div>
+    </div>
+    <script src="scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="scripts/toucher.js" type="text/javascript"></script>
+    <!--<script src="content/demo/demo.js"></script>-->
+    <script src="scripts/common.js" type="text/javascript"></script>
+
+    <script type="text/javascript" title="event handler">
+        document.onselectstart = function () { return false; }
+
+        function showDropdown(sender) {
+            if (sender.isExpanded) {
+                $($(sender).data('menu')).hide();
+                sender.isExpanded = false;
+            } else {
+                var location = $(sender).offset();
+                location.top = location.top + $(sender).height() + 3;
+                $($(sender).data('menu')).css(location).show();
+                $(document).one("click", function () {
+                    $(".dropdown-menu").hide();
+                    sender.isExpanded = false;
+                });
+                sender.isExpanded = true;
+            }
+        }
+
+        function onFilterClick(sender, status) {
+            this.$status = status;
+            loadData();
+            var dropdown = document.getElementById("state-dropdown-btn");
+            $(dropdown).html($(sender).text() + " <i class=\"caret\"></i>");
+            showDropdown(dropdown);
+        }
+        function dateRangeChanged(sender, range, load) {
+            var weekday = [7, 1, 2, 3, 4, 5, 6];
+            var now = new Date();
+            var beginDate, endDate = now.format("yyyy-MM-dd");
+            if (range == "tswk") {
+                $("#tsmon").attr("src", "content/images/tsmon.png");
+                $(sender).attr("src", "content/images/tswk-active.png");
+                beginDate = new Date(now.setDate(now.getDate() - (weekday[now.getDay()] - 1))).format("yyyy-MM-dd");
+                $("#dtbegin").val(beginDate);
+                $("#dtend").val(endDate);
+            }
+            else if (range == "tsmon") {
+                $("#tswk").attr("src", "content/images/tswk.png");
+                $(sender).attr("src", "content/images/tsmon-active.png");
+                beginDate = new Date(now.setDate(1)).format("yyyy-MM-dd");
+                $("#dtbegin").val(beginDate);
+                $("#dtend").val(endDate);
+            }
+            else {
+                beginDate = $("#dtbegin").val();
+                endDate = $("#dtend").val();
+            }
+            $beginDate = beginDate;
+            $endDate = endDate;
+            if (beginDate && endDate && load !== false) loadData();
+        };
+
+        function onRowLongTap() {
+            window.Current = getCurrent(this.parentElement['meta-data'][this.id.substr(4)]);
+            $('#modal-back,#modal-dialog').removeClass("hidden");
+            $("#sex-icon").css("background-image", "url('content/images/" + formater.sex_icon({ data: Current }) + ".png')")
+            bindingData("nothing");
+            var ocontainer = $("#operator-list").empty();
+            $(window.Current.operators).each(function () {
+                if (this.name) $("<span class=\"label-item\">").text(this.type + ": " + this.name).appendTo(ocontainer);
+            });
+            var dcontainer = $("#diagnose-list").empty();
+            var groups = {};
+            for (var i = 0; i < window.Current.diagnoses.length; i++) {
+                var type = window.Current.diagnoses[i].type;
+                var id = window.Current.diagnoses[i].id;
+                var name = window.Current.diagnoses[i].name;
+                if (!name) continue;
+                var label = type == 0 ? "术前" : (type == 1 ? "术后" : "病理");
+                if (!groups["g" + type]) dcontainer.append(groups["g" + type] = $("<div style=\"position:relative;padding-left:60px;line-height:45px;\">").html("<span style=\"position:absolute;left:0px;\" class=\"f-label\">" + label + ": </span>"));
+                groups["g" + type].append($("<span class=\"label-item\">").text("[" + id + "] " + name));
+            }
+        };
+    </script>
+    <script type="text/javascript" title="logic">
+        var $Operations = [];
+        var $beginDate, $endDate;
+        var $status = "-1";
+        var Current = {};
+        var formater = {
+            sex_icon: function (rec) {
+                var sex = rec.sex;
+                var sex_codes = ["man", "women", "boy", "girl", "mbaby", "fbaby"];
+                var re = /^.*岁/;
+                var match = (rec.age || "").match(re);
+                var age = match ? parseInt($.trim(match[0].replace("岁", ""))) : 0;
+                if (sex == "男") {
+                    if (age >= 18) return "man";
+                    else if (age >= 14) return "boy";
+                    else return "mbaby";
+                }
+                else {
+                    if (age >= 18) return "women";
+                    else if (age >= 14) return "girl";
+                    else return "fbaby";
+                }
+            },
+            status: function (rec) {
+                switch (rec.jlzt) {
+                    case 0: return "未安排";
+                    case 1: return "已安排";
+                    case 2: return "已完成";
+                    case 3:
+                    case 4: return "已取消";
+                    default: return "";
+                }
+            },
+            sqrq: function (rec) {
+                return Date.fromRq16(rec.sqrq).format("yyyy-MM-dd HH:mm");
+            },
+            detail: function (rec) {
+                var text = [];
+                if (rec.mzmc) text.push("在", rec.mzmc, "下");
+                text.push("行", rec.ssmc);
+                return text.join("");
+            }
+        };
+
+        function loadData() {
+            var doctor = $App.getDoctor();
+            var dept = $App.getDept();
+            var ksrq = $beginDate;
+            var jsrq = $endDate;
+            this.$Operations = $App.findData("operation", "ward-list", String.format("{\"ksdm\":\"{0}\",\"bqdm\":\"{1}\",\"ksrq\":\"{2}\",\"jsrq\":\"{3}\",\"sszt\":\"{4}\",\"filter\":\"\"}", $.trim(dept.ksdm), $.trim(dept.bqdm), ksrq, jsrq, $status));
+            bindingData();
+
+            $(".data-row").each(function () {
+                if (!this.touchUtil) {
+                    this.touchUtil = util.toucher(this);
+                    this.touchUtil.on("longTap", onRowLongTap);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            dateRangeChanged(document.getElementById("tswk"), "tswk", false);
+        });
+
+        //setTimeout(loadData, 1000);
+
+        function getCurrent(rec) {
+            return $.extend({}, rec, {
+                ssnr: formater.detail(rec),
+                sqrq: formater.sqrq(rec),
+                jlzt: formater.status(rec),
+                aprq: Date.fromRq16(rec.aprq).format("yyyy-MM-dd HH:mm"),
+                kssj: Date.fromRq16(rec.kssj).format("yyyy-MM-dd HH:mm"),
+                jssj: Date.fromRq16(rec.jssj).format("yyyy-MM-dd HH:mm")
+            });
+        }
+
+    </script>
+</body>
+</html>

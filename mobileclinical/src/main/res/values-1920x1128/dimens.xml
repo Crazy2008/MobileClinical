@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <dimen name="pb_toptitle">24sp</dimen>
+    <dimen name="pb_topdoctor">16sp</dimen>
+    <dimen name="pb_search">12sp</dimen>
+    <dimen name="pb_topheight">72dp</dimen>
+    <dimen name="pb_bottomheight">70dp</dimen>
+    <dimen name="pb_searchwidth">240dp</dimen>
+    <dimen name="login_imgtotop">100dp</dimen>
+    <dimen name="login_imgtotoptext">30dp</dimen>
+    <dimen name="login_imgtotopimage">10dp</dimen>
+    <dimen name="login_textsize">32sp</dimen>
+    <dimen name="bqksmap_drop">16sp</dimen>
+    <dimen name="mvp_menu_bottom">14sp</dimen>
+    <dimen name="pm_menu_text">20sp</dimen>
+    <dimen name="pm_topheight">50dp</dimen>
+    <dimen name="pm_toptabheight">60dp</dimen>
+    <dimen name="pm_textsize">20sp</dimen>
+    <dimen name="pm_bew_text">22sp</dimen>
+    
+    <dimen name="fpd_menu">20sp</dimen>
+    <dimen name="fpd_topheight">80dp</dimen>
+    <dimen name="bfd_backwidth">140dp</dimen>
+    <dimen name="bfd_closewidth">80dp</dimen>
+    <dimen name="bfd_height">500dp</dimen>
+    <dimen name="bfd_bfwidth">250dp</dimen>
+    <dimen name="fbg_top">10dp</dimen>
+    <dimen name="fbg_name_top">20dp</dimen>
+    <dimen name="fbg_blh_top">25dp</dimen>
+    <dimen name="fbg_name_left">40dp</dimen>
+    <dimen name="fbg_circle_left">120dp</dimen>
+    <dimen name="fbg_zd_left">15dp</dimen>
+    
+    <dimen name="dn_notetext">20sp</dimen>
+    <dimen name="dn_notetitle">18sp</dimen>
+    <dimen name="dn_notetitle_write">14sp</dimen>
+    <dimen name="bf_grid_width">400dp</dimen>
+    <dimen name="bf_grid_height">200dp</dimen>
+    
+    <dimen name="addn_height">100dp</dimen>
+    <dimen name="addn_heightbott">150dp</dimen>
+    <dimen name="addn_widthbott_flag">40dp</dimen>
+    <dimen name="addn_heightbott_flag">50dp</dimen>
+    
+    <dimen name="note_pic_height">100dp</dimen>
+    <dimen name="addnote_pic_height">130dp</dimen>
+    <dimen name="note_pic_width">200dp</dimen>
+    
+    <dimen name="pb_wd_size">20sp</dimen>
+    <dimen name="pb_wd_height">80dp</dimen>
+     <dimen name="pb_wd_topsize">18sp</dimen>
+     <dimen name="bqks_size">20sp</dimen>
+    
+    <!--以上新版本  -->
+    <dimen name="login_editwidth">500dp</dimen>
+    <dimen name="login_editheight">60dp</dimen>
+    <dimen name="test">30sp</dimen>
+    <dimen name="pb_downleft">850dp</dimen>
+    <dimen name="pb_downleft_title">50dp</dimen>
+    <dimen name="pb_downleft_bqks">18sp</dimen>
+    <dimen name="pb_gv_width">250dp</dimen>
+    <dimen name="pb_downright">430dp</dimen>
+    <dimen name="pb_downrighttitle">22sp</dimen>
+    <dimen name="pb_downrightnum">55sp</dimen>
+    <dimen name="key_height">100dp</dimen>
+    
+    <dimen name="gv_bed">60sp</dimen>
+    <dimen name="gv_head_width">80dp</dimen>
+    <dimen name="gv_head_height">80dp</dimen>
+    <dimen name="gv_name_size">18sp</dimen>
+    <dimen name="gv_no_size">20sp</dimen>
+    <dimen name="gv_bed2">20sp</dimen>
+    <!-- 手术安排 -->
+    <dimen name="ss_marginLeft">35dp</dimen>
+    <dimen name="ss_marginTop">40dp</dimen>
+    <dimen name="ss_timesize">22sp</dimen>
+    <dimen name="ss_datesize">20sp</dimen>
+    <dimen name="ss_datetotime">10dp</dimen>
+    <dimen name="ss_rightToL">25dp</dimen>
+    <dimen name="ss_bedsize">22sp</dimen>
+    <dimen name="ss_namesize">22sp</dimen>
+    <dimen name="ss_titlesize">20sp</dimen>
+    <dimen name="ss_contentsize">20sp</dimen>
+    <dimen name="addyz_height">60sp</dimen>
+      <!--  字体设置-->
+    <dimen name="gv_patient">18sp</dimen>
+    
+    <dimen name="pb_hzjs">12sp</dimen>
+    <dimen name="pb_cardname">16sp</dimen>
+    <dimen name="pb_cardcwh">14sp</dimen>
+    <dimen name="pb_card">12sp</dimen>
+    <dimen name="gv_basic">12sp</dimen>
+    <dimen name="gv_table">12sp</dimen>
+    <dimen name="pb_menu_top">25dp</dimen>
+    
+    
+    <dimen name="gv_patient_bottom">16sp</dimen>
+    <dimen name="gv_report">16sp</dimen>
+    <dimen name="gv_herbalmedi">18sp</dimen>
+    <dimen name="picter">20dp</dimen>
+    <dimen name="dp_ryzd">50dp</dimen>
+    <dimen name="pd_patient">50dp</dimen>
+    <dimen name="pd_left">10dp</dimen>
+    <dimen name="gv_cardimage">35dp</dimen>
+    <dimen name="gv_patinetinfo">16sp</dimen>
+    <dimen name="gv_jibenxinxi">24sp</dimen>
+    <dimen name="gv_menu_left">14sp</dimen>
+    <!--上海儿童医院配置  -->
+    <dimen name="gv_emr">14sp</dimen>
+    <dimen name="pb_card_width">280dp</dimen>
+    <dimen name="pb_card_height">190dp</dimen>
+    <dimen name="rightcardlength">60dp</dimen>
+    <dimen name="pb_hzjs_rtyy">16sp</dimen>
+    
+     <dimen name="pb_topheight_2048">60dp</dimen>
+    <dimen name="btn_back_margin">80dp</dimen>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="login_imgtotoptext">20dp</dimen>
+    <dimen name="login_imgtotop">50dp</dimen>
+    <dimen name="login_textsize">30dp</dimen>
+    <dimen name="login_imgtotopimage">10dp</dimen>
+    <dimen name="login_editheight">45dp</dimen>
+
+</resources>

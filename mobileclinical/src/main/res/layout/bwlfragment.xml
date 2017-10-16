@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#f2f2f2"
+    android:padding="20dp">
+    
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    >
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:orientation="vertical"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="100dp">
+	        <!-- <TextView
+	            android:id="@+id/bwl_mbadd"
+			    android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="模板"
+				android:textColor="#53b9d0"
+				android:textSize="@dimen/pb_topdoctor"
+				android:layout_marginTop="15dp"
+		    />  -->
+	    </LinearLayout>
+	    <ImageButton 
+	        android:id="@+id/bwl_btn_add"
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:background="@drawable/fill4"
+	        android:layout_alignParentRight="true"
+	        />
+	</RelativeLayout>
+	
+	<com.winning.mobileclinical.layout.ScrollListView
+	    android:id="@+id/bwl_listview"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dip"
+	    android:layout_weight="1"
+	    android:layout_marginTop="5dp"
+	    android:layout_marginBottom="5dp"
+	    android:cacheColorHint="#00000000"
+	    android:divider="#00000000"
+	    android:dividerHeight="8dp">
+	</com.winning.mobileclinical.layout.ScrollListView>
+	
+	
+</LinearLayout>

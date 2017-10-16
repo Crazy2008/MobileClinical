@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bwledit_main"
+    android:layout_width="900dp"
+    android:layout_height="600dp"
+    android:background="#f2f2f2"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="#53b9d0"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/bwl_edit_cancle"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/fill4"
+            />
+        
+        <TextView 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:text="备忘" 
+            style="@style/font_white_size1"
+            android:layout_centerInParent="true"/>
+
+        <Button
+            android:id="@+id/bwl_edit_complete"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/fill4"
+             />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="#e3e3e3"
+        >
+
+        <TextView 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="07床   王惠" 
+            android:id="@+id/bwl_hzinfo"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:textSize="@dimen/gv_patient"
+            android:textColor="#7b8694"
+            android:layout_centerInParent="true"/>
+         <CheckBox 
+            android:layout_width="wrap_content" 
+            android:layout_height="@dimen/pb_downleft_title"
+            android:layout_gravity="center"
+            android:text="病区共享" 
+            android:button="@drawable/fill4"  
+            android:textSize="@dimen/gv_patient"
+            android:textColor="#53b9d0"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <com.winning.mobileclinical.widget.AudioRecorder 
+        android:id="@+id/bwl_audiorecorder"
+        android:layout_width="400dp" 
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="60dp"
+        android:background="#f0f0f0"
+        android:visibility="gone">
+    </com.winning.mobileclinical.widget.AudioRecorder>
+    
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#f2f2f2"
+        android:layout_weight="1" >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+	        <TextView 
+	            android:layout_width="match_parent" 
+	            android:layout_height="wrap_content"
+	            android:padding="8dp" 
+	            android:background="#ffffff" 
+	            android:singleLine="true"
+	            style="@style/font_white_light_size1"
+	            android:text="提醒：2015/7/15 16:00" 
+	            android:id="@+id/bwl_edit_tx"/>
+	        <View 
+	            android:layout_width="match_parent" 
+	            android:layout_height="1px"
+	            android:background="#dfdfdf"/>
+            <TextView 
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+		        android:padding="8dp" 
+		        android:background="#ffffff" 
+		        style="@style/font_white_light_size1"  
+		        android:singleLine="true"
+		        android:text=" 01床朱耀祺,03床胡爱凤"
+		        android:id="@+id/bwl_edit_gl"/>
+            <View 
+                android:layout_width="match_parent" 
+                android:layout_height="1px"
+	            android:background="#dfdfdf"/>
+            <RelativeLayout 
+		        android:layout_width="match_parent"
+		        android:background="#f0f0f0"
+		        android:layout_height="wrap_content">
+	            <EditText 
+	                android:id="@+id/bwl_edit_nr"
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content"
+	                android:padding="8dp" 
+	                android:minHeight="60dp"
+	                android:background="@drawable/fill4"
+	                android:gravity="left|center"  
+	                android:hint="内容"
+	                android:visibility="gone"
+	                android:layout_marginRight="15dp"
+	                android:layout_marginLeft="15dp"/>
+	             <TextView 
+	                android:background="#f2f2f2"
+	                android:id="@+id/bwl_edit_display"
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content"
+	                android:padding="8dp" 
+	                android:gravity="left|center"
+	                android:textSize="@dimen/gv_patient"
+	                android:hint="无内容"
+	                android:textColor="#7b8694"
+	                android:visibility="gone"
+	                android:layout_marginRight="15dp"
+	                android:layout_marginLeft="15dp"/>
+	            <ImageButton 
+			        android:id="@+id/bwl_btn_mbadd"
+			        android:layout_width="60dp"
+			        android:layout_height="60dp"
+			        android:layout_alignParentRight="true"
+			        android:background="@drawable/fill4"
+		        />
+	         </RelativeLayout>
+          <CheckBox 
+                android:id="@+id/bwl_edit_bqshare"
+	       		android:layout_width="match_parent" 
+	       		android:layout_height="wrap_content"
+	       		android:text="病区可见" 
+	       		android:visibility="invisible"
+	       		style="@style/font_white_light_size1"
+	       		/> 
+            <!-- 录音 -->
+			<LinearLayout 
+			    android:id="@+id/record_container"
+			    android:background="#f2f2f2"
+    			android:layout_width="fill_parent"
+    			android:layout_height="wrap_content"
+    			android:orientation="vertical" 
+    			android:padding="5dp">
+
+			</LinearLayout>
+
+           <!-- 图片 -->
+           <LinearLayout
+                android:id="@+id/image_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#f2f2f2"
+                android:orientation="vertical" 
+                android:padding="5dp">
+            </LinearLayout>
+        </LinearLayout> 
+    </ScrollView>
+ 	<LinearLayout 
+       android:id="@+id/bwl_menu"
+        android:layout_width="300dp" 
+        android:layout_height="70dp"
+        android:padding="16dp" 
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="#415067">
+        
+ 	   <!--   <ImageView 
+		    android:id="@+id/ivDeleteText"  
+            android:layout_width="30dp"
+			android:layout_height="30dp" 
+			android:layout_marginRight="15dp"
+            android:src="@drawable/add_audio"  
+            />
+ 	     -->
+		<Button 
+		    android:id="@+id/bwl_addaudio" 
+		    android:layout_width="fill_parent"
+			android:layout_height="fill_parent" 
+			android:layout_marginRight="15dp"
+			android:layout_weight="1" 
+			android:background="@drawable/fill4" 
+			style="@style/font_white_size2"
+			/> 
+		<Button 
+		    android:id="@+id/bwl_addphoto" 
+		    android:layout_width="fill_parent"
+			android:layout_height="fill_parent" 
+			android:layout_marginRight="20dp"
+			android:layout_weight="1" 
+			android:background="@drawable/fill4" 
+			style="@style/font_white_size2"
+			/>
+		<Button 
+		    android:id="@+id/bwl_text" 
+		    android:layout_width="fill_parent"
+			android:layout_height="fill_parent" 
+			android:layout_marginRight="20dp"
+			android:layout_weight="1" 
+			android:background="@drawable/fill4" 
+			style="@style/font_white_size2"/> 
+		
+		<Button 
+		    android:id="@+id/bwl_addsketch" 
+		    android:layout_width="fill_parent"
+			android:layout_height="fill_parent" 
+			android:layout_marginRight="20dp"
+			android:layout_weight="1" 
+			android:background="@drawable/fill4" 
+			style="@style/font_white_size2"/>
+		<!--  <Button 
+		    android:id="@+id/bwl_addlink" 
+		    android:layout_width="fill_parent"
+			android:layout_height="fill_parent" 
+			android:layout_marginRight="20dp"
+			android:layout_weight="1" 
+			android:background="@drawable/tab_link" 
+			style="@style/font_white_size2"/> -->
+		<Button 
+		    android:id="@+id/bwl_addremind" 
+		    android:layout_width="fill_parent"
+			android:layout_height="fill_parent" 
+			android:layout_weight="1" 
+			android:background="@drawable/fill4" 
+			style="@style/font_white_size2"/>
+	   
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8E8E8"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/top_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pm_topheight"
+        android:background="@drawable/top_headbg"
+        android:gravity="center"
+        android:layout_gravity="center">
+        
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:layout_gravity="center"
+             android:orientation="horizontal"
+        >
+        <TextView 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="80dp"
+           android:text="姓名 : "
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView 
+           android:id="@+id/top_head_name"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="张一奢"
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="性别 : "
+           android:layout_marginLeft="40dp"
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView
+           android:id="@+id/top_head_sex"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="男"
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="40dp"
+           android:text="年龄 : "
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView
+           android:id="@+id/top_head_age" 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="17"
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="40dp"
+           android:text="病历号 : "
+           android:visibility="gone"
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView
+           android:id="@+id/top_head_blh" 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="0367265"
+           android:visibility="gone"
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="住院号 : "
+           android:textColor="#ffffff"
+           android:layout_marginLeft="40dp"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView
+           android:id="@+id/top_head_zyh" 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="20162827"
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="40dp"
+           android:text="入院日期  : "
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView
+           android:id="@+id/top_head_ryrq" 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="20160203"
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+        <TextView 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="诊断 : "
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+           android:paddingLeft="40dp"
+        />
+        <TextView
+           android:id="@+id/top_head_zd" 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="感冒 "
+           android:textColor="#ffffff"
+           android:textSize="@dimen/pm_textsize"
+           android:gravity="center"
+        />
+         </LinearLayout>
+    </RelativeLayout>
+    
+	<RelativeLayout
+        android:id="@+id/pi_ll_head_tab"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pm_pattab_rlheight"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal" >
+        
+	    <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pm_pattab_llheight"
+            android:background="#ffffff"
+            android:orientation="horizontal"
+        	android:layout_centerVertical="true"
+        	android:scrollbars="none" >
+	        <LinearLayout
+		    	android:id="@+id/pi_ll_head_tabmenu"
+		        android:layout_width="wrap_content"
+		        android:layout_height="@dimen/pm_pattab_llheight"
+		        android:background="#ffffff"
+		        android:orientation="horizontal"
+		        android:gravity="center" >
+	    	</LinearLayout>
+	    </HorizontalScrollView>
+        
+        <Button
+	    	android:id="@+id/pi_head_bwlbtn"
+	        android:layout_width="@dimen/pm_bwlwidth"
+	        android:layout_height="match_parent"
+	        android:orientation="horizontal"
+	        android:text="查房便签"
+	        android:textColor="#1D46FF"
+	        android:textSize="@dimen/mvp_menu_bottom"
+	        android:drawableTop="@drawable/btn_selectbq_bwl"
+	        android:background="@drawable/btn_selectbg_bwl"
+	        android:layout_alignParentRight="true"
+        	android:gravity="center"
+        	android:paddingTop="10dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/pi_ll_content"
+       	android:layout_width="match_parent"
+	    android:layout_height="0dip"
+	    android:layout_weight="1"	 
+	    android:divider="#00000000"
+        android:orientation="vertical" >
+
+       <FrameLayout
+            android:id="@+id/pi_fl_contentEMR"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent" >
+        </FrameLayout>
+        
+       <FrameLayout
+            android:id="@+id/pi_fl_contentBwl"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent" >
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/pi_fl_contentOrder"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent" >
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/pi_fl_contentRIS"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent" >
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/pi_fl_contentLIS"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent" >
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/pi_fl_contentLCLJ"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent" >
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/pi_fl_contentTchart"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent" >
+        </FrameLayout>
+        
+        
+    </LinearLayout>
+
+    
+    <RelativeLayout
+    	android:id="@+id/order_contextshow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pb_topheight"
+        android:gravity="center_vertical"
+        android:background="@drawable/bott_headbg"
+        android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/pi_ll_menu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/pb_topheight"
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+    </RelativeLayout>
+    
+    <!-- 
+    	<LinearLayout
+            android:id="@+id/pi_ll_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/pb_menu_top"
+            android:orientation="horizontal" >
+        </LinearLayout>
+     -->
+</LinearLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+     >
+    <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" 
+	    android:id="@+id/bwl_context"
+	    android:textSize="22sp"
+	    android:gravity="center_vertical">
+	    <LinearLayout 
+	        android:layout_width="0dip"
+	        android:layout_weight="1"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginBottom="5dp"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        android:layout_marginLeft="25dp">
+	        <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text=""
+	            android:textColor="#4d4d4d"
+	            android:textSize="20sp"
+	            android:id="@+id/bwl_content"/>
+	         <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text=""
+	            android:textColor="#53b9d0"
+	            android:textSize="18sp"
+	            android:id="@+id/bwl_time"/>
+	    </LinearLayout>
+	    <View android:layout_width="2dp"
+	        android:layout_height="30dp"
+	        android:background="#d9d9d9"
+	        android:layout_marginLeft="25dp"/>
+	    <LinearLayout 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal"
+	        android:orientation="vertical"
+	        android:layout_marginLeft="25dp">
+	        <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="状    态"
+	            android:textColor="#4d4d4d"
+	            android:textSize="20sp"/>
+	         <TextView 
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text=""
+	            android:textColor="#53b9d0"
+	            android:textSize="20sp"
+	            android:id="@+id/bwl_zt"/>
+	    </LinearLayout>
+	    
+	    <ImageView
+	        android:layout_width="60dp"
+	        android:layout_height="60dp"
+	        android:visibility="invisible"
+	        android:id="@+id/yz_iv_control"/>
+	</LinearLayout>
+</LinearLayout>

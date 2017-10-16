@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <title>我的审核</title>
+    <link rel="Stylesheet" href="content/site.css" />
+    <style type="text/css">
+        select, input { height: 2em; padding: 6px 12px; font-size: 1.2em; text-align: center; color: #555; border: 1px solid #ccc; border-radius: 20px; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075); box-shadow: inset 0 1px 1px rgba(0,0,0,.075); -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
+        input:focus { border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); }
+        .data-view { height: 100%; }
+        .data-list { box-shadow: 0 10px 15px #F5F5F5; margin-bottom: 15px; clear: both; padding-bottom: 7.5em;height:100%; }
+
+        .list-header { border: 1px #F5F5F5 solid; height: 7.5em; line-height: 7.5em; padding-left: 40px; padding-right: 40px; }
+        
+        .type-selector { float: left; font-size: 1.3em; color: #8B8B8B; }
+        .type-selector span { border: 1px #b7b7b7 solid; height: 44px; border-radius: 20px; display: inline-block; line-height: 40px; padding-left: 20px; padding-right: 20px; cursor: pointer; user-select: none; }
+        
+        .date-selector { float: right;  padding-right: 20px;}
+        .date-selector .btn{ vertical-align: middle; cursor: pointer; }
+        .date-selector input { height: 44px; }
+        .list-view { clear: both;height:100%;overflow-y:auto; }
+        .list-view .list-item { border-bottom: 1px #F5F5F5 solid; border-right: 1px #F5F5F5 solid; height: 7.5em; padding-left: 50px;}
+        .list-view .list-item .rec-detail { display: none; height: 3.5em;line-height:1.8em;}
+
+        .col-name { float: left; width: 14%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-hzxm { background-repeat: no-repeat; background-size: 45px 45px; background-position: 0 55%; padding-left: 60px; display: table; overflow: hidden; }
+        .col-name .wrap { display: table-cell; vertical-align: middle; }
+        .col-name .wrap .inner { font-size: 1.75em; color: #193CDA; }
+        
+        .col-content { float: right; width: 77%; height: 100%; }
+        .col-content .info { height: 50%; position: relative; }
+        .info-inner { position: absolute; bottom: 5px; width: 100%; }
+        .col-content .record { height: 50%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .col-sex { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-age { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-dept { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-ward { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-bed { float: left; width: 15.8%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .col-status { float: right; width: 7%; height: 100%; background-position: center; background-repeat: no-repeat; }
+        .data-list .list .item .record { clear: both; }
+        .f-label { color: #8B8B8B; font-size: 1.3em; }
+        .f-field { color: #464646; font-size: 1.3em; }
+
+        .data-binding { display: none; }
+        .tpl-row { display: none; }
+        .kss-flag { background-color: #9013FE; color: white;border-color:#9013FE !important; }
+        .undo-flag { background-color: #FF860B; color: white;border-color:#FF860B !important; }
+        .all-flag { background-color: #FF860B; color: white;border-color:#FF860B !important; }
+        .hidden { display: none; }
+        #checker-kss-label { width: auto; }
+        .kss-row-focused { height:10em !important; }
+        .kss-row-focused .info { height:32% !important; }
+        .kss-row-focused .record { height:68% !important; }
+        .kss-row-focused .record .rec-detail { display: block !important; }
+        .undo-row-focused { height:10em !important; }
+        .undo-row-focused .info { height:32% !important; }
+        .undo-row-focused .record { height:68% !important; }
+        .undo-row-focused .record .rec-detail { display: block !important; }
+    </style>
+</head>
+<body>
+    <div class="other-viewport">
+        <div style="width:100%;height:100%;padding-bottom:15px;">
+            <div style="height:15px;background-color:#FAFAFA;"></div>
+            <div class="data-view">
+                <div class="data-list" id="task-list">
+                    <div class="list-header">
+                        <div class="type-selector" id="type-selector">
+                            <span onclick="onFilterClick(this,'kss')" onselectstart="return false;" id="filter-kss" data-type="kss">抗生素申请</span>
+                            <span onclick="onFilterClick(this,'undo')" onselectstart="return false;" id="filter-undo" data-type="undo">病历撤销归档</span>&nbsp;&nbsp;
+                        </div>
+                        <div class="date-selector">
+                            &nbsp;<img src="content/images/tswk-active.png" alt="本周" onclick="dateRangeChanged(this,'tswk');" class="btn" id="tswk" />
+                            &nbsp;<img src="content/images/tsmon.png" alt="本月" onclick="dateRangeChanged(this, 'tsmon');" class="btn" id="tsmon" />
+                            &nbsp;<input type="text" required="required" id="dtbegin" data-type="0" data-title="申请" data-max="[Date.now().format('yyyyMMddHH:mm')]" data-group="reg-date" onchange="dateRangeChanged(null, 'custom');" class="date-picker btn" />
+                            &nbsp;-&nbsp;<input type="text" required="required" id="dtend" data-group="reg-date" class="date-picker btn" />
+                            &nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <div class="list-view data-source-binding" id="recent-item-list" data-source="{binding $Recents}" data-formater="formater" data-key-expression="this.type + '_' + this.data.xh">
+                        <div class="tpl-row list-item" id="{$type}_r_{data-key}" onclick="onRowClick(this);">
+                            <div class="col-name col-hzxm" style="height:100%;background-image:url('content/images/{$sex_icon}.png');">
+                                <div class="wrap"><div class="inner">{$hzxm}</div></div>
+                            </div>
+                            <div class="col-status" style="background-image:url('{$status_icon}')">
+                            </div>
+                            <div class="col-content">
+                                <div class="info">
+                                    <div class="info-inner">
+                                        <div class="col-sex"><span class="f-label">性别：</span><span class="f-field">{$sex}</span></div>
+                                        <div class="col-age"><span class="f-label">年龄：</span><span class="f-field">{$age}</span></div>
+                                        <div class="col-bed"><span class="f-label">床位：</span><span class="f-field">{$cwdm}</span></div>
+                                        <div class="col-dept"><span class="f-label">科室：</span><span class="f-field">{$ksmc}</span></div>
+                                        <div class="col-ward"><span class="f-label">病区：</span><span class="f-field">{$bqmc}</span></div>
+                                    </div>
+                                </div>
+                                <div class="record">
+                                    <div>
+                                        <span class="f-label">说明：</span>
+                                        <span class="f-field">{$taskcontent}</span>
+                                    </div>
+                                    <div class="rec-detail">{$detail}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script src="scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <!--<script src="content/demo/demo.js"></script>-->
+        <script src="scripts/common.js" type="text/javascript"></script>
+        <script type="text/javascript" title="event handler">
+            var focusedRow = null;
+            function onRowClick(row) {
+                var isfocused = focusedRow == row;
+                if (focusedRow) {
+                    if (focusedRow.id.indexOf("KSS") == 0) $(focusedRow).removeClass("kss-row-focused");
+                    else if (focusedRow.id.indexOf("UNDO") == 0) $(focusedRow).removeClass("undo-row-focused");
+                    focusedRow = null;
+                }
+                if (!isfocused) {
+                    if (row.id.indexOf("KSS") == 0) $(row).addClass("kss-row-focused");
+                    else if (row.id.indexOf("UNDO") == 0) $(row).addClass("undo-row-focused");
+                    focusedRow = row;
+                }
+            }
+
+            function onFilterClick(sender, type) {
+                var element = $(sender);
+                var parent = $(sender.parentElement);
+                if (element.data("checked") === true) return;
+                var focused = $(parent.data("focused") || []);
+                focused.removeClass(focused.data("type") + "-flag").data("checked", false);
+                element.addClass(type + "-flag");
+                $("#recent-item-list").children(".data-row").each(function () {
+                    if (type == "all") $(this).css("display", "");
+                    else if (this.id.toLowerCase().indexOf(type) != 0) $(this).css("display", "none");
+                    else $(this).css("display", "");
+                });
+                element.data("checked", true);
+                parent.data("focused", sender);
+            }
+            function dateRangeChanged(sender, range, load) {
+                var weekday = [7, 1, 2, 3, 4, 5, 6];
+                var now = new Date();
+                var beginDate, endDate = now.format("yyyy-MM-dd");
+                if (range == "tswk") {
+                    $("#tsmon").attr("src", "content/images/tsmon.png");
+                    $(sender).attr("src", "content/images/tswk-active.png");
+                    beginDate = new Date(now.setDate(now.getDate() - (weekday[now.getDay()] - 1))).format("yyyy-MM-dd");
+                    $("#dtbegin").val(beginDate);
+                    $("#dtend").val(endDate);
+                }
+                else if (range == "tsmon") {
+                    $("#tswk").attr("src", "content/images/tswk.png");
+                    $(sender).attr("src", "content/images/tsmon-active.png");
+                    beginDate = new Date(now.setDate(1)).format("yyyy-MM-dd");
+                    $("#dtbegin").val(beginDate);
+                    $("#dtend").val(endDate);
+                }
+                else {
+                    beginDate = $("#dtbegin").val();
+                    endDate = $("#dtend").val();
+                }
+                $beginDate = beginDate;
+                $endDate = endDate;
+                if (beginDate && endDate && load !== false) loadData();
+                var element = $(document.getElementById("filter-all"));
+            };
+        </script>
+        <script type="text/javascript" title="logic">
+            var $Recents = [];
+            var $beginDate, $endDate;
+            var formater = {
+                hzxm: function (rec) {
+                    return rec.data.hzxm;
+                },
+                sex: function (rec) {
+                    return rec.data.sex;
+                },
+                sex_icon: function (rec) {
+                    var sex = (rec.data || rec).sex;
+                    var sex_codes = ["man", "women", "boy", "girl", "mbaby", "fbaby"];
+                    var re = /^.*岁/;
+                    var match = (rec.data || rec).age.match(re);
+                    var age = match ? parseInt($.trim(match[0].replace("岁", ""))) : 0;
+                    if (sex == "男") {
+                        if (age >= 18) return "man";
+                        else if (age >= 14) return "boy";
+                        else return "mbaby";
+                    }
+                    else {
+                        if (age >= 18) return "women";
+                        else if (age >= 14) return "girl";
+                        else return "fbaby";
+                    }
+                },
+                age: function (rec) {
+                    return rec.data.age;
+                },
+                ksmc: function (rec) {
+                    return rec.data.ksmc;
+                },
+                bqmc: function (rec) {
+                    return rec.data.bqmc;
+                },
+                cwdm: function (rec) {
+                    return rec.data.cwdm;
+                },
+                taskcls: function (rec) {
+                    return rec.type.toLowerCase() + "-flag";
+                },
+                taskcontent: function (rec) {
+                    var data = rec.data;
+                    if (rec.type == "KSS") {
+                        var newline = this.tagName == "DIV" ? "&nbsp;" : "<br/>";
+                        var sqlxmc = ["药品用量控制", "联合用药控制", "三级管控", "围手术期控制", "处方规则控制", "特殊用药", "术后24小时使用抗菌药物"];
+                        var html = ["【", sqlxmc[data.sqlx], "】", newline];
+                        html.push("抗生素：");
+                        html.push($.trim(data.ypmc) || "");
+                        html.push("&nbsp;");
+                        html.push($.trim(data.ypgg) || "");
+                        html.push("&nbsp;");
+                        html.push($.trim(data.ypjl) || "");
+                        html.push($.trim(data.jldw) || "");
+                        html.push("&nbsp;");
+                        html.push($.trim(data.ypyfmc) || "");
+                        html.push("&nbsp;");
+                        html.push($.trim(data.pcmc) || "");
+                        html.push(newline);
+
+                        var arr = (data.sqyy || "").split("&");
+                        for (var i = 0; i < arr.length; i++) {
+                            if (!$.trim(arr[i]) || (arr[i].substr(arr[i].indexOf(":")) == ":")) continue;
+                            html.push(arr[i]);
+                            if (i < arr[i].length - 1) html.push("&nbsp;&nbsp;");
+                        }
+                        return html.join("");
+                    }
+                    else if (rec.type == "UNDO") {
+                        return rec.data["cxgdyy"];
+                    }
+                },
+                status_icon: function (rec) {
+                    if (rec.type == "KSS") return rec.data.shzt == "1" ? "content/images/shzt-1.png" : "content/images/shzt-0.png";
+                    else if (rec.type == "UNDO") return "6502,6504,6506".indexOf(rec.data.shzt + "") > -1 ? "content/images/shzt-1.png" : "content/images/shzt-0.png";
+                    return "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==";
+                },
+                detail: function (rec) {
+                    var tpl = "<div>"
+                               + "<div style=\"float:left;width:50%;\"><span class=\"f-label\">申请时间：</span><span class=\"f-field\">{0}</span></div>"
+                               + "<div style=\"float:right;width:50%;\"><span class=\"f-label\">审核时间：</span><span class=\"f-field\">{1}</span></div>"
+                               + "</div>"
+                               + "<div class=\"clear\"><span class=\"f-label\">审核意见：</span><span class=\"f-field\">{2}</span></div>";
+                    return String.format(tpl, Date.fromRq16(rec.data.sqrq).format("yyyy-MM-dd HH:mm"), Date.fromRq16(rec.data.shsj).format("yyyy-MM-dd HH:mm"),rec.data.shyj);
+                }
+            };
+
+            function loadData() {
+                var doctor = $App.getDoctor();
+                var dept = $App.getDept();
+                var ksrq = $beginDate;
+                var jsrq = $endDate;
+                this.$Recents = $App.findData("doctor", "approval-recent", String.format("{\"ysdm\":\"{0}\",\"ksdm\":\"{1}\",\"bqdm\":\"{2}\",\"ksrq\":\"{3}\",\"jsrq\":\"{4}\"}", $.trim(doctor.id), $.trim(dept.ksdm), $.trim(dept.bqdm), ksrq, jsrq));
+                bindingData();
+
+                var el = document.getElementById("type-selector");//parent.data("focused")
+                var active_filter = $(el).data("focused") || document.getElementById("filter-kss");
+                $(active_filter).data("checked", false);
+                onFilterClick(active_filter, $(active_filter).data("type"));
+            }
+
+            $(document).ready(function () {
+                dateRangeChanged(document.getElementById("tswk"), "tswk", false);
+            });
+
+            //setTimeout(loadData, 1000);
+
+
+        </script>
+</body>
+</html>

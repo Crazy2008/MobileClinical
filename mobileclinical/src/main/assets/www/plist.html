@@ -1,0 +1,555 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <title>病人列表</title>
+    <link rel="Stylesheet" href="content/site.css" />
+    <style type="text/css">
+        .content { width: 85.73%; height: 100%; float: left; padding-bottom: 5.9375em; }
+        .right { width: 14.27%; float: right; height: 100%; }
+        .header { height: 5.9375em; background: url('content/images/border-1px.gif') bottom repeat-x; line-height: 5.9375em; }
+        .content-title { color: #333333; font-size: 2.375em; margin-left: 30px; }
+        .switcher { width: 330.6px; font-size: 2.375em; padding-left: 55px; }
+        .switcher img { vertical-align: middle; cursor: pointer; }
+        .download { width: 9.6668%; float: right; }
+        .download img { vertical-align: middle; cursor: pointer; background: url('content/images/down.png') no-repeat center; width: 95px; height: 46px; }
+        .download img:active { vertical-align: middle; cursor: pointer; background: url('content/images/download-down.png') no-repeat center; width: 95px; height: 46px; }
+        .filters { float: right; padding-right: 20px; }
+        .filters .btn { vertical-align: middle; cursor: pointer; }
+        .date-selector { float: right; padding-right: 20px; }
+        .date-selector .btn{ vertical-align: middle; cursor: pointer; }
+        .date-selector input { width: 9em; height: 2.3125em; padding: 6px 12px; font-size: 1.2em; text-align:center; color: #555; border: 1px solid #ccc; border-radius: 20px; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075); box-shadow: inset 0 1px 1px rgba(0,0,0,.075); -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
+        .date-selector input:focus { border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); }
+        .list { height: 100%; position: relative; }
+        .list .list-inner { height: 100%; overflow-x: hidden; overflow-y: auto; }
+        #patient-list { width: 100%; }
+        .col-space { width: 3.64%; }
+        .col-content { width: 92.72%; background: url('content/images/border-1px.gif') bottom repeat-x; white-space: nowrap; height: 5em; }
+        .col-content .col-name { width: 22%; float: left; height: 100%; background-repeat: no-repeat; background-position: 0px 75%; padding-left: 70px; line-height: 5em; }
+        .col-content .col-name .f-hzxm { color: #193CDA; }
+        .col-content .col-other { width: 49.5%; float: left; height: 100%; font-size: 1.2em; }
+        .col-content .col-other .above { height: 50%; position: relative; }
+        .col-content .col-other .above .bed { left: 0; position: absolute; bottom: 3px; }
+        .col-content .col-other .above .age { left: 33%; position: absolute; bottom: 3px; }
+        .col-content .col-other .above .date { left: 66%; position: absolute; bottom: 3px; }
+        .col-content .col-other .below { height: 50%; margin-top: 3px; }
+        .col-content .col-flag { width: 22%; float: left; height: 100%; display: table; _position: relative; overflow: hidden; }
+        .col-content .col-flag .wrap { vertical-align: middle; display: table-cell; _position: absolute; _top: 50%; }
+        .col-content .col-flag .wrap .flags { _position: relative; _top: -50%; }
+        .col-content .col-download { width: 6.5%; float: left; height: 100%; padding-left: 23.5px; }
+        .col-content .col-download img { width: 48px; height: 100%; background: url('content/images/down-btn.png') no-repeat center; cursor: pointer; }
+        .col-content .downloaded { }
+        .col-content .downloaded img { background: url('content/images/downed-btn.png') no-repeat center; }
+        .col-content .col-download .offline { background-image: none !important; }
+        .f-label { color: #8B8B8B; }
+        .f-field { color: #464646; }
+        .flag { width: 1.5em; height: 1.5em; line-height: 1.5em; font-size: 1.5em; border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%; vertical-align: middle; text-align: center; float: left; color: white; font-weight: bold; margin: 5px; }
+        .recent-header { height: 3.5em; line-height: 3.5em; text-align: center; color: #5A5A5A; border-bottom: 1px solid #D8D8D8; }
+        .recent { margin: 2em 0px 0px 0px; overflow: hidden; }
+        .recent-header span { font-size: 1.75em; }
+        .recent-list { list-style: none; margin: 0px; padding: 0px; }
+        .recent-list li { padding: 10px 0px 10px 0px; FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#F9FCFB,endColorStr=#E6E6E7); /*IE 6 7 8*/ background: -ms-linear-gradient(top, #F9FCFB, #E6E6E7); /* IE 10 */ background: -moz-linear-gradient(top,#F9FCFB,#E6E6E7); /*火狐*/ background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#F9FCFB), to(#E6E6E7)); /*谷歌*/ background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F9FCFB), to(#E6E6E7)); /* Safari 4-5, Chrome 1-9*/ background: -webkit-linear-gradient(top, #F9FCFB, #E6E6E7); /*Safari5.1 Chrome 10+*/ background: -o-linear-gradient(top, #F9FCFB, #E6E6E7); /*Opera 11.10+*/ border: 1px #D3D3D3 solid; -webkit-box-shadow: 0 8px 12px #D6DEE6; -moz-box-shadow: 0 8px 12px #D6DEE6; box-shadow: 0 8px 12px #D6DEE6; }
+        .recent-pat { font-size: 1.25em; color: #666666; }
+        .recent-pat .lname { float: left; }
+        .recent-pat .rbed { float: right; }
+        .recent-empty { font-size: 1.2em; color: #666666; margin: 8px 0px 8px 0px; }
+        .recent-msg { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #969696; font-size: 1.2em; }
+        .recent-label { color: #323B46; font-size: 1.5em; padding: 8px 0px 8px 0px; margin: 0px; }
+        .tpl-row { display: none; }
+        .recent-more { position: absolute; bottom: 5px; }
+        .recent-more a { color: #323B46; font-size: 1.5em; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="app-viewport">
+        <div class="content">
+            <div class="header">
+                <span class="content-title">病人列表</span>
+                <span class="switcher"><img src="content/images/switcher-on.png" alt="在院病人" onclick="onSwitchClick(this);" /></span>
+                <span class="download"><img id="download-all-btn" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="下载全部" onclick="if($App.isOnline() && $App.confirm('提示', '确认下载全部？')) download('all');" /></span>
+                <span class="filters" id="filter-span">
+                    &nbsp;<img src="content/images/all-in-active.png" alt="全部" onclick="onFilterBtnClick(this);" id="all" class="btn" data-checked="true" />
+                    &nbsp;<img src="content/images/manage.png" alt="分管" onclick="onFilterBtnClick(this);" id="mgr" class="btn" />
+                    &nbsp;<img src="content/images/gfx.png" alt="高危病人" onclick="onFilterBtnClick(this);" id="gfx" class="btn" />
+                    &nbsp;&nbsp;
+                </span>
+                <span class="date-selector" id="date-selector" style="display:none;">
+                    &nbsp;<img src="content/images/tswk.png" alt="本周" onclick="loadLeave(this,'tswk');" class="btn" id="tswk"/>
+                    &nbsp;<img src="content/images/tsmon.png" alt="本月" onclick="loadLeave(this,'tsmon');" class="btn" id="tsmon"/>
+                    &nbsp;<input type="text" required="required" id="dtbegin" data-type="0" data-title="出院" data-max="[Date.now().format('yyyyMMddHH:mm')]" data-group="leave-date" onchange="loadLeave(null,'custom');" class="date-picker btn" />
+                    &nbsp;-&nbsp;<input type="text" required="required" id="dtend" data-group="leave-date" class="date-picker btn" />
+                    &nbsp;&nbsp;
+                </span>
+            </div>
+            <div style="height:100%;" class="clear">
+                <div class="list">
+                    <div class="list-inner">
+                        <table id="patient-list" class="data-source-binding" onclick="focusRow(this);" cellpadding="0" cellspacing="0" border="0" data-source="{binding Patients}" data-formater="formater" data-key-expression="this.syxh + '_' + this.yexh" data-row-bind="onRowBind">
+                            <tr class="tpl-row" id="d_r_{data-key}">
+                                <td class="col-space"></td>
+                                <td class="col-content">
+                                    <div class="col-name" style="background-image: url('content/images/{$sex_icon}.png');"><span class="f-field f-hzxm" style="font-size:2em;">{$name}</span></div>
+                                    <div class="col-other">
+                                        <div class="above">
+                                            <span class="bed"><span class="f-label">床位号：</span><span class="f-field">{$cwdm}</span></span>
+                                            <span class="age"><span class="f-label">年龄：</span><span class="f-field">{$age}</span></span>
+                                            <span class="date"><span class="f-label">入院：</span><span class="f-field">{$ryrq}</span></span>
+                                        </div>
+                                        <div class="below clear"><span class="f-label">诊断：</span><span class="f-field">{$zdmc}</span></div>
+                                    </div>
+                                    <div class="col-flag"><div class="wrap"><div class="flags">{$flag}</div></div></div>
+                                    <div class="col-download {$islocal}"><img class="{$offline}" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt="下载患者数据." onclick="if($App.isOnline() && $App.confirm('提示', '确认下载？')) download('{$syxh}', '{$yexh}'); event.cancelBubble = true;" /></div>
+                                </td>
+                                <td class="col-space"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div style="height: 100%; border-left: 1px #D8D8D8 solid;position:relative;">
+                <div class="recent-header"><span>最近查房</span></div>
+                <div class="recent" id="recent-container">
+                </div>
+                <div class="recent-more">&nbsp;<a onclick="$App.showVisits();" href="javascript:void(0);">更多</a></div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <!--<script src="content/demo/demo.js"></script>-->
+    <script src="scripts/common.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        //event handlers
+        function focusRow(table) {
+            var sender = event.srcElement || event.target;
+            if (!sender) return;
+
+
+            var rowEl = findParent(sender, function () { return this.className && this.className.indexOf("data-row") > -1; });
+            if (!rowEl) return;
+
+            var identity = rowEl.id.substr(4);
+            var record = table["meta-data"][identity];
+            if (identity === table.focusedKey) {
+                $App.switchPatient(record.syxh, record.yexh, record.name, record.sex, record.age, record.blh, Date.fromRq16(record.ryrq).format("yyyy.MM.dd"), record.zdmc, record.lcljbz == 2 ? 1 : 0);
+                return;
+            }
+
+            if (table.focusedKey) {
+                var beforeRow = $("#d_r_" + table.focusedKey);
+                beforeRow.children(":eq(1)").css("background-image", "");
+                beforeRow.css("background", "");
+                beforeRow.children().css("border", "");
+                beforeRow.find(".f-label").css("color", "");
+                beforeRow.find(".f-field").css("color", "");
+                beforeRow.find(".col-name").css("background-image", function () { return this.style.backgroundImage.replace("-sel", ""); });
+            }
+
+            var focusRow = $("#d_r_" + identity);
+            focusRow.children(":eq(1)").css("background-image", "none");
+            focusRow.css("background", "#1D46FF");
+            focusRow.children().css("border", "2px #1D46FF solid");
+            focusRow.find(".f-label").css("color", "white");
+            focusRow.find(".f-field").css("color", "white");
+            focusRow.find(".col-name").css("background-image", function () { return this.style.backgroundImage.replace(".png", "-sel.png"); });
+
+            table.focusedKey = identity;
+
+            $App.setData("CURRENT_PATIENT", record._mjson);
+            $App.switchPatient(record.syxh, record.yexh, record.name, record.sex, record.age, record.blh, Date.fromRq16(record.ryrq).format("yyyy.MM.dd"), record.zdmc, record.lcljbz == 2 ? 1 : 0);
+        }
+
+        function onSwitchClick(sender) {
+            var isLeave = $(sender).data("isleave") || false;
+            if (isLeave) {
+                sender.src = sender.src.replace("-off", "-on");
+                $("#date-selector").hide();
+                $("#filter-span").show();
+                $("span.download").show();
+            }
+            else {
+                sender.src = sender.src.replace("-on", "-off");
+                $("#filter-span").hide();
+                $("#date-selector").show();
+                $("span.download").hide();
+            }
+            $(sender).data("isleave", !isLeave);
+            $isLeave = !isLeave;
+            loadData();
+        }
+
+        function onFilterBtnClick(btn) {
+            if ($(btn).data("checked") === true) return;
+            var filter = "all";
+            $("#all,#mgr,#gfx").each(function () {
+                var self = $(this);
+                if (btn === this && !self.data("checked")) {
+                    btn.src = btn.src.replace(".png", "-active.png");
+                    self.data("checked", true);
+                    filter = btn.id;
+                }
+                else if (self.data("checked")) {
+                    self[0].src = self[0].src.replace("-active", "");
+                    self.data("checked", false);
+                }
+            });
+
+            var tab = document.getElementById("patient-list");
+            var rows = tab.children[0].children;
+            var source = tab["meta-data"];
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var rec = source[row.id.substr(4)];
+                if (!rec) continue;
+
+                var visible = "none";
+                if (filter == "mgr" && rec.fgbz == 1) visible = "";
+                else if (filter == "focus" && rec.gzbz == 1) visible = "";
+                else if (filter == "gfx" && rec.gfxbz == 1) visible = "";
+                else if (filter == "all") visible = "";
+                row.style.display = visible;
+            }
+        };
+
+        function loadLeave(sender, range) {
+            var weekday = [7, 1, 2, 3, 4, 5, 6];
+            var now = new Date();
+            var beginDate, endDate = now.format("yyyy-MM-dd");
+            if (range == "tswk") {
+                $("#tsmon").attr("src", "content/images/tsmon.png");
+                $(sender).attr("src", "content/images/tswk-active.png");
+                beginDate = new Date(now.setDate(now.getDate() - (weekday[now.getDay()] - 1))).format("yyyy-MM-dd");
+                $("#dtbegin").val(beginDate);
+                $("#dtend").val(endDate);
+            }
+            else if (range == "tsmon") {
+                $("#tswk").attr("src", "content/images/tswk.png");
+                $(sender).attr("src", "content/images/tsmon-active.png");
+                beginDate = new Date(now.setDate(1)).format("yyyy-MM-dd");
+                $("#dtbegin").val(beginDate);
+                $("#dtend").val(endDate);
+            }
+            else {
+                beginDate = $("#dtbegin").val();
+                endDate = $("#dtend").val();
+            }
+            if (beginDate && endDate) {
+                var dept_ward = $App.getDept();
+                this.Patients = $App.findData("patient", "leave-patient", String.format("{\"ksdm\":\"{0}\",\"bqdm\":\"{1}\",\"ksrq\":\"{2}\",\"jsrq\":\"{3}\"}", dept_ward.ksdm, dept_ward.bqdm, beginDate, endDate));
+                window["Patients_bak"] = this.Patients;
+                bindingData("patient-list");
+            }
+        };
+
+        function onRowBind(rec) {
+            try {
+                $App.getBedSearch(rec.syxh + "", rec.yexh + "", rec.name, rec.sex, rec.age, rec.cwdm, rec.blh, rec.zdmc, window.allBeds[$.trim(rec.cwdm)].room + "", rec.lcljbz == 2 ? 1 : 0, Date.fromRq16(rec.ryrq).format("yyyy.MM.dd"));
+            }
+            catch (ex) {
+                $App.alert(ex);
+            }
+        }
+
+        function download(syxh, yexh) {
+            if (syxh == "all") {
+                var success = $App.downloadAll();
+                if (success === true) $(".col-download").each(function () { if (this.className.indexOf("downloaded") < 0) $(this).addClass("downloaded"); })
+            }
+            else {
+                var success = $App.download(syxh, yexh);
+                if (success === true) $("#d_r_"+syxh+"_" + yexh).find(".col-download").each(function () { if (this.className.indexOf("downloaded") < 0) $(this).addClass("downloaded"); })
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var Patients = [];
+        var allBeds = {};
+        var $isLeave = false;
+        var $bqdm = "";
+        var $isfilter = false;
+        var $Visits = [];
+        var $Downloaded = [];
+
+        var formater = {
+            flag_colors: {
+                '特': '#FFEE58',
+                'Ⅰ': '#FFEE58',
+                'Ⅱ': '#D4E157',
+                'Ⅲ': '#D4E157',
+                '临': '#1635F7',
+                '新': '#CE77FF',
+                '重': '#FF6565',
+                '危': '#EF5350',
+                '保': '#29B6F6',
+                '径': '#66bb6a',
+                '？': 'Yellow',
+                '敏': '#F11735',
+                '术': 'Yellow',
+                '限': '#F11735',
+                '报': '#F11735',
+                '急': '#FF8000',
+                '☆': '#FF5C5C',
+                '￥': 'Orange',
+                '结': '#FF5C5C',
+                '耐': '#17FF00'
+            },
+            flag_tpl: "<div class=\"flag\" style=\"background-color: {0};\">{1}</div>",
+            sex_icon: function (rec) {
+                var sex_codes = ["man", "women", "boy", "girl", "mbaby", "fbaby"];
+                var re = /^.*岁/;
+                var match = (rec.age || "").match(re);
+                var age = match ? parseInt($.trim(match[0].replace("岁", ""))) : 0;
+                if (rec.sex == "男") {
+                    if (age >= 18) return "man";
+                    else if (age >= 14) return "boy";
+                    else return "mbaby";
+                }
+                else {
+                    if (age >= 18) return "women";
+                    else if (age >= 14) return "girl";
+                    else return "fbaby";
+                }
+            },
+            ryrq: function (rec) {
+                return Date.fromRq16(rec.ryrq).format("yyyy-MM-dd");
+            },
+            flag: function (rec) {
+                var flags = [];
+
+                //护理
+                var hlmc = (rec.hlmc && $.trim(rec.hlmc)) || "";
+                if (hlmc) {
+                    var labels = ["Ⅲ", "Ⅱ", "Ⅰ", "特"];
+                    var levels = [["三", "3", "Ⅲ", "III"], ["二", "2", "Ⅱ", "II"], ["一", "1", "Ⅰ", "I"], ["特"]];
+                    for (var i = 0; i < levels.length; i++) {
+                        var found = false;
+                        for (var j = 0; j < levels[i].length; j++) {
+                            if (hlmc.indexOf(levels[i][j]) < 0) continue;
+                            found = true;
+                            flags.push(String.format(formater.flag_tpl, "#CACACA", labels[i]));
+                            break;
+                        }
+                        if (found) break;
+                    }
+                }
+                if (rec.ybjkid && rec.ybjkid != "0") flags.push(String.format(formater.flag_tpl, "#CACACA", rec.ybjkid));
+                //病重、病危
+                var wzjb = $.trim(rec.wzjb) || "0";
+                if (wzjb == "1") flags.push(String.format(formater.flag_tpl, "#CACACA", "危"));
+                else if (wzjb == "2") flags.push(String.format(formater.flag_tpl, "#CACACA", "重"));
+                //径
+                if (rec.lcljbz == 2) flags.push(String.format(formater.flag_tpl, "#CACACA", "径"));
+                //敏
+                if (rec.gmxx && $.trim(rec.gmxx)) flags.push(String.format(formater.flag_tpl, "#CACACA", "敏"));
+
+                var opsmc = $.trim(rec.opsmc);
+                var opszt = rec.opszt || "-1";
+                //var stausLabels = ["", "术前", "术中", "术后", ""];
+                if (opsmc) flags.push(String.format(formater.flag_tpl, "#CACACA", "术"));
+
+
+
+                return flags.join("");
+            },
+            islocal: function (rec) {
+                if (!$App.isOnline()) return "";
+                for (var i = 0; $Downloaded.length && i < $Downloaded.length; i++) {
+                    var d = $Downloaded[i];
+                    if (d.syxh == rec.syxh && d.yexh == rec.yexh) return "downloaded";
+                }
+                return "";
+            },
+            offline: function (rec) {
+                return $App.isOnline() ? "" : "offline";
+            }
+        }
+        function loadData() {
+            var dept_ward = $App.getDept();
+            if (dept_ward.bqdm != $bqdm) {
+                var beds = $App.findData("dept", "ward-bed", String.format("{\"bqdm\":\"{0}\"}", dept_ward.bqdm));
+                $bqdm = dept_ward.bqdm;
+                for (var i = 0 ; i < beds.length; i++) this.allBeds[$.trim(beds[i].cwdm)] = beds[i];
+            }
+            if ($isLeave) return loadLeave(document.getElementById("tswk"), "tswk");
+            else this.Patients = $App.findData("patient", "all-inpaitient", String.format("{\"ksdm\":\"{0}\",\"bqdm\":\"{1}\"}", dept_ward.ksdm, dept_ward.bqdm));
+
+            this.$Downloaded = $App.getDownloaded();
+
+            window["Patients_bak"] = this.Patients;
+            bindingData("patient-list");
+
+            setTimeout(loadRecents, 1);
+
+            if (!$App.isOnline()) $("#download-all-btn").hide();
+        }
+
+        function loadRecents() {
+            var container = $("#recent-container").empty();
+            var doc = $App.getDoctor();
+            var dept_ward = $App.getDept();
+            this.$Visits = $App.findData("dailyrecord", "dr-pat", String.format("{\"ksdm\":\"{0}\",\"bqdm\":\"{1}\",\"ysdm\":\"{2}\"}", dept_ward.ksdm, dept_ward.bqdm, doc.id));
+            this.$Visits = this.$Visits.sort(function (x, y) { return y.cfrq.substr(0, 8).localeCompare(x.cfrq.substr(0, 8)); });
+            var tpl = {
+                header: "<p class=\"recent-label\">&nbsp;{0}</p>",
+                list: "<ul class=\"recent-list\">",
+                item: "<li onclick=\"forwardToVisit({0},{1})\"><div class=\"recent-pat\"><span class=\"lname\">&nbsp;&nbsp;{2}</span><span class=\"rbed\">{3}&nbsp;&nbsp;</span></div><div class=\"recent-msg clear\">&nbsp;&nbsp;{4}</div></li>",
+                empty: "<p class=\"recent-empty\">&nbsp;&nbsp;&lt;无&gt;</p>",
+                html: function () { return String.format.apply(String, arguments); }
+            };
+            var now = new Date(), count = 0;
+            var today = now.format("yyyy MM dd").replace(/ +/g, ""), yesterday = (new Date(now.setDate(now.getDate() - 1))).format("yyyy MM dd").replace(/ +/g, "");
+            var tvisits = [], yvisits = [], mvisits = [];
+            for (var i = 0; i < $Visits.length && count < 9; i++, count++) {
+                var date = $Visits[i].cfrq.substr(0, 8);
+                if (date == today) tvisits.push($Visits[i]);
+                else if (date == yesterday) yvisits.push($Visits[i]);
+                else mvisits.push($Visits[i]);
+            }
+
+            if (tvisits.length > 0) {
+                container.append(tpl.html(tpl.header, "今天"));
+                var list = $(tpl.list);
+                $.each(tvisits, function () {
+                    list.append(tpl.html(tpl.item,this.syxh,this.yexh, $.trim(this.hzxm), $.trim(this.cwdm) && ("【" + $.trim(this.cwdm) + "床】"), this.memo));
+                });
+                container.append(list);
+            }
+            else {
+                container.append(tpl.html(tpl.header, "今天") + tpl.empty);
+            }
+
+            if (tvisits.length < 8) {
+                if (yvisits.length > 0) {
+                    container.append(tpl.html(tpl.header, "昨天"));
+                    var list = $(tpl.list);
+                    $.each(yvisits, function (i) {
+                        list.append(tpl.html(tpl.item, this.syxh, this.yexh, $.trim(this.hzxm), $.trim(this.cwdm) && ("【" + $.trim(this.cwdm) + "床】"), this.memo));
+                        return tvisits.length + i < 7;
+                    });
+                    container.append(list);
+                }
+                else {
+                    container.append(tpl.html(tpl.header, "昨天") + tpl.empty);
+                }
+            }
+
+            if (tvisits.length + 1 + yvisits.length + 1 < 8) {
+                if (mvisits.length > 0) {
+                    container.append(tpl.html(tpl.header, "更早"));
+                    var list = $(tpl.list);
+                    $.each(mvisits, function (i) {
+                        list.append(tpl.html(tpl.item, this.syxh, this.yexh, $.trim(this.hzxm), $.trim(this.cwdm) && ("【" + $.trim(this.cwdm) + "床】"), this.memo));
+                        return tvisits.length + 1 + yvisits.length + 1 + i < 7;
+                    });
+                    container.append(list);
+                    container.append($("<div style=\"height:13px;\">"));
+                }
+                else {
+                    container.append(tpl.html(tpl.header, "更早") + tpl.empty);
+                }
+            }
+            //if (this.$Visits.length > 9) $("<div class=\"recent-more\">").html("&nbsp;<a href=\"javascript:void(0);\" onclick=\"$App.showVisits();\">更多</a>").css("top", (container.height() - 20) + "px").appendTo(container);//container.append();
+        }
+
+        function search(keyword) {
+            if (!keyword) {
+                if (!$isfilter) return;
+                window.Patients = window["Patients_bak"];
+                bindingData("patient-list");
+                $isfilter = false;
+                return;
+            }
+
+            var findOut = [];
+            var fields = ["name", "py", "wb", "cwdm", "blh"];
+            for (var idx = 0; idx < window["Patients_bak"].length; idx++) {
+                var info = $decode(window["Patients_bak"][idx].json);
+                info._mjson = window["Patients_bak"][idx].json;
+                for (var k = 0; k < fields.length; k++) {
+                    if (!info[fields[k]] || info[fields[k]].indexOf(keyword) < 0) continue;
+                    findOut.push(info);
+                    break;
+                }
+            }
+
+            window.Patients = findOut.sort(function (y, x) {
+                for (var i = 0; i < fields.length; i++) {
+                    if (x[fields[i]].indexOf(keyword) == 0 && y[fields[i]].indexOf(keyword) == 0) return x[fields[i]].length < y[fields[i]].length ? 1 : -1;
+                    else if (x[fields[i]].indexOf(keyword) == 0) return 1;
+                    else if (y[fields[i]].indexOf(keyword) == 0) return -1;
+                }
+
+                for (var i = 0; i < fields.length; i++) {
+                    if (x[fields[i]].indexOf(keyword) > 0 && y[fields[i]].indexOf(keyword) > 0) return Math.abs(x[fields[i]].localeCompare(keyword)) < Math.abs(y[fields[i]].localeCompare(keyword)) ? 1 : -1;
+                    else if (x[fields[i]].indexOf(keyword) > 0) return 1;
+                    else if (y[fields[i]].indexOf(keyword) > 0) return -1;
+                }
+                return 0;
+            });
+            $isfilter = true;
+            bindingData("patient-list");
+        }
+
+
+        function locatePatient(syxh, yexh) {
+            var tableEl = document.getElementById("patient-list");
+            if (tableEl && tableEl["meta-data"] && tableEl["meta-data"][syxh + "_" + yexh]) {
+                var record = tableEl["meta-data"][syxh + "_" + yexh];
+                $App.setData("CURRENT_PATIENT", record._mjson);
+                $App.switchPatient(record.syxh, record.yexh, record.name, record.sex, record.age, record.blh, Date.fromRq16(record.ryrq).format("yyyy.MM.dd"), record.zdmc, record.lcljbz == 2 ? 1 : 0);
+            }
+        }
+
+        function scanCode(code) {
+            var list = [];
+            for (var i = 0; i < window["Patients_bak"].length; i++) {
+                var data = window["Patients_bak"][i];
+                if(data.json.indexOf("\"blh\":\"" + code + "\"") < 0) continue;
+                var record = $decode(data.json);
+                record._mjson = data.json;
+                if (record.blh != code) continue;
+                $App.setData("CURRENT_PATIENT", record._mjson);
+                $App.switchPatient(record.syxh, record.yexh, record.name, record.sex, record.age, record.blh, Date.fromRq16(record.ryrq).format("yyyy.MM.dd"), record.zdmc, record.lcljbz == 2 ? 1 : 0);
+            }
+        }
+
+        function focusedPatients() {
+            if (!window["Patients_bak"]) return;
+
+            var doc = $App.getDoctor();
+            var dept_ward = $App.getDept();
+            var focusedPatients = $App.findData("patient", "doc-focus", String.format("{\"ksdm\":\"{0}\",\"bqdm\":\"{1}\",\"ysdm\":\"{2}\"}", dept_ward.ksdm, dept_ward.bqdm, doc.id));
+
+            if (!focusedPatients || !focusedPatients.length) {
+                this.Patients = [];
+                bindingData("patient-list");
+                return;
+            }
+            var list = [];
+            for (var i = 0; i < window["Patients_bak"].length; i++) {
+                var info = $decode(window["Patients_bak"][i].json);
+                info._mjson = window["Patients_bak"][i].json;
+                for (var j = 0; j < focusedPatients.length; j++) {
+                    if (info.syxh == focusedPatients[j].syxh && info.yexh == focusedPatients[j].yexh) list.push(info);
+                }
+            }
+            if (list.length > 0) {
+                this.Patients = list;
+                bindingData("patient-list");
+            }
+
+        }
+        function forwardToVisit(syxh,yexh) {
+            var data = $App.findData("patient", "info", String.format("{\"syxh\":{0},\"yexh\":{1}}", syxh, yexh));
+            var patient = $decode(data.json);
+            patient._mjson = data.json;
+            $App.setData("CURRENT_PATIENT", patient._mjson);
+            $App.forwardToVisit(patient.syxh, patient.yexh, patient.name, patient.sex, patient.age, patient.blh, Date.fromRq16(patient.ryrq).format("yyyy.MM.dd"), patient.zdmc, patient.lcljbz == 2 ? 1 : 0);
+        }
+        
+        //$(document).ready(function () { setTimeout(loadData, 1) });
+    </script>
+</body>
+</html>

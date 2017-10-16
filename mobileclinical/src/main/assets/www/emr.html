@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <title>病历</title>
+    <link rel="Stylesheet" href="content/site.css" />
+    <style type="text/css">
+        .nav-left { width: 17.5%; height: 100%; float: left; background-color: #EEEEEE; text-align: left; padding-right: 20px; overflow-y: auto; overflow-x: hidden; }
+        .nav-menu { height: 5.5em; line-height: 5.5em; FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#F9FCFB,endColorStr=#E6E6E7); /*IE 6 7 8*/ background: -ms-linear-gradient(top, #F9FCFB, #E6E6E7); /* IE 10 */ background: -moz-linear-gradient(top,#F9FCFB,#E6E6E7); /*火狐*/ background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#F9FCFB), to(#E6E6E7)); /*谷歌*/ background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F9FCFB), to(#E6E6E7)); /* Safari 4-5, Chrome 1-9*/ background: -webkit-linear-gradient(top, #F9FCFB, #E6E6E7); /*Safari5.1 Chrome 10+*/ background: -o-linear-gradient(top, #F9FCFB, #E6E6E7); /*Opera 11.10+*/ border-top: 1px #D3D3D3 solid; border-right: 1px #D3D3D3 solid; border-left: 1px #D3D3D3 solid; cursor: pointer; -webkit-box-shadow: 0 10px 15px #D6DEE6; -moz-box-shadow: 0 10px 15px #D6DEE6; box-shadow: 0 10px 15px #D6DEE6; }
+        .menu-last { border-bottom: 1px #D3D3D3 solid; }
+        .menu-active-before { border-bottom: 1px #D3D3D3 solid; }
+        .nav-menu span { width: 8.86%; background-color: inherit; float: left; height: 100%; }
+        .nav-menu div { width: 91.14%; background-color: inherit; height: 100%; color: #555555; font-size: 1.5em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nav-menu-active { height: 5.5em; line-height: 5.5em; background-color: #EEEEEE; border: none; }
+        .nav-menu-active span { width: 8.86%; background-color: #1D46FF; float: left; height: 100%; }
+        .nav-menu-active div { width: 91.14%; background-color: inherit; height: 100%; color: #1D46FF; font-size: 1.75em; left: -8.86%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .content { width: 82.5%; height: 100%; float: right; }
+        .flipbook { width: 100%; height: 100%; }
+        .flippage { overflow-y: auto; background-color: #FFFFFF; position: relative; }
+        .tpl-row { display: none; }
+        .big-title { font-size: 1.75em; line-height: 1.75em; color: #1D46FF; font-weight: bold; }
+        .big-title span { float: left; }
+        .big-title div { text-align: center; padding-right: 20%; }
+        .big-title-left { font-size: 1.75em; line-height: 1.75em; color: #1D46FF; font-weight: bold; }
+        .big-title-left div { text-align: left; }
+        .emr-title { font-size: 1.375em; color: #555555; font-weight: bold; text-align: center; }
+        .emr-text { color: #555555; font-size: 1.375em; }
+        p { line-height: 2.5em; margin-top: 0px; margin-bottom: 0px; clear: both; }
+        .emr-atom { color: blue; font-size: 1.375em; }
+        .emr-atom .name { font-family: SimHei; font-size: 1.2em; }
+        .emr-atom .noname { }
+        .emr-atom .spliter { }
+        .emr-atom .value { }
+        .emr-atom .unit { color: #0000ae; }
+        /*牙位图*/
+        .tooth { line-height: 90%; display: inline-block; width: 2.5em; position: relative; vertical-align: middle; }
+        .tooth .t1 { position: relative; top: -50%; left: 0px; width: 50%; display: block; text-align: right; padding-right: 5px; vertical-align: bottom; float: left; border-bottom: 1px black solid; border-right: 1px black solid; }
+        .tooth .t2 { position: relative; top: -50%; width: 50%; height: 50%; display: block; text-align: left; padding-left: 5px; float: right; border-bottom: 1px black solid; border-left: 1px black solid; }
+        .tooth .t3 { position: relative; top: 50%; left: 0px; width: 50%; height: 50%; display: inline-block; text-align: center; border-top: 1px black solid; border-right: 1px black solid; text-align: right; padding-right: 5px; }
+        .tooth .t4 { left: 0; position: relative; display: block; width: 50%; float: right; text-align: center; border-top: 1px black solid; border-left: 1px black solid; text-align: left; padding-left: 5px; }
+        /*分子式*/
+        .fraction { }
+        .fraction .f { line-height: 90%; display: inline-block; vertical-align: middle; }
+        .fraction .f .n { text-align: center; vertical-align: bottom; display: block; border-bottom: 1px black solid; padding-left: 3px; padding-right: 3px; }
+        .fraction .f .d { text-align: center; vertical-align: bottom; display: block; padding-left: 3px; padding-right: 3px; }
+        .emr-chk { zoom: 137.5%; vertical-align: middle; }
+        .sign { text-align: right; }
+        .emr-tab { width: 100%; }
+        .emr-tab td { text-align: center; vertical-align: middle; border-top: 1px black solid; border-left: 1px black solid; height: 2em; }
+        .emr-tab tr:last-child td { border-bottom: 1px black solid; }
+        .emr-tab td:last-child { border-right: 1px black solid; }
+        .emr-tab .emr-col { color: #555555; font-size: 1.375em; font-weight: bold; }
+        .emr-tab .emr-cell { color: #555555; font-size: 1.375em; }
+
+        .emr-grid { padding-left: 5%; padding-right: 5%; width: 90%; position: relative; }
+        .emr-grid .emr-row { position: absolute; width: 100%; }
+        .emr-grid .emr-cell { float: left; height: 100%; }
+        .emr-grid .b-all { border: 1px blue solid; }
+        .emr-grid .b-b { border-bottom: 1px blue solid; }
+        .emr-grid .b-r { border-right: 1px blue solid; }
+        .emr-grid .b-t { border-top: 1px blue solid; }
+        .emr-grid .b-l { border-left: 1px blue solid; }
+        /*目录页*/
+        .container-catalog { overflow-y: auto; background-color: #FFFFFF; }
+        .model-item { border-bottom: 1px #D3D3D3 solid; height: 7em; clear: both; }
+        .model-item .item-left { height: 100%; float: left; width: 70%; }
+        .model-item .item-left .model-title { height: 50%; position: relative; padding-left: 60px; }
+        .model-item .item-left .model-title span { color: #333333; font-size: 1.375em; position: absolute; bottom: 3px; }
+        .model-item .item-left .model-creator { height: 50%; position: relative; padding-left: 60px; }
+        .model-item .item-left .model-creator span { color: #888888; font-size: 1.25em; position: absolute; top: 3px; }
+        .model-item .item-right { float: right; height: 100%; line-height: 7em; width: 30%; padding-right: 60px; }
+        .model-item .item-right span { color: #B6B6B6; font-size: 1.375em; }
+
+        .nav-button { position: absolute; right: 10px; width: 110px; height: 110px;display:none; }
+
+        .gocatalog { bottom: 1%; z-index: 999999; background: url('content/images/gocatalog.png') no-repeat center;opacity: 0.5; }
+        .bookmark { bottom: 16%; z-index: 999998; background: url('content/images/bookmark-not.png') no-repeat center; }
+        .bookmark.exist { background: url('content/images/bookmark-not.png') no-repeat center; }
+    </style>
+</head>
+<body>
+    <div class="clinical-viewport">
+        <div style="width:100%;height:100%;position:relative;">
+            <div class="nav-left">
+                <div style="height: 100%; background-color: #FFFFFF;" id="menu-container" class="data-source-binding" data-source="{binding Containers}" data-formater="formater" data-key-expression="this.id.replace(/\-/g,'')">
+                    <div class="tpl-row nav-menu {$lastcls}" onclick="menuClick(this);" id="m-{data-key}">
+                        <span></span>
+                        <div>&nbsp;&nbsp;{$name}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="content" id="emr-content"></div>
+            <img class="nav-button bookmark" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg ==" onclick="doMark();" alt=""/>
+            <img id="go-catalog" class="nav-button gocatalog" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" onclick="if (menuContainer['active-menu']) $('#flipbook' + menuContainer['active-menu'].id.substr(2)).turn('page', 1);" />
+        </div>
+    </div>
+    <script id="tpl-container-catalog" type="text/template">
+        <div class="model-item" onclick="flipPage('{0}','{1}')">
+            <div class="item-left">
+                <div class="model-title"><span>{2}</span></div>
+                <div class="model-creator"><span>{3}</span></div>
+            </div>
+            <div class="item-right"><span>{4}</span></div>
+        </div>
+    </script>
+
+    <script src="scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="scripts/turn.js" type="text/javascript"></script>
+    <!--<script src="content/demo/demo.js"></script>-->
+    <script src="scripts/common.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var menuContainer = document.getElementById("menu-container");
+        function menuClick(it) {
+            var menu_actived = menuContainer["active-menu"];
+            var menu_actived_index = menuContainer["actvice-index"];
+            var r = /\-/g;
+            if (it == menu_actived) return;
+            if (menu_actived) {
+                menu_actived.className = menu_actived.className.replace("nav-menu-active", "nav-menu");
+                if (menu_actived_index > 0) $("#m-" + window.Containers[menu_actived_index - 1].id.replace(r, "")).removeClass("menu-active-before");
+                if (menu_actived_index == window.Containers.length - 1) $(menu_actived).addClass("menu-last");
+            }
+            for (var i = 0; i < window.Containers.length; i++) {
+                if (window.Containers[i].id.replace(r, "") == it.id.substr(2)) {
+                    menuContainer["active-menu"] = it;
+                    menuContainer["actvice-index"] = i;
+                    it.className = it.className.replace("nav-menu", "nav-menu-active");
+                    if (i > 0) $("#m-" + window.Containers[i - 1].id.replace(r, "")).addClass("menu-active-before");
+                    if (i == window.Containers.length - 1) $(it).removeClass("menu-last");
+                    break;
+                }
+            }
+            loadContainer(it.id.substr(2));
+        }
+
+        function onPageTurned(e, p) {
+            var pages = $(this).data().pages;
+            var currentPage = pages[p];
+
+            if (p == 1) $("#go-catalog,.bookmark").hide();
+            else $("#go-catalog,.bookmark").show();
+
+            if (!currentPage.hasClass("container-catalog") && currentPage.data("content-load") !== true) {
+                var currentid = currentPage.attr("id").substr(5);
+                var current = getContainerModel(currentid);
+                currentPage.data("content-load", true).children("div").html("<div style=\"margin:10px 20px;\">" + current.html + "</div>");
+                if ($App.findData("emr", "bookmark", JSON.stringify({ syxh: $syxh, yexh: $yexh, emrid: currentid })).length) currentPage.children(".bookmark").addClass("exist");
+            }
+            if (pages[p - 1]) $(this).turn("peel", "tl");
+            if (pages[p + 1]) $(this).turn("peel", "tr");
+            else return;
+
+            var nextPage = pages[p + 1];
+            var id = nextPage.attr("id").substr(5);
+            if (nextPage.data("content-load") === true || !(parseInt(id) > 0)) return;
+
+            setTimeout(function (modelid, view) {
+                var other = getContainerModel(modelid);
+                view.data("content-load", true).children("div").html("<div style=\"margin:10px 20px;\">" + other.html + "</div>");
+                if ($App.findData("emr", "bookmark", JSON.stringify({ syxh: $syxh, yexh: $yexh, emrid: modelid })).length) view.children(".bookmark").addClass("exist");
+            }, 1, id, nextPage);
+        }
+        function flipPage(containerid, index) {
+            if (containerid && parseInt(index) > -1) $('#flipbook' + containerid).turn('page', parseInt(index) + 2);
+        }
+
+        function doMark() {
+            var container = menuContainer["active-menu"].id.substr(2);
+            var book = $("#flipbook" + container);
+            var view = book.data().pages[book.turn("page")];
+            var model = view.attr("id").substr(5);
+            var visible_el = [];
+            $(".nav-button:visible").each(function () { visible_el.push(this); }).hide();
+            setTimeout(function (m,v,el) {
+                if ($App.doEditBookmark($syxh, $yexh, m)) v.children(".bookmark").addClass("exist");
+                $(el).show();
+            }, 100, model, view, visible_el);
+            
+        }
+    </script>
+    <script type="text/javascript">
+        var $AllModels = [];
+        var Containers = [];
+        var $syxh = 0, $yexh = 0;
+
+        var formater = {
+            lastcls: function (rec) {
+                if (rec == Containers[Containers.length - 1]) return "menu-last";
+                else return "";
+            }
+        };
+
+        function loadData(syxh, yexh) {
+            var patient = $App.getData("CURRENT_PATIENT");
+            if (syxh > 0 && (!patient || patient.syxh != syxh)) patient = $decode($App.setData("CURRENT_PATIENT", $App.findData("patient", "info", String.format("{\"syxh\":{0},\"yexh\":{1}}", syxh, yexh)).json));
+
+            $syxh = patient.syxh;
+            $yexh = patient.yexh;
+
+            var data = $App.findData("emr", "fullmodel", String.format("{\"syxh\":{0},\"yexh\":{1}}", patient.syxh, patient.yexh));
+            var fullModel = (data && data.json && $decode(data.json)) || data || {};
+            this.Containers = fullModel.containers;
+            bindingData();
+            if (!$App.isOnline()) this.$AllModels = $App.findData("emr", "patient-model", String.format("{\"syxh\":{0},\"yexh\":{1}}", patient.syxh, patient.yexh));
+            else this.$AllModels = [];
+            if (this.Containers && this.Containers.length > 0) menuClick(document.getElementById("m-" + this.Containers[0].id.replace(/\-/g, "")));
+        }
+
+        function loadContainer(id) {
+            $("#bookmark").hide().attr("src", "content/images/bookmark-not.png");
+            var element = $("#emr-content").empty();
+            for (var i = 0; i < Containers.length; i++) {
+                if (Containers[i].id.replace(/\-/g, "") != id) continue;
+                var idlist = $.trim(Containers[i].idlist || "0").split("`");
+                if (!idlist.length || !parseInt(idlist[0])) break;
+                element.append($("<div id=\"flipbook" + id + "\" class=\"flipbook\">"));
+                var flipbook = $("#flipbook" + id);
+                flipbook.append(createCatalog(id, Containers[i].models));
+                for (var c = 0; c < idlist.length; c++) flipbook.append($("<div id=\"page_" + $.trim(idlist[c]) + "\" class=\"flippage\"><div></div></div>"));
+                var patient = $App.getData("CURRENT_PATIENT");
+                var data = getContainerModel(idlist[0]);//$App.findData("emr", "model", String.format("{\"syxh\":{0},\"yexh\":{1},\"id\":{2}}", patient.syxh, patient.yexh, idlist[0]));
+                $("#page_" + idlist[0]).data("content-load", true).children("div").html("<div style=\"margin:10px 20px;\">" + data.html + "</div>");
+                if ($App.findData("emr", "bookmark", JSON.stringify({ syxh: $syxh, yexh: $yexh, emrid: idlist[0] })).length) $("#page_" + idlist[0]).children(".bookmark").addClass("exist");
+
+                if (idlist.length > 0) flipbook.turn({ display: "single", elevation: 50, gradients: true, autoCenter: true, when: { turned: onPageTurned } });
+                if (idlist.length == 1) setTimeout(function () { flipPage(id, '0'); }, 10);
+                break;
+            }
+        }
+
+        function getContainerModel(id) {
+            for (var i = 0; i < $AllModels.length; i++) {
+                var rec = $AllModels[i];
+                var data = (rec.json && $decode(rec.json)) || rec;
+                data._mjson = data._mjson || rec.json;
+                $AllModels[i] = data;
+                if (data.xh == parseInt(id)) return data;
+            }
+
+            if ($App.isOnline()) {
+                var rec = $App.findData("emr", "model", String.format("{\"syxh\":{0},\"yexh\":{1},\"id\":{2}}", $syxh, $yexh, id));
+                var data = (rec.json && $decode(rec.json)) || rec;
+                data._mjson = data._mjson || rec.json;
+                $AllModels.push(data);
+                return data;
+            }
+
+            return {};
+        }
+
+        function createCatalog(containerid, models) {
+            var tpl = document.getElementById("tpl-container-catalog").innerHTML;
+            var html = ["<div class=\"container-catalog\">"];
+            for (var i = 0; i < models.length || i < 6; i++) {
+                if (i < models.length) html.push(String.format(tpl, containerid || "", i, models[i].name || "&nbsp;", models[i].creator || "&nbsp;", models[i].model_time || "&nbsp;"));
+                else html.push(String.format(tpl, "", "-1", "&nbsp;", "&nbsp;", "&nbsp;"));
+            }
+            html.push("</div>");
+            return html.join("");
+        }
+    </script>
+</body>
+</html>

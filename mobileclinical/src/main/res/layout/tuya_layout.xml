@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#f3f7f7">
+
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:padding="10dp" 
+        android:background="#53b9d0">
+
+        <Button
+            android:id="@+id/tuya_back"
+            android:layout_width="60dp"
+                android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="5dip"
+            android:background="@drawable/fill4"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/tuya_sure"
+            android:layout_width="60dp"
+                android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:paddingRight="5dip"
+            android:background="@drawable/fill4"/>
+        
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/tuya"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" 
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <!--<RadioGroup
+       android:id="@+id/tuya_bottom_bar"
+       android:layout_width="fill_parent"
+       android:layout_height="80dip"
+       android:background="#232D3B"
+       android:orientation="horizontal" >
+
+       <RadioButton
+           	android:id="@+id/tuya_brush"
+            style="@style/patient_qu_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/tab_brush"/>
+
+        <RadioButton
+            android:id="@+id/bwl_color"
+            style="@style/patient_qu_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/tab_color"/>
+
+        <RadioButton
+            android:id="@+id/bwl_cancel"
+            style="@style/patient_qu_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/tab_cancel"/>
+
+        <RadioButton
+            android:id="@+id/bwl_delete"
+            style="@style/patient_qu_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/tab_delete"/>
+
+    </RadioGroup>-->
+    
+        
+    <GridView 
+        android:id="@+id/tuyaGrid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4"
+        android:background="#232D3B"
+        android:stretchMode="columnWidth" 
+        
+        android:verticalSpacing="5dp"
+        android:gravity="center_vertical"
+    />
+</LinearLayout>

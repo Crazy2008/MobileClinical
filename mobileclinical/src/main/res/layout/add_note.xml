@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:baselineAligned="false" >
+	<!-- zhushi -->
+    <LinearLayout
+        android:id="@+id/pb_ll_gridview"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/rep_bg"
+        android:orientation="vertical" >
+
+        <!-- 左侧显示 -->
+        <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        android:layout_gravity="center" >
+
+            <Button
+	            android:id="@+id/pi_btn_back"
+	            android:layout_width="60dp"
+	            android:layout_height="60dp"
+	            android:layout_alignParentLeft="true"
+	            android:background="@drawable/note_back" />
+            
+            <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="50dp"
+	            android:layout_toRightOf="@id/pi_btn_back"
+	            android:layout_centerInParent="true"
+	            android:layout_gravity="center"
+	            android:layout_marginLeft="80dp"
+	            android:gravity="center"
+	            android:text="备忘录"
+	            android:textColor="#ffffff"
+	            android:textSize="@dimen/dn_notetext" />
+        </RelativeLayout>
+
+        <View
+             android:layout_width="fill_parent"
+             android:layout_height="1dp"
+             android:background="#002487" />
+        
+        <LinearLayout
+             android:layout_width="match_parent"
+	         android:layout_height="match_parent"
+	         android:orientation="vertical"
+	         android:baselineAligned="false" >
+	        <LinearLayout 
+	             android:layout_width="fill_parent"
+		         android:layout_height="0dp"
+		         android:layout_weight="2"
+		         android:gravity="center"
+		         android:layout_gravity="center"
+		         android:orientation="horizontal" >
+		         
+		         <Button 
+			     	android:id="@+id/addwb"
+		         	android:layout_width="@dimen/addn_height"
+		            android:layout_height="@dimen/addn_height"  
+		            android:layout_gravity="center"
+		            android:background="@drawable/note_wbselect"  
+		            android:layout_marginRight="10dp" />
+		        
+		         <TextView
+		            android:layout_width="30dp"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:gravity="center"
+		            android:text="文本输入"
+		            android:textColor="#ffffff"
+		            android:textSize="@dimen/dn_notetext" />
+	         </LinearLayout>
+	
+	         <LinearLayout 
+		         android:layout_width="fill_parent"
+		         android:layout_height="0dp"
+		         android:layout_weight="2"
+		         android:gravity="center"
+		         android:layout_gravity="center"
+		         android:orientation="horizontal" >
+		        
+		         <Button 
+				     android:id="@+id/addpz"
+		             android:layout_width="@dimen/addn_height"  
+		             android:layout_gravity="center"
+		             android:layout_height="@dimen/addn_height"  
+		             android:background="@drawable/note_pzselect"  
+		             android:layout_marginRight="10dp" />
+		        
+		         <TextView
+		             android:layout_width="30dp"
+		             android:layout_height="wrap_content"
+		             android:layout_gravity="center"
+		             android:gravity="center"
+		             android:text="拍照"
+		             android:textColor="#ffffff"
+		             android:textSize="@dimen/dn_notetext" />
+	         </LinearLayout>
+	        
+	         <LinearLayout 
+		         android:layout_width="fill_parent"
+		         android:layout_height="0dp"
+		         android:layout_weight="3"
+		         android:gravity="center"
+		         android:layout_gravity="center"
+		         android:orientation="horizontal" >
+		         <!--<RelativeLayout
+		             android:id="@+id/rl_addly"
+		             android:layout_width="wrap_content"
+					 android:layout_height="wrap_content"
+					 android:clickable="true"
+					 android:layout_marginRight="10dp" >
+		             <Button 
+				        android:id="@+id/addly"
+			            android:layout_width="@dimen/addn_heightbott"
+			            android:layout_height="@dimen/addn_heightbott"  
+			            android:layout_centerInParent="true"
+			            android:background="@drawable/noterecord"
+			            android:layout_marginRight="10dp" />
+		             <Button
+			            android:layout_width="@dimen/addn_widthbott_flag"
+			            android:layout_height="@dimen/addn_heightbott_flag"
+			            android:layout_centerInParent="true"
+			            android:background="@drawable/noterecord_flag"
+			            android:layout_marginLeft="10dp"
+			            android:layout_marginBottom="10dp" />
+		         </RelativeLayout>-->
+		         
+		         <Button 
+			        android:id="@+id/addly"
+		            android:layout_width="@dimen/addn_heightbott"  
+		            android:layout_gravity="center"
+		            android:layout_height="@dimen/addn_heightbott"  
+		            android:background="@drawable/notely_normal"  
+		            android:layout_marginRight="10dp" />
+		            
+		         <TextView
+		            android:id="@+id/tv_addrecord"
+		            android:layout_width="30dp"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center"
+		            android:gravity="center"
+		            android:text="点击开始录音"
+		            android:textColor="#ffffff"
+		            android:textSize="@dimen/dn_notetext" />
+	        </LinearLayout>
+        </LinearLayout>
+        
+        <!-- <com.winning.mobileclinical.layout.MyImageButton
+            android:id="@+id/addwb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/wbwrite"
+            android:gravity="center">
+		</com.winning.mobileclinical.layout.MyImageButton>
+		
+         <com.winning.mobileclinical.layout.MyImageButton
+            android:id="@+id/addpz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/notepz"
+            android:gravity="center">
+		</com.winning.mobileclinical.layout.MyImageButton>
+		
+         
+          <com.winning.mobileclinical.layout.MyImageButton
+            android:id="@+id/addly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/noterecord"
+            android:gravity="center">
+		</com.winning.mobileclinical.layout.MyImageButton> -->
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="15dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#E6E6E7" >
+    </LinearLayout>
+
+	<LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="3"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:id="@+id/bwl_title"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/titlebackground"
+            android:text="      查房便签"
+            android:textColor="#1D46FF"
+            android:textSize="@dimen/dn_notetitle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="文本"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:textColor="#434343"
+            android:textSize="@dimen/dn_notetitle" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:id="@+id/bwl_content"
+            android:layout_height="80dp"
+            android:hint="请输入文字"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:maxLines="10"
+            android:textColorHint="#979797"
+            android:background="@drawable/note_pic_corners"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textColor="#434343"
+            android:textSize="@dimen/dn_notetitle_write"
+            android:gravity="left|top"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="照片"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:textColor="#434343"
+            android:textSize="@dimen/dn_notetitle" />
+
+         <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <com.winning.mobileclinical.layout.HorizontalListView2
+                android:id="@+id/add_picturelistview"
+                android:layout_width="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="3"
+                android:layout_height="130dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp" >
+            </com.winning.mobileclinical.layout.HorizontalListView2>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="录音"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:textColor="#434343"
+            android:textSize="@dimen/dn_notetitle" />
+
+      <com.winning.mobileclinical.widget.MyMediaRecorder
+            android:id="@+id/dn_ll_recording"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+        </com.winning.mobileclinical.widget.MyMediaRecorder>
+        <LinearLayout
+            android:id="@+id/dn_ll_record"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+            <ImageView
+                android:id="@+id/dn_record_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_gravity="center"
+                android:src="@drawable/leftswitch"
+                android:layout_marginLeft="30dp" />
+
+            <com.winning.mobileclinical.layout.HorizontalListView2
+                android:id="@+id/date_recordlistview"
+                android:layout_width="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="3"
+                android:layout_height="100dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp" >
+            </com.winning.mobileclinical.layout.HorizontalListView2>
+
+            <ImageView
+                android:id="@+id/dn_record_right"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:src="@drawable/rightswitch"
+                android:layout_marginRight="30dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/dn_ll_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="visible" >
+            <Button
+                android:id="@+id/dn_cancel_btn"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:text="取消"
+                android:textColor="#ffffff"
+                android:background="#979797"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="20dp" >
+            </Button>
+            <Button
+                android:id="@+id/dn_save_btn"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:text="保存"
+                android:textColor="#ffffff"
+                android:background="#003ACD"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp" >
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+
+	<View android:layout_width="0dip"
+        android:layout_height="0dip"
+        android:id="@+id/addimage_point"/>
+
+</LinearLayout>
